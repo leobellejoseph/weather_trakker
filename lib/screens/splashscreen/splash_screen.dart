@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:lottie/lottie.dart';
+import 'package:weather_trakker/screens/screens.dart';
 
 class SplashScreen extends StatelessWidget {
   static const id = 'splash';
@@ -37,12 +38,17 @@ class _LottieSplash extends HookWidget {
     final controller = useAnimationController();
     return Lottie.asset(
       'assets/splash.json',
-      repeat: true,
+      //repeat: true,
       controller: controller,
       onLoaded: (composition) {
         controller
           ..duration = composition.duration
-          ..repeat();
+          ..forward()
+          ..addListener(() {
+            if (controller.status == AnimationStatus.completed) {
+              Navigator.popAndPushNamed(context, HomeScreen.id);
+            }
+          });
       },
     );
   }

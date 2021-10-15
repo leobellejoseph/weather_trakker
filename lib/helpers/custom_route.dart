@@ -6,6 +6,8 @@ class CustomRoute {
     switch (settings.name) {
       case SplashScreen.id:
         return SplashScreen.route();
+      case HomeScreen.id:
+        return HomeScreen.route();
       default:
         return MaterialPageRoute(
           builder: (context) => const Scaffold(
