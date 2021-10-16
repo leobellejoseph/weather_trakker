@@ -54,7 +54,7 @@ flutter:
     - assets/sunny.json
     - assets/cloudy.json
     - images/met.png
-    - images/mssbanner.png
+
   # fonts:
   #   - family: Trajan Pro
   #     fonts:

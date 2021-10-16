@@ -49,17 +49,17 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Align(
-              alignment: Alignment.topCenter,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ImageButton(
-                  asset: 'images/mssbanner.png',
-                  onPress: () {},
-                  size: const Size(double.infinity, 200),
-                ),
-              ),
-            ),
+            // Align(
+            //   alignment: Alignment.topCenter,
+            //   child: Padding(
+            //     padding: const EdgeInsets.all(8.0),
+            //     child: ImageButton(
+            //       asset: 'images/mssbanner.png',
+            //       onPress: () {},
+            //       size: const Size(double.infinity, 200),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),
