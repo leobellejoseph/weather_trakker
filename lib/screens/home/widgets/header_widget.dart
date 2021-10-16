@@ -6,7 +6,7 @@ class HeaderWidget extends StatelessWidget {
   final Color _color;
   const HeaderWidget(
       {Key? key, required this.title, required this.subtitle, Color? color})
-      : _color = color ?? Colors.white,
+      : _color = color ?? Colors.transparent,
         super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -14,21 +14,22 @@ class HeaderWidget extends StatelessWidget {
       width: double.infinity,
       height: 45,
       color: _color,
-      padding: const EdgeInsets.all(6),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Center(
-                child: Text(title,
-                    style: const TextStyle(fontWeight: FontWeight.bold))),
-            Center(
-                child: Text(subtitle,
-                    style: const TextStyle(
-                        color: Colors.grey,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 12))),
-          ],
-        ),
+      padding: const EdgeInsets.all(5),
+      child: Column(
+        children: [
+          Center(
+              child: Text(title,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white,
+                      fontSize: 18))),
+          Center(
+              child: Text(subtitle,
+                  style: const TextStyle(
+                      color: Colors.white60,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 12))),
+        ],
       ),
     );
   }

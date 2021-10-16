@@ -2,62 +2,52 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_trakker/screens/home/widgets/header_widget.dart';
 import 'package:weather_trakker/screens/home/widgets/nowcast_item.dart';
+import 'package:weather_trakker/widgets/lottie_button.dart';
 
 class NowCastWidget extends StatelessWidget {
-  const NowCastWidget({Key? key}) : super(key: key);
+  final String title;
+  final String subtitle;
+  const NowCastWidget({Key? key, required this.title, required this.subtitle})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const HeaderWidget(
-            title: '2-hour Nowcast', subtitle: '5:00 pm to 7:00 pm'),
-        Container(
-          height: 120,
-          width: double.infinity,
-          color: Colors.lightBlueAccent,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: const [
-              NowCastItem(
-                  label: 'CURRENT',
-                  title: 'Changi',
-                  child: Icon(
-                    Icons.cloud,
-                    size: 60,
-                    color: Colors.white,
-                  ),
-                  subtitle: 'Partly Cloudy'),
-              NowCastItem(
-                  label: 'FAVORITE',
-                  title: 'Ang Mo Kio',
-                  child: Icon(
-                    Icons.cloud,
-                    size: 60,
-                    color: Colors.white,
-                  ),
-                  subtitle: 'Partly Cloudy'),
-              NowCastItem(
-                  label: 'FAVORITE',
-                  title: 'City',
-                  child: Icon(
-                    Icons.cloud,
-                    size: 60,
-                    color: Colors.white,
-                  ),
-                  subtitle: 'Partly Cloudy'),
-              NowCastItem(
-                  label: 'FAVORITE',
-                  title: 'Holland Village',
-                  child: Icon(
-                    Icons.cloud,
-                    size: 60,
-                    color: Colors.white,
-                  ),
-                  subtitle: 'Partly Cloudy'),
-            ],
+    return Padding(
+      padding: const EdgeInsets.only(left: 6, right: 6),
+      child: Column(
+        children: [
+          HeaderWidget(title: title, subtitle: subtitle),
+          SizedBox(
+            height: 170,
+            width: double.infinity,
+            child: ListView(
+              physics: const ClampingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              children: [
+                NowCastItem(
+                    title: 'Holland Village',
+                    child:
+                        LottieButton(onTap: () {}, asset: 'assets/cloudy.json'),
+                    subtitle: 'Cloudy'),
+                NowCastItem(
+                    title: 'Sembawang',
+                    child: LottieButton(
+                        onTap: () {}, asset: 'assets/heavyrain.json'),
+                    subtitle: 'Heavy Rain'),
+                NowCastItem(
+                    title: 'Paya Lebar',
+                    child:
+                        LottieButton(onTap: () {}, asset: 'assets/windy.json'),
+                    subtitle: 'Windy'),
+                NowCastItem(
+                    title: 'Sengkang',
+                    child:
+                        LottieButton(onTap: () {}, asset: 'assets/sunny.json'),
+                    subtitle: 'Sunny'),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

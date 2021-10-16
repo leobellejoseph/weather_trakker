@@ -19,7 +19,6 @@ dependencies:
   flutter_hooks: ^0.18.0
   http: ^0.13.4
   equatable: ^2.0.3
-  geolocator: ^7.7.0
   http_retry: ^0.2.0
   flutter_spinkit: ^5.1.0
   map_launcher: ^2.1.1
@@ -29,6 +28,8 @@ dependencies:
   flutter_bounceable: ^1.0.1
   font_awesome_flutter: ^9.1.0
   flip_card: ^0.6.0
+  location: ^4.2.0
+  expand_widget: ^2.1.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -41,6 +42,17 @@ flutter:
   assets:
     - assets/splash.json
     - images/mss.png
+    - assets/windy.json
+    - assets/rainstorm.json
+    - assets/overcast.json
+    - assets/rainshower.json
+    - assets/lightrain.json
+    - assets/moderaterain.json
+    - assets/heavyrain.json
+    - assets/cloudywindy.json
+    - assets/thunderstorm.json
+    - assets/sunny.json
+    - assets/cloudy.json
   # fonts:
   #   - family: Trajan Pro
   #     fonts:
