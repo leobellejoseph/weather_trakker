@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.leobellejoseph.weathertrakker.weather_trakker">
    <application
-        android:label="weather_trakker"
+        android:label="WeatherTrakker"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
