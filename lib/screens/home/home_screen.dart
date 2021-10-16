@@ -49,13 +49,14 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Positioned(
-              left: 120,
-              child: SafeArea(
+            Align(
+              alignment: Alignment.topCenter,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: ImageButton(
-                  asset: 'images/met.png',
+                  asset: 'images/mssbanner.png',
                   onPress: () {},
-                  size: const Size(150, 150),
+                  size: const Size(double.infinity, 200),
                 ),
               ),
             ),
