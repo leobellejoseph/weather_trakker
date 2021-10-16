@@ -33,45 +33,46 @@ class TodayCastWidget extends HookWidget {
         Bounceable(
           onTap: () {},
           child: SizedBox(
-            height: 190,
+            height: 170,
             width: double.infinity,
-            child: Card(
-              shape: RoundedRectangleBorder(
+            child: Container(
+              margin: const EdgeInsets.all(4),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.white60, width: 0.5),
+                shape: BoxShape.rectangle,
                 borderRadius: BorderRadius.circular(20),
+                color: Colors.transparent,
               ),
-              color: Colors.white.withOpacity(0.3),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: const [
-                          LottieWidget(asset: 'assets/thunderstorm.json'),
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.only(left: 5.0, right: 5),
-                              child: ExpandText(
-                                'Thundery showers mainly over northern and western Singapore in the late afternoon.',
-                                textAlign: TextAlign.justify,
-                                overflow: TextOverflow.clip,
-                              ),
+                    child: Row(
+                      textBaseline: TextBaseline.alphabetic,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      children: const [
+                        LottieWidget(asset: 'assets/thunderstorm.json'),
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.all(8),
+                            child: ExpandText(
+                              'Thundery showers mainly over northern and western Singapore in the late afternoon.',
+                              textAlign: TextAlign.justify,
+                              overflow: TextOverflow.clip,
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
-                  const Divider(height: 1, color: Colors.white60),
+                  const Divider(height: 1, color: Colors.white, thickness: 0.5),
                   SizedBox(
-                    height: 50,
+                    height: 40,
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(6.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [

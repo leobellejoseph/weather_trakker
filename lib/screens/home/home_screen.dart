@@ -16,6 +16,9 @@ class HomeScreen extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
+        floatingActionButton: ImageButton(
+            asset: 'images/mss.png', onPress: () {}, size: const Size(70, 70)),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         body: Stack(
           children: [
             Container(
@@ -39,7 +42,7 @@ class HomeScreen extends StatelessWidget {
                   Padding(
                     padding:
                         EdgeInsets.only(left: 5, right: 5, top: 10, bottom: 10),
-                    child: Divider(height: 1, color: Colors.white60),
+                    child: Divider(height: 0.5, color: Colors.blueAccent),
                   ),
                   TodayCastWidget(),
                   // ObservationWidget(),
@@ -47,9 +50,14 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             Positioned(
-              left: 10,
-              top: 50,
-              child: ImageButton(asset: 'images/mss.png', onPress: () {}),
+              left: 120,
+              child: SafeArea(
+                child: ImageButton(
+                  asset: 'images/met.png',
+                  onPress: () {},
+                  size: const Size(150, 150),
+                ),
+              ),
             ),
           ],
         ),

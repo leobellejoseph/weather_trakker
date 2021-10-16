@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:weather_trakker/screens/home/widgets/header_widget.dart';
-import 'package:weather_trakker/screens/home/widgets/nowcast_item.dart';
-import 'package:weather_trakker/widgets/lottie_button.dart';
+import 'package:weather_trakker/screens/home/widgets/widget.dart';
+import 'package:weather_trakker/widgets/widgets.dart';
 
 class NowCastWidget extends StatelessWidget {
   final String title;

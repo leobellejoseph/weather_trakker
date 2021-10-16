@@ -53,6 +53,7 @@ flutter:
     - assets/thunderstorm.json
     - assets/sunny.json
     - assets/cloudy.json
+    - images/met.png
   # fonts:
   #   - family: Trajan Pro
   #     fonts:
