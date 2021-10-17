@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:weather_trakker/screens/favorites/favorites_screen.dart';
-import 'package:weather_trakker/screens/forecast/forecast_screen.dart';
-import 'package:weather_trakker/screens/locations/locations_screen.dart';
+import 'package:weather_trakker/bloc/blocs.dart';
+import 'package:weather_trakker/screens/screens.dart';
 import 'package:weather_trakker/widgets/widgets.dart';
 
 class SpeedDialWidget extends StatelessWidget {
@@ -42,7 +42,11 @@ class SpeedDialWidget extends StatelessWidget {
           foregroundColor: Colors.white,
           label: 'Locations',
           visible: true,
-          onTap: () => Navigator.pushNamed(context, LocationsScreen.id),
+          onTap: () {
+            final bloc = context.read<NowcastBloc>();
+            bloc.add(NowcastFetchEvent());
+            Navigator.pushNamed(context, LocationsScreen.id);
+          },
         ),
       ],
     );
