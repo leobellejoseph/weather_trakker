@@ -22,7 +22,7 @@ class HeaderWidget extends StatelessWidget {
                   style: const TextStyle(
                       fontWeight: FontWeight.w700,
                       color: Colors.white,
-                      fontSize: 18))),
+                      fontSize: 14))),
           Center(
               child: Text(subtitle,
                   style: const TextStyle(

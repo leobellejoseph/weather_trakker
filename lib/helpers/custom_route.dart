@@ -8,6 +8,12 @@ class CustomRoute {
         return SplashScreen.route();
       case HomeScreen.id:
         return HomeScreen.route();
+      case FavoritesScreen.id:
+        return FavoritesScreen.route();
+      case LocationsScreen.id:
+        return LocationsScreen.route();
+      case ForecastScreen.id:
+        return ForecastScreen.route();
       default:
         return MaterialPageRoute(
           builder: (context) => const Scaffold(

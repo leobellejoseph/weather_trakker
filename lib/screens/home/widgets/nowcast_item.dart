@@ -23,8 +23,8 @@ class NowCastItem extends StatelessWidget {
           Text(
             title,
             style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
+              fontSize: 24,
+              fontWeight: FontWeight.w600,
               color: Colors.white,
             ),
           ),
@@ -32,9 +32,9 @@ class NowCastItem extends StatelessWidget {
           Text(
             subtitle,
             style: const TextStyle(
-              fontSize: 10,
+              fontSize: 11,
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: Colors.white60,
             ),
           ),
         ],

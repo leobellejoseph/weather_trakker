@@ -30,6 +30,9 @@ dependencies:
   flip_card: ^0.6.0
   location: ^4.2.0
   expand_widget: ^2.1.0
+  card_swiper: ^1.0.4
+  animations: ^2.0.1
+  flutter_speed_dial: ^4.4.0+2
 dev_dependencies:
   flutter_test:
     sdk: flutter
