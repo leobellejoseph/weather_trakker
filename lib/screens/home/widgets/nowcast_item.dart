@@ -32,9 +32,9 @@ class NowCastItem extends StatelessWidget {
           Text(
             subtitle,
             style: const TextStyle(
-              fontSize: 11,
+              fontSize: 12,
               fontWeight: FontWeight.bold,
-              color: Colors.white60,
+              color: Colors.white,
             ),
           ),
         ],

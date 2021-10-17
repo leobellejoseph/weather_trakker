@@ -23,7 +23,6 @@ class NowCastWidget extends StatelessWidget {
               margin: EdgeInsets.all(0),
               alignment: Alignment.bottomCenter,
             ),
-            physics: const ClampingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             children: [
               NowCastItem(
