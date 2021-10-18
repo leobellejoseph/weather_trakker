@@ -14,6 +14,12 @@ class ForecastItem {
       required this.validPeriod,
       required this.general,
       required this.periods});
+  factory ForecastItem.noData() => ForecastItem(
+      updateTimeStamp: 'NA',
+      timeStamp: 'NA',
+      validPeriod: ValidPeriod.noData(),
+      general: ForecastGeneral.noData(),
+      periods: []);
   factory ForecastItem.fromJson(Map<String, dynamic> json) {
     final data = json['items'];
     final _updateTimeStamp = data['update_timestamp'] ?? '';

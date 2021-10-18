@@ -8,7 +8,7 @@ class ForecastGeneral {
       required this.humidity,
       required this.temperature,
       required this.windSpeed});
-
+  factory ForecastGeneral.noData()=>ForecastGeneral(forecast: 'NA', humidity: RelativeHumidity.noData(), temperature: Temperature.noData(), windSpeed: WindSpeed.noData());
   factory ForecastGeneral.fromJson(Map<String, dynamic> data) {
     final _forecast = data['forecast'] ?? 'NA';
     final _humidity = data['relative_humidity'] ?? '';

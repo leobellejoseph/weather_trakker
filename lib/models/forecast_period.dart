@@ -21,8 +21,10 @@ extension RegionsExtension on Regions {
 
 class ForecastPeriod {
   late final TimePeriod time;
-  late final ForecastPeriod region;
+  late final ForecastRegion region;
   ForecastPeriod({required this.time, required this.region});
+  factory ForecastPeriod.noData() => ForecastPeriod(
+      time: TimePeriod.noData(), region: ForecastRegion.noData());
   factory ForecastPeriod.fromJson(Map<String, dynamic> data) {
     final _time = data['time'] ?? '';
     final _region = data['period'] ?? '';
@@ -57,7 +59,8 @@ class ForecastRegion {
       required this.central,
       required this.south,
       required this.north});
-
+  factory ForecastRegion.noData() => ForecastRegion(
+      west: 'NA', east: 'NA', central: 'NA', south: 'NA', north: 'NA');
   factory ForecastRegion.fromJson(Map<String, dynamic> data) {
     final _west = data['west'] ?? '';
     final _east = data['east'] ?? '';
