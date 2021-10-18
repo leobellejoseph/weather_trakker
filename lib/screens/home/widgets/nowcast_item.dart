@@ -4,7 +4,7 @@ class NowCastItem extends StatelessWidget {
   final String title;
   final Widget child;
   final String subtitle;
-  const NowCastItem({
+  NowCastItem({
     Key? key,
     required this.title,
     required this.child,

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:weather_trakker/bloc/blocs.dart';
+import 'package:weather_trakker/cubit/cubit.dart';
 import 'package:weather_trakker/helpers/helpers.dart';
 import 'package:weather_trakker/repositories/repositories.dart';
 import 'package:weather_trakker/screens/screens.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => NowcastBloc(repo: repo)),
+          BlocProvider(create: (context) => FavoritesCubit(repo: repo)),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

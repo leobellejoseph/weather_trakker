@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+import 'location_model.dart';
+
 class AreaModel extends Equatable {
   late final String name;
   late final LocationModel labelLocation;
@@ -18,24 +20,4 @@ class AreaModel extends Equatable {
   @override
   // TODO: implement props
   List<Object?> get props => [name];
-}
-
-class LocationModel extends Equatable {
-  late final double latitude;
-  late final double longitude;
-
-  LocationModel({required this.latitude, required this.longitude});
-
-  LocationModel.fromJson(Map<String, dynamic> data) {
-    latitude = data['latitude'];
-    longitude = data['longitude'];
-  }
-
-  Map<String, dynamic> toJson() => {
-        'latitude': latitude,
-        'longitude': longitude,
-      };
-
-  @override
-  List<Object?> get props => [latitude, longitude];
 }

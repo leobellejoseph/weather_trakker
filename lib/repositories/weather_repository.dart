@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:weather_trakker/helpers/helpers.dart';
 import 'package:weather_trakker/models/forecast_item.dart';
 import 'package:weather_trakker/models/models.dart';
@@ -29,5 +32,49 @@ class WeatherRepository extends BaseWeatherRepository {
   Future<FourDayForecast> fetchFourDaysForecast() {
     // TODO: implement fetchFourDaysForecast
     throw UnimplementedError();
+  }
+
+  @override
+  Future<void> addFavorites(String key, dynamic value) async {
+    await _storageWrite(key, value);
+  }
+
+  @override
+  Future<void> deleteFavorites(String key) async {
+    await _storageRemove(key);
+  }
+
+  @override
+  Future<List<FavoritesModel>> fetchFavorite(String key) async {
+    final _data = await _storageRead(key);
+    final _list = <FavoritesModel>[];
+    if (_data.isNotEmpty) {
+      _list.addAll(
+          (_data as List).map((e) => FavoritesModel.fromJson(e)).toList());
+    }
+    return _list;
+  }
+
+  @override
+  Future<void> updateFavorites(String key) {
+    // TODO: implement updateFavorites
+    throw UnimplementedError();
+  }
+
+  Future<dynamic> _storageRead(String key) async {
+    final _data = await HydratedBloc.storage.read(key);
+    if (_data == null) {
+      return {};
+    }
+    return jsonDecode(_data);
+  }
+
+  Future<void> _storageWrite(String key, dynamic value) async {
+    final data = jsonEncode(value);
+    await HydratedBloc.storage.write(key, data);
+  }
+
+  Future<void> _storageRemove(String key) async {
+    await HydratedBloc.storage.delete(key);
   }
 }

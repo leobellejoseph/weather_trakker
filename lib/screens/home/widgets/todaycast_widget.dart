@@ -7,8 +7,8 @@ import 'package:weather_trakker/widgets/widgets.dart';
 
 import 'header_widget.dart';
 
-class TodayCastWidget extends HookWidget {
-  const TodayCastWidget({Key? key}) : super(key: key);
+class Forecast24Hours extends HookWidget {
+  const Forecast24Hours({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

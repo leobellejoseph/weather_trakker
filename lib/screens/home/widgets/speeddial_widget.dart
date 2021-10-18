@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:weather_trakker/bloc/blocs.dart';
+import 'package:weather_trakker/cubit/cubit.dart';
 import 'package:weather_trakker/screens/screens.dart';
 import 'package:weather_trakker/widgets/widgets.dart';
 
@@ -46,6 +48,16 @@ class SpeedDialWidget extends StatelessWidget {
             final bloc = context.read<NowcastBloc>();
             bloc.add(NowcastFetchEvent());
             Navigator.pushNamed(context, LocationsScreen.id);
+          },
+        ),
+        SpeedDialChild(
+          child: const Icon(FontAwesomeIcons.eraser),
+          backgroundColor: Colors.blue,
+          foregroundColor: Colors.white,
+          label: 'Reset Data',
+          visible: true,
+          onTap: () {
+            context.read<FavoritesCubit>().reset();
           },
         ),
       ],

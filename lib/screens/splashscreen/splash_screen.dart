@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:lottie/lottie.dart';
+import 'package:weather_trakker/cubit/cubit.dart';
 import 'package:weather_trakker/screens/screens.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -46,6 +48,7 @@ class _LottieSplash extends HookWidget {
           ..forward()
           ..addListener(() {
             if (controller.status == AnimationStatus.completed) {
+              context.read<FavoritesCubit>().fetch();
               Navigator.popAndPushNamed(context, HomeScreen.id);
             }
           });
