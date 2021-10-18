@@ -11,12 +11,12 @@ class NowcastBloc extends Bloc<NowcastEvent, NowcastState> {
   NowcastBloc({required this.repo}) : super(NowcastState.initial()) {
     on<NowcastFetchEvent>((event, emit) async {
       emit(state.copyWith(newStatus: NowcastStateStatus.loading));
-      final data = await repo.fetchNowcast();
+      final data = await repo.fetch2HourForecast();
       emit(state.copyWith(newData: data, newStatus: NowcastStateStatus.loaded));
     });
     on<NowcastFilterEvent>((event, emit) async {
       emit(state.copyWith(newStatus: NowcastStateStatus.loading));
-      final data = await repo.fetchNowcast();
+      final data = await repo.fetch2HourForecast();
 
       emit(state.copyWith(newData: data, newStatus: NowcastStateStatus.loaded));
     });
