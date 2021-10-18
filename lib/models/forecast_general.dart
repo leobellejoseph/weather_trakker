@@ -59,14 +59,16 @@ class Temperature {
 class WindSpeed {
   late final int low;
   late final int high;
-  WindSpeed({required this.low, required this.high});
-  factory WindSpeed.noData() => WindSpeed(low: 0, high: 0);
+  late final String direction;
+  WindSpeed({required this.low, required this.high, required this.direction});
+  factory WindSpeed.noData() => WindSpeed(low: 0, high: 0, direction: 'NA');
   factory WindSpeed.fromJson(Map<String, dynamic> data) {
     if (data.isEmpty || data['speed'] == null) {
-      return WindSpeed(low: 0, high: 0);
+      return WindSpeed.noData();
     }
     final _low = data['speed']['low'] ?? 0;
     final _high = data['speed']['high'] ?? 0;
-    return WindSpeed(low: _low, high: _high);
+    final _direction = data['direction'] ?? 'NA';
+    return WindSpeed(low: _low, high: _high, direction: _direction);
   }
 }

@@ -9,4 +9,5 @@ const WeatherStatus = {
   'Partly Cloudy (Day)':
       LottieWidget(asset: 'assets/overcast.json', size: Size(50, 50)),
   'Showers': LottieWidget(asset: 'assets/rainshower.json', size: Size(50, 50)),
+  'Cloudy': LottieWidget(asset: 'assets/cloudy.json', size: Size(50, 50)),
 };
