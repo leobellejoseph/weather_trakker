@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:weather_trakker/helpers/date_formatter.dart';
 import 'package:weather_trakker/models/forecast_model.dart';
 
 class NowcastItem extends Equatable {
@@ -45,17 +46,28 @@ class NowcastItem extends Equatable {
 }
 
 class ValidPeriod {
-  late final String start;
-  late final String end;
-  ValidPeriod({required this.start, required this.end});
-  factory ValidPeriod.noData() => ValidPeriod(start: 'NA', end: 'NA');
+  late final String startDate;
+  late final String endDate;
+  late final String startTime;
+  late final String endTime;
+  ValidPeriod(
+      {required this.startDate,
+      required this.endDate,
+      required this.startTime,
+      required this.endTime});
+  factory ValidPeriod.noData() => ValidPeriod(
+      startDate: 'NA', endDate: 'NA', startTime: 'NA', endTime: 'NA');
   factory ValidPeriod.fromJson(Map<String, dynamic> data) {
     if (data.isEmpty) {
       return ValidPeriod.noData();
     }
     final _start = data['start'];
     final _end = data['end'];
-    return ValidPeriod(start: _start, end: _end);
+    return ValidPeriod(
+      startDate: DateFormatter.formatToDate(_start),
+      endDate: DateFormatter.formatToDate(_end),
+      startTime: DateFormatter.formatToTime(_start),
+      endTime: DateFormatter.formatToTime(_end),
+    );
   }
-  Map<String, dynamic> toJson() => {'start': start, 'end': end};
 }

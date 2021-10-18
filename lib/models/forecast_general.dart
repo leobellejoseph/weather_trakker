@@ -8,7 +8,11 @@ class ForecastGeneral {
       required this.humidity,
       required this.temperature,
       required this.windSpeed});
-  factory ForecastGeneral.noData()=>ForecastGeneral(forecast: 'NA', humidity: RelativeHumidity.noData(), temperature: Temperature.noData(), windSpeed: WindSpeed.noData());
+  factory ForecastGeneral.noData() => ForecastGeneral(
+      forecast: 'NA',
+      humidity: RelativeHumidity.noData(),
+      temperature: Temperature.noData(),
+      windSpeed: WindSpeed.noData());
   factory ForecastGeneral.fromJson(Map<String, dynamic> data) {
     final _forecast = data['forecast'] ?? 'NA';
     final _humidity = data['relative_humidity'] ?? '';
@@ -31,8 +35,8 @@ class RelativeHumidity {
     if (data.isEmpty) {
       return RelativeHumidity(low: 0, high: 0);
     }
-    final _low = (data['low'] as int) ?? 0;
-    final _high = (data['high'] as int) ?? 0;
+    final _low = data['low'] ?? 0;
+    final _high = data['high'] ?? 0;
     return RelativeHumidity(low: _low, high: _high);
   }
 }
@@ -46,8 +50,8 @@ class Temperature {
     if (data.isEmpty) {
       return Temperature(low: 0, high: 0);
     }
-    final _low = (data['low'] as int) ?? 0;
-    final _high = (data['high'] as int) ?? 0;
+    final _low = data['low'] ?? 0;
+    final _high = data['high'] ?? 0;
     return Temperature(low: _low, high: _high);
   }
 }
@@ -61,8 +65,8 @@ class WindSpeed {
     if (data.isEmpty || data['speed'] == null) {
       return WindSpeed(low: 0, high: 0);
     }
-    final _low = (data['speed']['low'] as int) ?? 0;
-    final _high = (data['speed']['high'] as int) ?? 0;
+    final _low = data['speed']['low'] ?? 0;
+    final _high = data['speed']['high'] ?? 0;
     return WindSpeed(low: _low, high: _high);
   }
 }
