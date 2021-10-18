@@ -7,7 +7,11 @@ class HTTPRequest {
   static const baseUrl = 'https://api.data.gov.sg/v1/environment/';
   static Future<Map<String, dynamic>> get2HourNowcast() async {
     final client = RetryClient(http.Client());
-    final url = Uri.parse(baseUrl + '2-hour-weather-forecast');
+    var date = DateTime.now().toIso8601String();
+    if (date.contains('.')) {
+      date = DateTime.now().toIso8601String().split('.')[0];
+    }
+    final url = Uri.parse('${baseUrl}2-hour-weather-forecast?date_time=$date');
     final response = await client.get(url);
     if (response != null && response.statusCode == 200) {
       return jsonDecode(response.body);
