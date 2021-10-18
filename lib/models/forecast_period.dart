@@ -45,8 +45,8 @@ class TimePeriod {
     }
     final _start = data['start'];
     final _end = data['end'];
-    final _startDate = DateFormatter.formatToDateTime(_start);
-    final _endDate = DateFormatter.formatToDateTime(_end);
+    final _startDate = DateFormatter.formatToHourDate(_start);
+    final _endDate = DateFormatter.formatToHourDate(_end);
     return TimePeriod(start: _startDate, end: _endDate);
   }
 }
