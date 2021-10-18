@@ -1,3 +1,5 @@
+import 'package:weather_trakker/helpers/date_formatter.dart';
+
 enum Regions { west, east, central, south, north }
 
 extension RegionsExtension on Regions {
@@ -43,7 +45,9 @@ class TimePeriod {
     }
     final _start = data['start'];
     final _end = data['end'];
-    return TimePeriod(start: _start, end: _end);
+    final _startDate = DateFormatter.formatToDateTime(_start);
+    final _endDate = DateFormatter.formatToDateTime(_end);
+    return TimePeriod(start: _startDate, end: _endDate);
   }
 }
 

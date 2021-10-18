@@ -12,4 +12,11 @@ class DateFormatter {
     final _formatted = formatDate(_date.toLocal(), [h, ':', nn, am]);
     return _formatted;
   }
+
+  static String formatToDateTime(String date) {
+    final _date = DateTime.parse(date);
+    final _formatted = formatDate(
+        _date.toLocal(), [d, '-', M, '-', yyyy, ' ', h, ':', nn, am]);
+    return _formatted;
+  }
 }
