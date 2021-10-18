@@ -13,27 +13,37 @@ class HTTPRequest {
     }
     final url = Uri.parse('${baseUrl}2-hour-weather-forecast?date_time=$date');
     final response = await client.get(url);
-    if (response != null && response.statusCode == 200) {
+    if (response.statusCode == 200) {
       return jsonDecode(response.body);
     }
     return {};
   }
 
-  static Future<dynamic> get24HourForecast() async {
-    final url = Uri.parse(baseUrl + '24-hour-weather-forecast');
-    final response = await http.get(url);
-    if (response != null && response.statusCode == 200) {
-      return response.body;
+  static Future<Map<String, dynamic>> get24HourForecast() async {
+    final client = RetryClient(http.Client());
+    var date = DateTime.now().toIso8601String();
+    if (date.contains('.')) {
+      date = DateTime.now().toIso8601String().split('.')[0];
     }
-    return 'NA';
+    final url = Uri.parse('${baseUrl}24-hour-weather-forecast?date_time=$date');
+    final response = await client.get(url);
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    }
+    return {};
   }
 
-  static Future<dynamic> get4DayForecast() async {
-    final url = Uri.parse(baseUrl + '4-day-weather-forecast');
-    final response = await http.get(url);
-    if (response != null && response.statusCode == 200) {
-      return response.body;
+  static Future<Map<String, dynamic>> get4DaysForecast() async {
+    final client = RetryClient(http.Client());
+    var date = DateTime.now().toIso8601String();
+    if (date.contains('.')) {
+      date = DateTime.now().toIso8601String().split('.')[0];
     }
-    return 'NA';
+    final url = Uri.parse('${baseUrl}4-day-weather-forecast?date_time=$date');
+    final response = await client.get(url);
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    }
+    return {};
   }
 }
