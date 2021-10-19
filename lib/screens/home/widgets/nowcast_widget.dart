@@ -45,7 +45,6 @@ class _NowCastWidgetState extends State<NowCastWidget>
   Widget build(BuildContext context) {
     return BlocBuilder<FavoritesCubit, FavoritesState>(
       builder: (context, state) {
-        print(state.status);
         if (state.status == FavoriteStatus.loading) {
           return const LoadingWidget();
         } else if (state.status == FavoriteStatus.no_internet) {
