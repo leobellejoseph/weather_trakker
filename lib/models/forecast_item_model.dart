@@ -1,5 +1,5 @@
-import 'package:weather_trakker/models/forecast_general.dart';
-import 'package:weather_trakker/models/forecast_period.dart';
+import 'package:weather_trakker/models/forecast_general_model.dart';
+import 'package:weather_trakker/models/forecast_period_model.dart';
 import 'package:weather_trakker/models/models.dart';
 
 class ForecastItem {

@@ -1,5 +1,5 @@
 import 'package:weather_trakker/models/area_model.dart';
-import 'package:weather_trakker/models/nowcast_item.dart';
+import 'package:weather_trakker/models/nowcast_item_model.dart';
 
 class NowcastModel {
   late final List<AreaModel> areas;
