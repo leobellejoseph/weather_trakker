@@ -86,7 +86,7 @@ class FavoritesCubit extends Cubit<FavoritesState> {
   void reset() async {
     try {
       emit(state.copyWith(newData: [], newStatus: FavoriteStatus.loading));
-      final _list = await repo.deleteFavorites(key);
+      await repo.deleteFavorites(key);
       emit(state.copyWith(newData: [], newStatus: FavoriteStatus.no_data));
     } on Failure catch (_) {
       emit(state.copyWith(newStatus: FavoriteStatus.error));

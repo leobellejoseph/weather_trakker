@@ -1,18 +1,11 @@
 part of 'nowcast_bloc.dart';
 
-enum NowcastStateStatus {
-  initial,
-  loading,
-  loaded,
-  no_data,
-  no_internet,
-  error
-}
+enum NowcastStateStatus { initial, loading, loaded, noData, noInternet, error }
 
 class NowcastState extends Equatable {
   final NowcastModel data;
   final NowcastStateStatus status;
-  NowcastState({required this.data, required this.status});
+  const NowcastState({required this.data, required this.status});
   factory NowcastState.initial() => NowcastState(
       data: NowcastModel.noData(), status: NowcastStateStatus.initial);
 

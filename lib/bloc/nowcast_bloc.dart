@@ -21,7 +21,7 @@ class NowcastBloc extends Bloc<NowcastEvent, NowcastState> {
     emit(state.copyWith(newStatus: NowcastStateStatus.loading));
     final _hasConnection = await InternetConnectionChecker().hasConnection;
     if (_hasConnection == false) {
-      emit(state.copyWith(newStatus: NowcastStateStatus.no_internet));
+      emit(state.copyWith(newStatus: NowcastStateStatus.noInternet));
     } else {
       final data = await repo.fetch2HourForecast();
       emit(state.copyWith(newData: data, newStatus: NowcastStateStatus.loaded));

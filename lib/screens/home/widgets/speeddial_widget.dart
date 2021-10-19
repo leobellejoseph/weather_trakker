@@ -24,7 +24,7 @@ class SpeedDialWidget extends StatelessWidget {
       gradientBoxShape: BoxShape.circle,
       children: [
         SpeedDialChild(
-          child: const Icon(CupertinoIcons.heart_fill, size: 35),
+          child: const Icon(CupertinoIcons.star_fill, size: 35),
           backgroundColor: Colors.blueAccent,
           foregroundColor: Colors.yellow.shade700,
           label: 'Favorites',

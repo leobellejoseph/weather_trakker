@@ -13,7 +13,6 @@ class TodaycastList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ForecastBloc, ForecastState>(
       builder: (context, state) {
-        print(state.status);
         if (state.status == ForecastStateStatus.noData) {
           return CenteredTextButton.noData(onPress: () {});
         } else if (state.status == ForecastStateStatus.noInternet) {
@@ -24,7 +23,7 @@ class TodaycastList extends StatelessWidget {
           return Stack(children: [
             Column(
               children: [
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 Container(
                   height: 235,
                   margin: const EdgeInsets.all(8),

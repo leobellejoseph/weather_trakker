@@ -10,10 +10,10 @@ class LocationsScreen extends HookWidget {
   static const id = 'locations';
 
   static Route route() => MaterialPageRoute(
-      builder: (context) => LocationsScreen(key: ValueKey(id)),
+      builder: (context) => const LocationsScreen(key: ValueKey(id)),
       settings: const RouteSettings(name: LocationsScreen.id));
 
-  LocationsScreen({Key? key}) : super(key: key);
+  const LocationsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

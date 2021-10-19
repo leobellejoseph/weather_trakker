@@ -8,8 +8,8 @@ class ForecastState extends Equatable {
   final Failure failure;
   const ForecastState(
       {required this.data, required this.status, required this.failure});
-  factory ForecastState.initial() => ForecastState(
-      data: [], status: ForecastStateStatus.initial, failure: const Failure());
+  factory ForecastState.initial() => const ForecastState(
+      data: [], status: ForecastStateStatus.initial, failure: Failure());
   ForecastState copyWith(
           {List<ForecastItem>? newData,
           ForecastStateStatus? newStatus,
