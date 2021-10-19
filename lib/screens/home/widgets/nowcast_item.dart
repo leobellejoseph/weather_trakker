@@ -4,7 +4,7 @@ class NowCastItem extends StatelessWidget {
   final String title;
   final Widget child;
   final String subtitle;
-  NowCastItem({
+  const NowCastItem({
     Key? key,
     required this.title,
     required this.child,
@@ -32,7 +32,7 @@ class NowCastItem extends StatelessWidget {
           Text(
             subtitle,
             style: const TextStyle(
-              fontSize: 12,
+              fontSize: 14,
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),

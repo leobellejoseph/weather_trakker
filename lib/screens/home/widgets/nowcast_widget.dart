@@ -69,9 +69,9 @@ class _NowCastWidgetState extends State<NowCastWidget>
                   children: state.data
                       .map((item) => NowCastItem(
                           title: item.area,
-                          child: LottieButton(
-                            onTap: () {},
+                          child: const LottieWidget(
                             asset: 'assets/cloudy.json',
+                            size: Size(160, 160),
                           ),
                           subtitle: 'Cloudy'))
                       .toList(),
