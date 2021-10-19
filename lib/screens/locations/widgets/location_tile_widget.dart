@@ -16,7 +16,7 @@ class LocationTile extends HookWidget {
   Widget build(BuildContext context) {
     final isFavorite = useState<bool>(favorite);
     return ListTile(
-      leading: WeatherStatus[item.forecast],
+      leading: kWeatherStatus[item.forecast],
       title: Text(item.area,
           style: TextStyle(
               fontWeight: FontWeight.w700, color: Colors.blue.shade900)),

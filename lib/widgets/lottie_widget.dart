@@ -9,6 +9,8 @@ class LottieWidget extends HookWidget {
       : _asset = asset,
         _size = size ?? const Size(120, 120),
         super(key: key);
+  factory LottieWidget.noData() =>
+      const LottieWidget(asset: 'assets/sunny.json');
   @override
   Widget build(BuildContext context) {
     final controller = useAnimationController();

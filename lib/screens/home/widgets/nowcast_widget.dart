@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_trakker/cubit/cubit.dart';
+import 'package:weather_trakker/helpers/helpers.dart';
 import 'package:weather_trakker/screens/home/widgets/widget.dart';
 import 'package:weather_trakker/widgets/widgets.dart';
 
@@ -69,11 +70,9 @@ class _NowCastWidgetState extends State<NowCastWidget>
                   children: state.data
                       .map((item) => NowCastItem(
                           title: item.area,
-                          child: const LottieWidget(
-                            asset: 'assets/cloudy.json',
-                            size: Size(160, 160),
-                          ),
-                          subtitle: 'Cloudy'))
+                          child:
+                              kWeatherStatusLarge[item.forecast] ?? Container(),
+                          subtitle: item.forecast))
                       .toList(),
                 ),
               ),
