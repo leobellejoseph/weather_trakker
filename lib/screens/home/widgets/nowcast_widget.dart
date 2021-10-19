@@ -20,6 +20,18 @@ class NowCastWidget extends StatefulWidget {
 class _NowCastWidgetState extends State<NowCastWidget>
     with WidgetsBindingObserver {
   final controller = SwiperController();
+  @override
+  void initState() {
+    WidgetsBinding.instance?.addObserver(this);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    WidgetsBinding.instance?.removeObserver(this);
+    super.dispose();
+  }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
