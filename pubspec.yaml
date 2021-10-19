@@ -58,6 +58,7 @@ flutter:
     - assets/thunderstorm.json
     - assets/sunny.json
     - assets/partlycloudyday.json
+    - assets/partlycloudynight.json
     - images/met.png
 
   # fonts:

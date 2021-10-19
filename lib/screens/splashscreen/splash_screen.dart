@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:lottie/lottie.dart';
+import 'package:weather_trakker/bloc/blocs.dart';
 import 'package:weather_trakker/cubit/cubit.dart';
 import 'package:weather_trakker/screens/screens.dart';
 
@@ -49,6 +50,7 @@ class _LottieSplash extends HookWidget {
           ..addListener(() {
             if (controller.status == AnimationStatus.completed) {
               context.read<FavoritesCubit>().fetch();
+              context.read<ForecastBloc>().add(ForecastGeneralEvent());
               Navigator.popAndPushNamed(context, HomeScreen.id);
             }
           });

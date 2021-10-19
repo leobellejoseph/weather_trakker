@@ -20,8 +20,7 @@ class ForecastItem {
       validPeriod: ValidPeriod.noData(),
       general: ForecastGeneral.noData(),
       periods: []);
-  factory ForecastItem.fromJson(Map<String, dynamic> json) {
-    final data = json['items'];
+  factory ForecastItem.fromJson(Map<String, dynamic> data) {
     final _updateTimeStamp = data['update_timestamp'] ?? '';
     final _timeStamp = data['timestamp'] ?? '';
     final _validPeriod = data['valid_period'] ?? '';
@@ -35,5 +34,6 @@ class ForecastItem {
         validPeriod: ValidPeriod.fromJson(_validPeriod),
         general: ForecastGeneral.fromJson(_general),
         periods: _periods);
+    return ForecastItem.noData();
   }
 }

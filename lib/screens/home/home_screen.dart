@@ -26,7 +26,10 @@ class HomeScreen extends StatelessWidget {
                   end: Alignment.bottomCenter,
                   colors: [
                     Colors.blue.withOpacity(0.8),
+                    Colors.blue.withOpacity(0.6),
+                    Colors.blue.withOpacity(0.5),
                     Colors.blue.withOpacity(0.4),
+                    Colors.blue.withOpacity(0.2),
                   ],
                 ),
               ),
@@ -35,30 +38,20 @@ class HomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
+                  children: const [
                     SizedBox(
-                      height: 280,
-                      child: NowCastWidget(
-                          title: '2-hour Nowcast',
-                          subtitle: '5:00 pm to 7:00 pm'),
+                      height: 230,
+                      child: NowCastWidget(title: '2-hour Nowcast'),
                     ),
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.only(
                           left: 5, right: 5, top: 10, bottom: 10),
                       child: Divider(height: 0.5, color: Colors.blueAccent),
                     ),
-                    // SizedBox(
-                    //   width: double.infinity,
-                    //   height: size.height - 450,
-                    //   child: CustomScrollView(
-                    //     slivers: [
-                    //       SliverToBoxAdapter(child: Forecast24Hours()),
-                    //       SliverToBoxAdapter(child: Forecast24Hours()),
-                    //       SliverToBoxAdapter(child: Forecast24Hours()),
-                    //     ],
-                    //   ),
-                    // ),
-                    Forecast24Hours(),
+                    SizedBox(
+                        height: 290,
+                        width: double.infinity,
+                        child: TodaycastList()),
                   ],
                 ),
               ),

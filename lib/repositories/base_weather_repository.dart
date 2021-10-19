@@ -2,7 +2,7 @@ import 'package:weather_trakker/models/models.dart';
 
 abstract class BaseWeatherRepository {
   Future<NowcastModel> fetch2HourForecast();
-  Future<ForecastItem> fetch24HourForecast();
+  Future<List<ForecastItem>> fetch24HourForecast(bool isGeneral);
   Future<FourDayForecast> fetchFourDaysForecast();
   Future<List<FavoritesModel>> fetchFavorite(String key);
   Future<void> updateFavorites(String key);

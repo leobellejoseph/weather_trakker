@@ -29,16 +29,21 @@ class ForecastPeriod {
       time: TimePeriod.noData(), region: ForecastRegion.noData());
   factory ForecastPeriod.fromJson(Map<String, dynamic> data) {
     final _time = data['time'] ?? '';
-    final _region = data['period'] ?? '';
-    return ForecastPeriod(time: _time, region: _region);
+    final _region = data['regions'] ?? '';
+    return ForecastPeriod(
+        time: TimePeriod.fromJson(_time),
+        region: ForecastRegion.fromJson(_region));
   }
 }
 
 class TimePeriod {
   late final String start;
   late final String end;
-  TimePeriod({required this.start, required this.end});
-  factory TimePeriod.noData() => TimePeriod(start: 'NA', end: 'NA');
+  late final String description;
+  TimePeriod(
+      {required this.start, required this.end, required this.description});
+  factory TimePeriod.noData() =>
+      TimePeriod(start: 'NA', end: 'NA', description: 'NA');
   factory TimePeriod.fromJson(Map<String, dynamic> data) {
     if (data.isEmpty) {
       return TimePeriod.noData();
@@ -47,7 +52,24 @@ class TimePeriod {
     final _end = data['end'];
     final _startDate = DateFormatter.formatToHourDate(_start);
     final _endDate = DateFormatter.formatToHourDate(_end);
-    return TimePeriod(start: _startDate, end: _endDate);
+    final _startHour = DateFormatter.formatToHour(_start);
+    String _description = 'Morning';
+    switch (_startHour) {
+      case '6PM':
+        _description = 'Night until Early Morning';
+        break;
+      case '6AM':
+        _description = 'Morning until Noon';
+        break;
+      case '12PM':
+        _description = 'Afternoon until Evening';
+        break;
+      default:
+        _description = '';
+    }
+
+    return TimePeriod(
+        start: _startDate, end: _endDate, description: _description);
   }
 }
 

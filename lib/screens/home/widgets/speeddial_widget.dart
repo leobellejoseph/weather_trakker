@@ -57,6 +57,7 @@ class SpeedDialWidget extends StatelessWidget {
           visible: true,
           onTap: () {
             context.read<FavoritesCubit>().fetch();
+            context.read<ForecastBloc>().add(ForecastGeneralEvent());
           },
         ),
       ],

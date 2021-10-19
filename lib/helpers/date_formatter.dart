@@ -7,6 +7,12 @@ class DateFormatter {
     return _formatted;
   }
 
+  static String formatToYYYYMMDD(String date) {
+    final _date = DateTime.parse(date);
+    final _formatted = formatDate(_date.toLocal(), [yyyy, '-', mm, '-', dd]);
+    return _formatted;
+  }
+
   static String formatToDayMonth(String date) {
     final _date = DateTime.parse(date);
     final _formatted = formatDate(_date.toLocal(), [d, ' ', M]);
@@ -22,6 +28,12 @@ class DateFormatter {
   static String formatToTime(String date) {
     final _date = DateTime.parse(date);
     final _formatted = formatDate(_date.toLocal(), [h, ':', nn, am]);
+    return _formatted;
+  }
+
+  static String formatToHour(String date) {
+    final _date = DateTime.parse(date);
+    final _formatted = formatDate(_date.toLocal(), [h, am]);
     return _formatted;
   }
 

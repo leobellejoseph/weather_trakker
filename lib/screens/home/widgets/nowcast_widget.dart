@@ -9,10 +9,7 @@ import 'package:weather_trakker/widgets/widgets.dart';
 
 class NowCastWidget extends StatefulWidget {
   final String title;
-  final String subtitle;
-
-  const NowCastWidget({Key? key, required this.title, required this.subtitle})
-      : super(key: key);
+  const NowCastWidget({Key? key, required this.title}) : super(key: key);
 
   @override
   State<NowCastWidget> createState() => _NowCastWidgetState();

@@ -1,8 +1,14 @@
 part of 'forecast_bloc.dart';
 
-class ForecastFetchEvent extends Equatable {
-  const ForecastFetchEvent();
-
+abstract class ForecastEvent extends Equatable {
   @override
   List<Object?> get props => [];
+}
+
+class ForecastGeneralEvent extends ForecastEvent {
+  ForecastGeneralEvent();
+}
+
+class ForecastPeriodEvent extends ForecastEvent {
+  ForecastPeriodEvent();
 }

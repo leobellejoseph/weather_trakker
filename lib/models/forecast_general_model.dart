@@ -71,4 +71,6 @@ class WindSpeed {
     final _direction = data['direction'] ?? 'NA';
     return WindSpeed(low: _low, high: _high, direction: _direction);
   }
+  @override
+  String toString() => '$low,$high,$direction';
 }

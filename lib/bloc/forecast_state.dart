@@ -1,10 +1,23 @@
 part of 'forecast_bloc.dart';
 
-abstract class ForecastState extends Equatable {
-  const ForecastState();
-}
+enum ForecastStateStatus { initial, loading, loaded, noData, noInternet, error }
 
-class ForecastInitial extends ForecastState {
+class ForecastState extends Equatable {
+  final List<ForecastItem> data;
+  final ForecastStateStatus status;
+  final Failure failure;
+  const ForecastState(
+      {required this.data, required this.status, required this.failure});
+  factory ForecastState.initial() => ForecastState(
+      data: [], status: ForecastStateStatus.initial, failure: const Failure());
+  ForecastState copyWith(
+          {List<ForecastItem>? newData,
+          ForecastStateStatus? newStatus,
+          Failure? newFailure}) =>
+      ForecastState(
+          data: newData ?? [],
+          status: newStatus ?? status,
+          failure: newFailure ?? failure);
   @override
-  List<Object> get props => [];
+  List<Object> get props => [data, status];
 }

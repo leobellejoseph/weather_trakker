@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider(create: (context) => NowcastBloc(repo: repo)),
           BlocProvider(create: (context) => FavoritesCubit(repo: repo)),
+          BlocProvider(create: (context) => ForecastBloc(repo: repo)),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

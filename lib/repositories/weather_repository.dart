@@ -19,13 +19,17 @@ class WeatherRepository extends BaseWeatherRepository {
   }
 
   @override
-  Future<ForecastItem> fetch24HourForecast() async {
-    final response = await HTTPRequest.get24HourForecast();
-    if (response.isEmpty) {
-      return ForecastItem.noData();
+  Future<List<ForecastItem>> fetch24HourForecast(
+      [bool isGeneral = true]) async {
+    var response = {};
+    if (isGeneral) {
+      response = await HTTPRequest.get24HourGeneralForecast();
     } else {
-      return ForecastItem.fromJson(response);
+      response = await HTTPRequest.get24HourPeriodForecast();
     }
+    final _data = response['items'];
+    final _list = (_data as List).map((e) => ForecastItem.fromJson(e)).toList();
+    return _list;
   }
 
   @override
