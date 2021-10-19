@@ -20,9 +20,12 @@ class FavoritesCubit extends Cubit<FavoritesState> {
       _list.add(_favorite);
       await repo.deleteFavorites(key);
       await repo.addFavorites(key, _list);
-      emit(state.copyWith(newStatus: FavoriteStatus.loaded));
+      if (_list.isEmpty) {
+        emit(state.copyWith(newData: [], newStatus: FavoriteStatus.no_data));
+      }
+      emit(state.copyWith(newData: _list, newStatus: FavoriteStatus.loaded));
     } on Failure catch (_) {
-      emit(state.copyWith(newStatus: FavoriteStatus.error));
+      emit(state.copyWith(newData: [], newStatus: FavoriteStatus.error));
     }
   }
 
@@ -34,26 +37,34 @@ class FavoritesCubit extends Cubit<FavoritesState> {
           _list.where((element) => element.area != item.area).toList();
       await repo.deleteFavorites(key);
       await repo.addFavorites(key, _newList);
-      emit(state.copyWith(newStatus: FavoriteStatus.loaded));
+      if (_list.isEmpty) {
+        emit(state.copyWith(newData: [], newStatus: FavoriteStatus.no_data));
+      }
+      emit(state.copyWith(newData: _list, newStatus: FavoriteStatus.loaded));
     } on Failure catch (_) {
-      emit(state.copyWith(newStatus: FavoriteStatus.error));
+      emit(state.copyWith(newData: [], newStatus: FavoriteStatus.error));
     }
   }
 
   void fetch() async {
     try {
       emit(state.copyWith(newData: [], newStatus: FavoriteStatus.loading));
-      final _data = await repo.fetchFavorite(key);
-      final _nowcast = await repo.fetch2HourForecast();
-      final List<FavoritesModel> _list = [];
-      _data.forEach((item) {
-        final _forecast = _nowcast.items[0].forecasts
-            .firstWhere((element) => element.area == item.area)
-            .forecast;
-        final model = FavoritesModel(area: item.area, forecast: _forecast);
-        _list.add(model);
+      await Future.delayed(const Duration(milliseconds: 500), () async {
+        final _data = await repo.fetchFavorite(key);
+        final _nowcast = await repo.fetch2HourForecast();
+        final List<FavoritesModel> _list = [];
+        _data.forEach((item) {
+          final _forecast = _nowcast.items[0].forecasts
+              .firstWhere((element) => element.area == item.area)
+              .forecast;
+          final model = FavoritesModel(area: item.area, forecast: _forecast);
+          _list.add(model);
+        });
+        if (_list.isEmpty) {
+          emit(state.copyWith(newData: [], newStatus: FavoriteStatus.no_data));
+        }
+        emit(state.copyWith(newData: _list, newStatus: FavoriteStatus.loaded));
       });
-      emit(state.copyWith(newData: _list, newStatus: FavoriteStatus.loaded));
     } on Failure catch (_) {
       emit(state.copyWith(newStatus: FavoriteStatus.error));
     }
@@ -63,7 +74,7 @@ class FavoritesCubit extends Cubit<FavoritesState> {
     try {
       emit(state.copyWith(newData: [], newStatus: FavoriteStatus.loading));
       final _list = await repo.deleteFavorites(key);
-      emit(state.copyWith(newData: [], newStatus: FavoriteStatus.reset));
+      emit(state.copyWith(newData: [], newStatus: FavoriteStatus.no_data));
     } on Failure catch (_) {
       emit(state.copyWith(newStatus: FavoriteStatus.error));
     }

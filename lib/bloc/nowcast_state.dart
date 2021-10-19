@@ -1,6 +1,13 @@
 part of 'nowcast_bloc.dart';
 
-enum NowcastStateStatus { initial, loading, loaded, error }
+enum NowcastStateStatus {
+  initial,
+  loading,
+  loaded,
+  no_data,
+  no_internet,
+  error
+}
 
 class NowcastState extends Equatable {
   final NowcastModel data;

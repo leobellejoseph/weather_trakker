@@ -24,7 +24,6 @@ class LocationsScreen extends HookWidget {
         leading: InkWellButton(
           child: const Icon(Icons.arrow_back_ios),
           onPress: () {
-            context.read<FavoritesCubit>().fetch();
             Navigator.popAndPushNamed(context, HomeScreen.id);
           },
         ),
