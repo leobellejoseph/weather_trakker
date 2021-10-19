@@ -9,3 +9,4 @@ export 'fourday_forecast.dart';
 export 'location_model.dart';
 export 'nowcast_item.dart';
 export 'nowcast_model.dart';
+export 'valid_period_model.dart';

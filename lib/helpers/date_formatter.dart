@@ -13,6 +13,12 @@ class DateFormatter {
     return _formatted;
   }
 
+  static String formatToDateHour(String date) {
+    final _date = DateTime.parse(date);
+    final _formatted = formatDate(_date.toLocal(), [d, ' ', M, ' ', h, am]);
+    return _formatted;
+  }
+
   static String formatToTime(String date) {
     final _date = DateTime.parse(date);
     final _formatted = formatDate(_date.toLocal(), [h, ':', nn, am]);

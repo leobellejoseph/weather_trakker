@@ -43,23 +43,23 @@ class _NowCastWidgetState extends State<NowCastWidget>
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      children: [
-        HeaderWidget(title: widget.title, subtitle: widget.subtitle),
-        Expanded(
-          child: BlocBuilder<FavoritesCubit, FavoritesState>(
-            builder: (context, state) {
-              if (state.status == FavoriteStatus.loading) {
-                return const LoadingWidget();
-              } else if (state.status == FavoriteStatus.no_internet) {
-                return CenteredTextButton.noInternet(
-                  onPress: () {},
-                );
-              } else if (state.status == FavoriteStatus.no_data) {
-                return CenteredTextButton.noData(onPress: () {});
-              } else {
-                return Swiper.children(
+    return BlocBuilder<FavoritesCubit, FavoritesState>(
+      builder: (context, state) {
+        if (state.status == FavoriteStatus.loading) {
+          return const LoadingWidget();
+        } else if (state.status == FavoriteStatus.no_internet) {
+          return CenteredTextButton.noInternet(
+            onPress: () {},
+          );
+        } else if (state.status == FavoriteStatus.no_data) {
+          return CenteredTextButton.noData(onPress: () {});
+        } else {
+          return Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              HeaderWidget(title: widget.title, subtitle: state.period),
+              Expanded(
+                child: Swiper.children(
                   controller: controller,
                   pagination: const SwiperPagination(
                     margin: EdgeInsets.all(0),
@@ -75,12 +75,12 @@ class _NowCastWidgetState extends State<NowCastWidget>
                           ),
                           subtitle: 'Cloudy'))
                       .toList(),
-                );
-              }
-            },
-          ),
-        ),
-      ],
+                ),
+              ),
+            ],
+          );
+        }
+      },
     );
   }
 }

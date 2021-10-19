@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:weather_trakker/helpers/date_formatter.dart';
-import 'package:weather_trakker/models/forecast_model.dart';
+import 'package:weather_trakker/models/models.dart';
 
 class NowcastItem extends Equatable {
   late final String updateTimeStamp;
@@ -43,31 +42,4 @@ class NowcastItem extends Equatable {
   @override
   List<Object?> get props =>
       [updateTimeStamp, timeStamp, validPeriod, forecasts];
-}
-
-class ValidPeriod {
-  late final String startDate;
-  late final String endDate;
-  late final String startTime;
-  late final String endTime;
-  ValidPeriod(
-      {required this.startDate,
-      required this.endDate,
-      required this.startTime,
-      required this.endTime});
-  factory ValidPeriod.noData() => ValidPeriod(
-      startDate: 'NA', endDate: 'NA', startTime: 'NA', endTime: 'NA');
-  factory ValidPeriod.fromJson(Map<String, dynamic> data) {
-    if (data.isEmpty) {
-      return ValidPeriod.noData();
-    }
-    final _start = data['start'];
-    final _end = data['end'];
-    return ValidPeriod(
-      startDate: DateFormatter.formatToDate(_start),
-      endDate: DateFormatter.formatToDate(_end),
-      startTime: DateFormatter.formatToTime(_start),
-      endTime: DateFormatter.formatToTime(_end),
-    );
-  }
 }

@@ -53,17 +53,27 @@ class FavoritesCubit extends Cubit<FavoritesState> {
         final _data = await repo.fetchFavorite(key);
         final _nowcast = await repo.fetch2HourForecast();
         final List<FavoritesModel> _list = [];
+        String _period = '';
         _data.forEach((item) {
-          final _forecast = _nowcast.items[0].forecasts
-              .firstWhere((element) => element.area == item.area)
-              .forecast;
-          final model = FavoritesModel(area: item.area, forecast: _forecast);
-          _list.add(model);
+          final _items = _nowcast.items[0];
+          final _forecast =
+              _items.forecasts.firstWhere((e) => e.area == item.area).forecast;
+          final _model = FavoritesModel(area: item.area, forecast: _forecast);
+          final _start = _items.validPeriod.startTime;
+          final _end = _items.validPeriod.endTime;
+          _period = '$_start to $_end';
+          _list.add(_model);
         });
         if (_list.isEmpty) {
-          emit(state.copyWith(newData: [], newStatus: FavoriteStatus.no_data));
+          emit(state.copyWith(
+              newData: [],
+              newPeriod: _period,
+              newStatus: FavoriteStatus.no_data));
         }
-        emit(state.copyWith(newData: _list, newStatus: FavoriteStatus.loaded));
+        emit(state.copyWith(
+            newData: _list,
+            newPeriod: _period,
+            newStatus: FavoriteStatus.loaded));
       });
     } on Failure catch (_) {
       emit(state.copyWith(newStatus: FavoriteStatus.error));
