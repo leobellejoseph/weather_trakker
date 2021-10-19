@@ -12,7 +12,7 @@ class HeaderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 35,
+      height: 40,
       color: _color,
       padding: const EdgeInsets.only(left: 5, right: 5),
       child: Column(
@@ -22,13 +22,13 @@ class HeaderWidget extends StatelessWidget {
                   style: const TextStyle(
                       fontWeight: FontWeight.w700,
                       color: Colors.white,
-                      fontSize: 14))),
+                      fontSize: 18))),
           Center(
               child: Text(subtitle,
                   style: const TextStyle(
-                      color: Colors.white60,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 12))),
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14))),
         ],
       ),
     );

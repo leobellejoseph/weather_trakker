@@ -21,21 +21,40 @@ class TodaycastList extends StatelessWidget {
         } else if (state.status == ForecastStateStatus.loading) {
           return const LoadingWidget();
         } else {
-          return Swiper.children(
-            pagination: const SwiperPagination(
-              margin: EdgeInsets.all(0),
-              alignment: Alignment.bottomCenter,
+          return Stack(children: [
+            Column(
+              children: [
+                SizedBox(height: 30),
+                Container(
+                  height: 235,
+                  margin: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    image: const DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage('images/sgmap.png')),
+                    border: Border.all(color: Colors.white60, width: 0.5),
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+              ],
             ),
-            scrollDirection: Axis.horizontal,
-            children: [
-              // const TodaycastItemGeneral(),
-              //TodaycastItem(item: item)
-              for (var item in state.data) TodaycastItemGeneral(item: item),
-              for (var item in state.data)
-                for (var period in item.periods)
-                  TodaycastMapItem(period: period),
-            ],
-          );
+            Swiper.children(
+              pagination: const SwiperPagination(
+                margin: EdgeInsets.all(0),
+                alignment: Alignment.bottomCenter,
+              ),
+              scrollDirection: Axis.horizontal,
+              children: [
+                // const TodaycastItemGeneral(),
+                //TodaycastItem(item: item)
+                // for (var item in state.data) TodaycastItemGeneral(item: item),
+                for (var item in state.data)
+                  for (var period in item.periods)
+                    TodaycastMapItem(period: period),
+              ],
+            ),
+          ]);
         }
       },
     );

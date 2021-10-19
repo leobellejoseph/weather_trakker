@@ -28,7 +28,10 @@ class SpeedDialWidget extends StatelessWidget {
           backgroundColor: Colors.blueAccent,
           foregroundColor: Colors.yellow.shade700,
           label: 'Favorites',
-          onTap: () => Navigator.pushNamed(context, FavoritesScreen.id),
+          onTap: () {
+            context.read<FavoritesCubit>().fetch();
+            Navigator.pushNamed(context, FavoritesScreen.id);
+          },
         ),
         SpeedDialChild(
           child: const Icon(CupertinoIcons.cloud_rain),

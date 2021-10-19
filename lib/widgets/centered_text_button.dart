@@ -15,11 +15,11 @@ class CenteredTextButton extends StatelessWidget {
   factory CenteredTextButton.noFavorites({required Function onPress}) =>
       CenteredTextButton(
         title: 'Favorites',
-        child: const Center(
+        child: Center(
             child: Icon(
-          Icons.info,
-          color: Colors.white,
-          size: 50,
+          Icons.star,
+          color: Colors.yellow.shade600,
+          size: 100,
         )),
         onPress: onPress,
         buttonText: 'Click to Add Favorites',

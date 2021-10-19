@@ -4,7 +4,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:weather_trakker/bloc/blocs.dart';
 import 'package:weather_trakker/cubit/cubit.dart';
 import 'package:weather_trakker/screens/locations/widgets/location_tile_widget.dart';
-import 'package:weather_trakker/screens/screens.dart';
 import 'package:weather_trakker/widgets/widgets.dart';
 
 class LocationsScreen extends HookWidget {
@@ -20,14 +19,13 @@ class LocationsScreen extends HookWidget {
   Widget build(BuildContext context) {
     final controller = useTextEditingController();
     return Scaffold(
-      appBar: AppBar(
-        leading: InkWellButton(
-          child: const Icon(Icons.arrow_back_ios),
-          onPress: () {
-            Navigator.popAndPushNamed(context, HomeScreen.id);
-          },
-        ),
-        title: const Text('Locations'),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: InkWellButton(
+        size: const Size(50, 50),
+        child: const Icon(Icons.arrow_back, size: 50, color: Colors.blue),
+        onPress: () {
+          Navigator.pop(context);
+        },
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -45,23 +43,31 @@ class LocationsScreen extends HookWidget {
             if (state.status == NowcastStateStatus.loading) {
               return const LoadingWidget();
             } else {
-              return SizedBox(
-                height: double.infinity,
-                width: double.infinity,
-                child: BlocBuilder<FavoritesCubit, FavoritesState>(
-                  builder: (_, favorites) {
-                    return ListView.separated(
-                        itemBuilder: (context, index) {
-                          final item = state.data.items[0].forecasts[index];
-                          bool isFavorite = favorites.data
-                              .where((i) => i.area == item.area)
-                              .isNotEmpty;
-                          return LocationTile(item: item, favorite: isFavorite);
-                        },
-                        itemCount: state.data.items[0].forecasts.length,
-                        separatorBuilder: (BuildContext context, int index) =>
-                            const Divider(thickness: 0.1, color: Colors.white));
-                  },
+              return SafeArea(
+                child: Container(
+                  margin:
+                      const EdgeInsets.only(left: 15, right: 15, bottom: 70),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(18),
+                    border: Border.all(color: Colors.white, width: 0.5),
+                  ),
+                  child: BlocBuilder<FavoritesCubit, FavoritesState>(
+                    builder: (_, favorites) {
+                      return ListView.separated(
+                          itemBuilder: (context, index) {
+                            final item = state.data.items[0].forecasts[index];
+                            bool isFavorite = favorites.data
+                                .where((i) => i.area == item.area)
+                                .isNotEmpty;
+                            return LocationTile(
+                                item: item, favorite: isFavorite);
+                          },
+                          itemCount: state.data.items[0].forecasts.length,
+                          separatorBuilder: (BuildContext context, int index) =>
+                              const Divider(
+                                  thickness: 0.1, color: Colors.white));
+                    },
+                  ),
                 ),
               );
             }

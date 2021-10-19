@@ -21,14 +21,15 @@ class FavoritesCubit extends Cubit<FavoritesState> {
       await repo.deleteFavorites(key);
       await repo.addFavorites(key, _list);
       final filtered = await _fetchFilteredNowcast(_list);
-      if (_list.isEmpty) {
+      if (filtered.list.isEmpty) {
         emit(state.copyWith(
             newData: [], newPeriod: '', newStatus: FavoriteStatus.no_data));
+      } else {
+        emit(state.copyWith(
+            newData: filtered.list,
+            newPeriod: filtered.period,
+            newStatus: FavoriteStatus.loaded));
       }
-      emit(state.copyWith(
-          newData: filtered.list,
-          newPeriod: filtered.period,
-          newStatus: FavoriteStatus.loaded));
     } on Failure catch (_) {
       emit(state.copyWith(newData: [], newStatus: FavoriteStatus.error));
     }
@@ -47,14 +48,15 @@ class FavoritesCubit extends Cubit<FavoritesState> {
       }
       final filtered = await _fetchFilteredNowcast(_filteredList);
 
-      if (_list.isEmpty) {
+      if (filtered.list.isEmpty) {
         emit(state.copyWith(
             newData: [], newPeriod: '', newStatus: FavoriteStatus.no_data));
+      } else {
+        emit(state.copyWith(
+            newData: filtered.list,
+            newPeriod: filtered.period,
+            newStatus: FavoriteStatus.loaded));
       }
-      emit(state.copyWith(
-          newData: filtered.list,
-          newPeriod: filtered.period,
-          newStatus: FavoriteStatus.loaded));
     } on Failure catch (_) {
       emit(state.copyWith(newData: [], newStatus: FavoriteStatus.error));
     }
