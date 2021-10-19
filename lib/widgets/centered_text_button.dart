@@ -12,6 +12,18 @@ class CenteredTextButton extends StatelessWidget {
       required this.onPress,
       required this.buttonText})
       : super(key: key);
+  factory CenteredTextButton.noFavorites({required Function onPress}) =>
+      CenteredTextButton(
+        title: 'Favorites',
+        child: const Center(
+            child: Icon(
+          Icons.info,
+          color: Colors.white,
+          size: 50,
+        )),
+        onPress: onPress,
+        buttonText: 'Click to Add Favorites',
+      );
   factory CenteredTextButton.noData({required Function onPress}) =>
       CenteredTextButton(
         title: 'No Data',
@@ -49,9 +61,9 @@ class CenteredTextButton extends StatelessWidget {
           children: [
             child,
             Text(title,
-                style: TextStyle(
+                style: const TextStyle(
                     fontWeight: FontWeight.w700,
-                    color: Colors.blue.shade600,
+                    color: Colors.white,
                     fontSize: 25)),
             TextButton(
               style: TextButton.styleFrom(shape: const StadiumBorder()),

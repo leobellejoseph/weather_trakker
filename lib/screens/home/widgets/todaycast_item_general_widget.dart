@@ -3,23 +3,62 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:weather_trakker/helpers/helpers.dart';
+import 'package:weather_trakker/models/models.dart';
 import 'package:weather_trakker/screens/home/widgets/widget.dart';
 import 'package:weather_trakker/widgets/widgets.dart';
 
 class TodaycastItemGeneral extends StatelessWidget {
-  const TodaycastItemGeneral({Key? key}) : super(key: key);
+  final ForecastItem item;
+  const TodaycastItemGeneral({Key? key, required this.item}) : super(key: key);
+
+  String _generateText() {
+    final general = item.general;
+    final periods = item.periods;
+    final StringBuffer forecast = StringBuffer();
+    for (var item in periods) {
+      final region = item.region;
+      // final south = region.south.toLowerCase();
+      // final north = region.south.toLowerCase();
+      // final east = region.south.toLowerCase();
+      // final west = region.south.toLowerCase();
+      // final central = region.south.toLowerCase();
+      // if (south.contains('rain') || south.contains('shower')) {
+      //   forecast.write('$south in south ');
+      // }
+      // if (north.contains('rain') || north.contains('shower')) {
+      //   forecast.write('$north in north ');
+      // }
+      //
+      // if (east.contains('rain') || east.contains('shower')) {
+      //   forecast.write('$east in east ');
+      // }
+      //
+      // if (west.contains('rain') || west.contains('shower')) {
+      //   forecast.write('$west in west ');
+      // }
+      // if (central.contains('rain') || central.contains('shower')) {
+      //   forecast.write('$west in central ');
+      // }
+    }
+    return '${general.forecast} mainly over singapore.';
+  }
 
   @override
   Widget build(BuildContext context) {
+    final period = item.validPeriod;
+    final general = item.general;
+    final temperature = general.temperature;
+    final wind = general.windSpeed;
+    final humidity = general.humidity;
     return Padding(
       padding: const EdgeInsets.only(left: 2, right: 2, bottom: 10.0),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const HeaderWidget(
+          HeaderWidget(
               title: '24-hour Forecast',
-              subtitle: '12 pm 14 Oct - 12 pm Oct 15'),
+              subtitle: '${period.startTime} - ${period.endTime}'),
           Expanded(
             child: Bounceable(
               onTap: () {
@@ -51,21 +90,19 @@ class TodaycastItemGeneral extends StatelessWidget {
                               padding: const EdgeInsets.all(12),
                               child: Column(
                                 children: [
-                                  const Expanded(
+                                  Expanded(
                                     child: ExpandText(
-                                      'Thundery showers mainly over northern and western Singapore in the late afternoon.',
+                                      _generateText(),
                                       textAlign: TextAlign.justify,
                                       overflow: TextOverflow.clip,
                                     ),
                                   ),
                                   Row(
-                                    children: const [
-                                      Icon(
-                                        CupertinoIcons.location_fill,
-                                        color: Colors.black54,
-                                      ),
-                                      Text('ESE 5-15km/h',
-                                          style: TextStyle(
+                                    children: [
+                                      const Icon(CupertinoIcons.wind,
+                                          color: Colors.black54),
+                                      Text('${wind.low}-${wind.high}km/h',
+                                          style: const TextStyle(
                                               color: Colors.black54,
                                               fontWeight: FontWeight.bold,
                                               fontSize: 14)),
@@ -88,17 +125,17 @@ class TodaycastItemGeneral extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Row(
-                              children: const [
+                              children: [
                                 Text.rich(
                                   TextSpan(
                                     children: [
                                       TextSpan(
-                                          text: '24',
-                                          style: TextStyle(
+                                          text: temperature.low.toString(),
+                                          style: const TextStyle(
                                               color: Colors.green,
                                               fontWeight: FontWeight.w700,
                                               fontSize: 14)),
-                                      TextSpan(
+                                      const TextSpan(
                                           text: '\u2103',
                                           style: TextStyle(
                                               fontWeight: FontWeight.normal,
@@ -106,17 +143,17 @@ class TodaycastItemGeneral extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                SizedBox(width: 10),
+                                const Text('-'),
                                 Text.rich(
                                   TextSpan(
                                     children: [
                                       TextSpan(
-                                          text: '33',
-                                          style: TextStyle(
+                                          text: temperature.high.toString(),
+                                          style: const TextStyle(
                                               color: Colors.redAccent,
                                               fontWeight: FontWeight.w700,
                                               fontSize: 14)),
-                                      TextSpan(
+                                      const TextSpan(
                                           text: '\u2103',
                                           style: TextStyle(
                                               fontWeight: FontWeight.normal,
@@ -127,13 +164,13 @@ class TodaycastItemGeneral extends StatelessWidget {
                               ],
                             ),
                             Row(
-                              children: const [
-                                Icon(
+                              children: [
+                                const Icon(
                                   CupertinoIcons.drop,
                                   color: Colors.blueAccent,
                                 ),
-                                Text('55-95%',
-                                    style: TextStyle(
+                                Text('${humidity.low}-${humidity.high}%',
+                                    style: const TextStyle(
                                         fontWeight: FontWeight.w700,
                                         fontSize: 14)),
                               ],

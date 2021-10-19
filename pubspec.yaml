@@ -60,6 +60,7 @@ flutter:
     - assets/partlycloudyday.json
     - assets/partlycloudynight.json
     - images/met.png
+    - images/sgmap.png
 
   # fonts:
   #   - family: Trajan Pro

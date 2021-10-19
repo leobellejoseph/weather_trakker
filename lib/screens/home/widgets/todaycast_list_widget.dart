@@ -29,10 +29,11 @@ class TodaycastList extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             children: [
               // const TodaycastItemGeneral(),
-              for (var item in state.data) TodaycastItem(item: item),
+              //TodaycastItem(item: item)
+              for (var item in state.data) TodaycastItemGeneral(item: item),
               for (var item in state.data)
                 for (var period in item.periods)
-                  TodayCastPeriodItem(period: period),
+                  TodaycastMapItem(period: period),
             ],
           );
         }

@@ -2,9 +2,11 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_trakker/bloc/blocs.dart';
 import 'package:weather_trakker/cubit/cubit.dart';
 import 'package:weather_trakker/helpers/helpers.dart';
 import 'package:weather_trakker/screens/home/widgets/widget.dart';
+import 'package:weather_trakker/screens/screens.dart';
 import 'package:weather_trakker/widgets/widgets.dart';
 
 class NowCastWidget extends StatefulWidget {
@@ -43,6 +45,7 @@ class _NowCastWidgetState extends State<NowCastWidget>
   Widget build(BuildContext context) {
     return BlocBuilder<FavoritesCubit, FavoritesState>(
       builder: (context, state) {
+        print(state.status);
         if (state.status == FavoriteStatus.loading) {
           return const LoadingWidget();
         } else if (state.status == FavoriteStatus.no_internet) {
@@ -50,7 +53,10 @@ class _NowCastWidgetState extends State<NowCastWidget>
             onPress: () {},
           );
         } else if (state.status == FavoriteStatus.no_data) {
-          return CenteredTextButton.noData(onPress: () {});
+          return CenteredTextButton.noFavorites(onPress: () {
+            context.read<NowcastBloc>().add(NowcastFetchEvent());
+            Navigator.pushNamed(context, LocationsScreen.id);
+          });
         } else {
           return Column(
             mainAxisSize: MainAxisSize.max,

@@ -69,11 +69,12 @@ class FavoritesCubit extends Cubit<FavoritesState> {
         if (filtered.list.isEmpty) {
           emit(state.copyWith(
               newData: [], newPeriod: '', newStatus: FavoriteStatus.no_data));
+        } else {
+          emit(state.copyWith(
+              newData: filtered.list,
+              newPeriod: filtered.period,
+              newStatus: FavoriteStatus.loaded));
         }
-        emit(state.copyWith(
-            newData: filtered.list,
-            newPeriod: filtered.period,
-            newStatus: FavoriteStatus.loaded));
       });
     } on Failure catch (_) {
       emit(state.copyWith(newStatus: FavoriteStatus.error));

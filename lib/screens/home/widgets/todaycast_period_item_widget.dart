@@ -26,6 +26,8 @@ class TodayCastPeriodItem extends StatelessWidget {
               child: Container(
                 margin: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
+                  image: const DecorationImage(
+                      image: AssetImage('images/sgmap.png')),
                   border: Border.all(color: Colors.white60, width: 0.5),
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.circular(20),
@@ -126,7 +128,7 @@ class TodayCastPeriodItem extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                SizedBox(width: 10),
+                                // SizedBox(width: 10),
                                 Text.rich(
                                   TextSpan(
                                     children: [

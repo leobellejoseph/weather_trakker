@@ -7,3 +7,4 @@ export 'todaycast_item_general_widget.dart';
 export 'todaycast_item_widget.dart';
 export 'todaycast_list_widget.dart';
 export 'todaycast_period_item_widget.dart';
+export 'todaycast_map_widget.dart';
