@@ -1,6 +1,7 @@
 export 'area_model.dart';
 export 'failure_model.dart';
 export 'favorites_model.dart';
+export 'filtered_nowcast_model.dart';
 export 'forecast_general.dart';
 export 'forecast_item.dart';
 export 'forecast_model.dart';

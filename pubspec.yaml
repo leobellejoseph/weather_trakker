@@ -49,7 +49,7 @@ flutter:
     - images/mss.png
     - assets/windy.json
     - assets/rainstorm.json
-    - assets/partlycloudyday.json
+    - assets/cloudy.json
     - assets/rainshower.json
     - assets/lightrain.json
     - assets/moderaterain.json
@@ -57,7 +57,7 @@ flutter:
     - assets/cloudywindy.json
     - assets/thunderstorm.json
     - assets/sunny.json
-    - assets/cloudy.json
+    - assets/partlycloudyday.json
     - images/met.png
 
   # fonts:
