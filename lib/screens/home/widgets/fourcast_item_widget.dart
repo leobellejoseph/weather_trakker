@@ -1,0 +1,113 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:weather_trakker/helpers/constants.dart';
+import 'package:weather_trakker/models/models.dart';
+
+class FourcastItem extends StatelessWidget {
+  final ForecastGeneral item;
+  const FourcastItem({Key? key, required this.item}) : super(key: key);
+
+  Widget _getWeatherStatus(String keyword) {
+    String status = 'Cloudy';
+    for (var item in kWeatherStatus.entries) {
+      if (keyword.contains(item.key.toLowerCase())) {
+        status = item.key;
+        break;
+      }
+    }
+
+    return kWeatherStatus[status] ?? Container();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        //  color: Colors.blue,
+        border: Border.all(color: Colors.white, width: 0.5),
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(item.forecastDate,
+              style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.blueAccent.shade700)),
+          Row(
+            children: [
+              _getWeatherStatus(item.forecast),
+              // kWeatherStatus['Heavy Rain'] ?? Container(),
+              Flexible(
+                child: Text(item.forecast, style: TextStyle(fontSize: 12)),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Row(
+                children: [
+                  const Icon(
+                    CupertinoIcons.thermometer,
+                    color: Colors.blueAccent,
+                    size: 14,
+                  ),
+                  Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                            text: item.temperature.low.toString(),
+                            style: const TextStyle(
+                                color: Colors.green,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 12)),
+                        const TextSpan(
+                            text: '\u2103',
+                            style: TextStyle(
+                                fontWeight: FontWeight.normal, fontSize: 12)),
+                      ],
+                    ),
+                  ),
+                  const Text('-'),
+                  Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                            text: item.temperature.high.toString(),
+                            style: const TextStyle(
+                                color: Colors.redAccent,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 12)),
+                        const TextSpan(
+                            text: '\u2103',
+                            style: TextStyle(
+                                fontWeight: FontWeight.normal, fontSize: 12)),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  const Icon(
+                    CupertinoIcons.drop,
+                    color: Colors.blueAccent,
+                    size: 14,
+                  ),
+                  Text('${item.humidity.low}-${item.humidity.high}%',
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w700, fontSize: 12)),
+                ],
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}

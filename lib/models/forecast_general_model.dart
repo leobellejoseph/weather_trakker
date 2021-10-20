@@ -13,7 +13,7 @@ class ForecastGeneral {
       required this.windSpeed,
       String? date})
       : forecastDate = date ??
-            DateFormatter.formatToYYYYMMDD(
+            DateFormatter.formatToDate(
               DateTime.now().toIso8601String(),
             );
   factory ForecastGeneral.noData() => ForecastGeneral(
@@ -27,7 +27,7 @@ class ForecastGeneral {
     final _temperature = data['temperature'] ?? '';
     final _windspeed = data['wind'] ?? '';
     final _now = DateTime.now().toIso8601String();
-    final _date = data['date'] ?? DateFormatter.formatToYYYYMMDD(_now);
+    final _date = DateFormatter.formatToDate(data['date'] ?? _now);
     final _wind = WindSpeed.fromJson(_windspeed);
     final _temp = Temperature.fromJson(_temperature);
     final _humid = RelativeHumidity.fromJson(_humidity);

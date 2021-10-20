@@ -35,10 +35,14 @@ class WeatherRepository extends BaseWeatherRepository {
   @override
   Future<List<ForecastGeneral>> fetch4DaysForecast() async {
     final response = await HTTPRequest.get4DaysForecast();
-    final _data = response['forecasts'];
-    final _list =
-        (_data as List).map((e) => ForecastGeneral.fromJson(e)).toList();
-    return _list;
+    final _data = response['items'][0]['forecasts'];
+    if (_data == null) {
+      return [];
+    } else {
+      final _list =
+          (_data as List).map((e) => ForecastGeneral.fromJson(e)).toList();
+      return _list;
+    }
   }
 
   @override

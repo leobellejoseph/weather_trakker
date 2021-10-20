@@ -1,16 +1,18 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:weather_trakker/bloc/blocs.dart';
 import 'package:weather_trakker/screens/home/widgets/widget.dart';
 import 'package:weather_trakker/widgets/centered_text_button.dart';
 import 'package:weather_trakker/widgets/loading_widget.dart';
 
-class TodaycastList extends StatelessWidget {
+class TodaycastList extends HookWidget {
   const TodaycastList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final visible = useState(1.0);
     return BlocBuilder<ForecastBloc, ForecastState>(
       builder: (context, state) {
         if (state.status == ForecastStateStatus.noData) {
@@ -24,33 +26,42 @@ class TodaycastList extends StatelessWidget {
             Column(
               children: [
                 const SizedBox(height: 40),
-                Container(
-                  height: 240,
-                  margin: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    image: const DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage('images/sgmap.png')),
-                    border: Border.all(color: Colors.white60, width: 0.5),
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(20),
+                AnimatedOpacity(
+                  opacity: visible.value,
+                  duration: const Duration(milliseconds: 500),
+                  child: Container(
+                    height: 240,
+                    margin: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      image: const DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage('images/sgmap.png')),
+                      border: Border.all(color: Colors.white60, width: 0.5),
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
                   ),
                 ),
               ],
             ),
             Swiper.children(
+              onIndexChanged: (index) {
+                if (index == state.data[0].periods.length) {
+                  visible.value = 0.0;
+                } else {
+                  if (visible.value == 0.0) visible.value = 1.0;
+                }
+              },
               pagination: const SwiperPagination(
                 margin: EdgeInsets.all(0),
                 alignment: Alignment.bottomCenter,
               ),
               scrollDirection: Axis.horizontal,
               children: [
-                // const TodaycastItemGeneral(),
-                //TodaycastItem(item: item)
-                // for (var item in state.data) TodaycastItemGeneral(item: item),
                 for (var item in state.data)
                   for (var period in item.periods)
                     TodaycastMapItem(period: period),
+                FourdayForecast(items: state.fourcasts),
               ],
             ),
           ]);

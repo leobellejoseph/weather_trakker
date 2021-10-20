@@ -21,12 +21,17 @@ class ForecastBloc extends Bloc<ForecastEvent, ForecastState> {
       emit(state.copyWith(newStatus: ForecastStateStatus.loading));
       await Future.delayed(const Duration(seconds: 1), () async {
         final forecast = await repo.fetch24HourForecast(true);
+        final fourcast = await repo.fetch4DaysForecast();
         if (forecast.isEmpty) {
-          emit(state
-              .copyWith(newData: [], newStatus: ForecastStateStatus.noData));
+          emit(state.copyWith(
+              newData: [],
+              newFourcast: [],
+              newStatus: ForecastStateStatus.noData));
         }
         emit(state.copyWith(
-            newData: forecast, newStatus: ForecastStateStatus.loaded));
+            newData: forecast,
+            newFourcast: fourcast,
+            newStatus: ForecastStateStatus.loaded));
       });
     } on Failure catch (_) {
       emit(state.copyWith(
