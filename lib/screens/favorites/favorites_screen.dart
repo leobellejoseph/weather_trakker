@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:weather_trakker/bloc/blocs.dart';
 import 'package:weather_trakker/cubit/cubit.dart';
 import 'package:weather_trakker/helpers/helpers.dart';
@@ -85,7 +84,7 @@ class FavoritesScreen extends StatelessWidget {
   }
 }
 
-class _FavoritesItem extends HookWidget {
+class _FavoritesItem extends StatelessWidget {
   final String title;
   final Widget child;
   final String subtitle;
@@ -98,7 +97,6 @@ class _FavoritesItem extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isFavorite = useState(true);
     return SizedBox.fromSize(
       size: const Size(double.infinity, 190),
       child: Stack(children: [
@@ -129,7 +127,7 @@ class _FavoritesItem extends HookWidget {
           ),
         ),
         Align(
-            alignment: Alignment.topLeft,
+            alignment: Alignment.centerRight,
             child: InkWellButton(
                 size: const Size(50, 50),
                 onPress: () {

@@ -23,9 +23,9 @@ class TodaycastList extends StatelessWidget {
           return Stack(children: [
             Column(
               children: [
-                const SizedBox(height: 30),
+                const SizedBox(height: 40),
                 Container(
-                  height: 235,
+                  height: 240,
                   margin: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     image: const DecorationImage(

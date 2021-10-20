@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: const [
                     SizedBox(
-                      height: 230,
+                      height: 240,
                       child: NowCastWidget(title: '2-hour Nowcast'),
                     ),
                     Padding(
@@ -49,7 +49,7 @@ class HomeScreen extends StatelessWidget {
                       child: Divider(height: 0.5, color: Colors.blueAccent),
                     ),
                     SizedBox(
-                        height: 290,
+                        height: 310,
                         width: double.infinity,
                         child: TodaycastList()),
                   ],

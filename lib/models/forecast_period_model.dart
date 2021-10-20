@@ -53,16 +53,20 @@ class TimePeriod {
     final _startDate = DateFormatter.formatToHourDate(_start);
     final _endDate = DateFormatter.formatToHourDate(_end);
     final _startHour = DateFormatter.formatToHour(_start);
+    final _endHour = DateFormatter.formatToHour(_end);
     String _description = 'Morning';
-    switch (_startHour) {
-      case '6PM':
-        _description = 'Night until Early Morning';
+    switch ('$_startHour$_endHour') {
+      case '12PM6AM':
+        _description = 'Midnight to early morning';
         break;
-      case '6AM':
-        _description = 'Morning until Noon';
+      case '6PM6AM':
+        _description = 'Night to early morning';
         break;
-      case '12PM':
-        _description = 'Afternoon until Evening';
+      case '6AM12PM':
+        _description = 'Morning until noon';
+        break;
+      case '12PM6PM':
+        _description = 'Afternoon until evening';
         break;
       default:
         _description = '';

@@ -24,7 +24,7 @@ class TodaycastMapItem extends StatelessWidget {
               margin: const EdgeInsets.all(8),
               child: Padding(
                 padding: const EdgeInsets.only(
-                    left: 45, right: 55, bottom: 45, top: 0),
+                    left: 30, right: 70, bottom: 75, top: 10),
                 child: Stack(
                   children: [
                     Align(
@@ -50,140 +50,6 @@ class TodaycastMapItem extends StatelessWidget {
                   ],
                 ),
               ),
-              // child: Column(
-              //   mainAxisSize: MainAxisSize.max,
-              //   crossAxisAlignment: CrossAxisAlignment.stretch,
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: [
-              //     Expanded(
-              //       child: Row(
-              //         textBaseline: TextBaseline.alphabetic,
-              //         mainAxisSize: MainAxisSize.max,
-              //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //         crossAxisAlignment: CrossAxisAlignment.baseline,
-              //         children: [
-              //           Column(
-              //             children: [
-              //               kForecastPeriodWest,
-              //               kWeatherStatus[period.region.west] ?? Container(),
-              //               Text(period.region.west,
-              //                   style: kForecastPeriodStyle),
-              //             ],
-              //           ),
-              //           Column(
-              //             children: [
-              //               kForecastPeriodEast,
-              //               kWeatherStatus[period.region.east] ?? Container(),
-              //               Text(period.region.east,
-              //                   style: kForecastPeriodStyle),
-              //             ],
-              //           ),
-              //           Column(
-              //             children: [
-              //               kForecastPeriodCentral,
-              //               kWeatherStatus[period.region.central] ??
-              //                   Container(),
-              //               Text(period.region.central,
-              //                   style: kForecastPeriodStyle),
-              //             ],
-              //           ),
-              //         ],
-              //       ),
-              //     ),
-              //     Expanded(
-              //       child: Row(
-              //         textBaseline: TextBaseline.alphabetic,
-              //         mainAxisSize: MainAxisSize.max,
-              //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //         crossAxisAlignment: CrossAxisAlignment.baseline,
-              //         children: [
-              //           Column(
-              //             children: [
-              //               kForecastPeriodSouth,
-              //               kWeatherStatus[period.region.south] ??
-              //                   Container(),
-              //               Text(period.region.south,
-              //                   style: kForecastPeriodStyle),
-              //             ],
-              //           ),
-              //           Column(
-              //             children: [
-              //               kForecastPeriodNorth,
-              //               kWeatherStatus[period.region.north] ??
-              //                   Container(),
-              //               Text(period.region.north,
-              //                   style: kForecastPeriodStyle),
-              //             ],
-              //           ),
-              //         ],
-              //       ),
-              //     ),
-              //     const Divider(
-              //         height: 1, color: Colors.white, thickness: 0.5),
-              //     SizedBox(
-              //       height: 30,
-              //       child: Padding(
-              //         padding: const EdgeInsets.all(4.0),
-              //         child: Row(
-              //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //           children: [
-              //             Row(
-              //               children: const [
-              //                 Text.rich(
-              //                   TextSpan(
-              //                     children: [
-              //                       TextSpan(
-              //                           text: '24',
-              //                           style: TextStyle(
-              //                               color: Colors.green,
-              //                               fontWeight: FontWeight.w700,
-              //                               fontSize: 14)),
-              //                       TextSpan(
-              //                           text: '\u2103',
-              //                           style: TextStyle(
-              //                               fontWeight: FontWeight.normal,
-              //                               fontSize: 14)),
-              //                     ],
-              //                   ),
-              //                 ),
-              //                 // SizedBox(width: 10),
-              //                 Text.rich(
-              //                   TextSpan(
-              //                     children: [
-              //                       TextSpan(
-              //                           text: '33',
-              //                           style: TextStyle(
-              //                               color: Colors.redAccent,
-              //                               fontWeight: FontWeight.w700,
-              //                               fontSize: 14)),
-              //                       TextSpan(
-              //                           text: '\u2103',
-              //                           style: TextStyle(
-              //                               fontWeight: FontWeight.normal,
-              //                               fontSize: 14)),
-              //                     ],
-              //                   ),
-              //                 ),
-              //               ],
-              //             ),
-              //             Row(
-              //               children: const [
-              //                 Icon(
-              //                   CupertinoIcons.drop,
-              //                   color: Colors.blueAccent,
-              //                 ),
-              //                 Text('55-95%',
-              //                     style: TextStyle(
-              //                         fontWeight: FontWeight.w700,
-              //                         fontSize: 14)),
-              //               ],
-              //             ),
-              //           ],
-              //         ),
-              //       ),
-              //     ),
-              //   ],
-              // ),
             ),
           ),
         ],
