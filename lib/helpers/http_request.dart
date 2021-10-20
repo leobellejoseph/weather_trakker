@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:http_retry/http_retry.dart';
-import 'package:weather_trakker/helpers/date_formatter.dart';
 
 class HTTPRequest {
   static const baseUrl = 'https://api.data.gov.sg/v1/environment/';
@@ -36,8 +35,7 @@ class HTTPRequest {
 
   static Future<Map<String, dynamic>> get24HourPeriodForecast() async {
     final client = RetryClient(http.Client());
-    final dateNow = DateTime.now().toLocal().toString();
-    final date = DateFormatter.formatToYYYYMMDD(dateNow);
+    final date = DateTime.now().toIso8601String();
     final url = Uri.parse('${baseUrl}24-hour-weather-forecast?date_time=$date');
     final response = await client.get(url);
     if (response.statusCode == 200) {

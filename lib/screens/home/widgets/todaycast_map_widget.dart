@@ -6,7 +6,7 @@ import 'package:weather_trakker/screens/home/widgets/widget.dart';
 
 class TodaycastMapItem extends StatelessWidget {
   final ForecastPeriod period;
-  const TodaycastMapItem({Key? key, required this.period}) : super(key: key);
+  TodaycastMapItem({Key? key, required this.period}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,22 +27,34 @@ class TodaycastMapItem extends StatelessWidget {
                 children: [
                   Align(
                       alignment: Alignment.centerLeft,
-                      child: kWeatherStatus[period.region.west] ?? Container()),
+                      child: Tooltip(
+                          message: 'West: ${period.region.west}',
+                          child: kWeatherStatus[period.region.west] ??
+                              Container())),
                   Align(
                       alignment: Alignment.centerRight,
-                      child: kWeatherStatus[period.region.east] ?? Container()),
+                      child: Tooltip(
+                          message: 'East: ${period.region.east}',
+                          child: kWeatherStatus[period.region.east] ??
+                              Container())),
                   Align(
                       alignment: Alignment.center,
-                      child:
-                          kWeatherStatus[period.region.central] ?? Container()),
+                      child: Tooltip(
+                          message: 'Central: ${period.region.central}',
+                          child: kWeatherStatus[period.region.central] ??
+                              Container())),
                   Align(
                       alignment: Alignment.topCenter,
-                      child:
-                          kWeatherStatus[period.region.north] ?? Container()),
+                      child: Tooltip(
+                          message: 'North: ${period.region.north}',
+                          child: kWeatherStatus[period.region.north] ??
+                              Container())),
                   Align(
                       alignment: Alignment.bottomCenter,
-                      child:
-                          kWeatherStatus[period.region.south] ?? Container()),
+                      child: Tooltip(
+                          message: 'South: ${period.region.south}',
+                          child: kWeatherStatus[period.region.south] ??
+                              Container())),
                 ],
               ),
             ),

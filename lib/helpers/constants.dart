@@ -14,6 +14,8 @@ const kForecastPeriodStyle = TextStyle(fontSize: 10, color: Colors.white);
 const kLottieLargeSize = Size(120, 120);
 const kLottieSmallSize = Size(50, 50);
 const kWeatherStatus = {
+  'Moderate Rain':
+      LottieWidget(asset: 'assets/moderaterain.json', size: kLottieSmallSize),
   'Light Rain':
       LottieWidget(asset: 'assets/lightrain.json', size: kLottieSmallSize),
   'Heavy Thundery Showers with Gusty Winds':
@@ -27,8 +29,14 @@ const kWeatherStatus = {
   'Showers':
       LottieWidget(asset: 'assets/rainshower.json', size: kLottieSmallSize),
   'Cloudy': LottieWidget(asset: 'assets/cloudy.json', size: kLottieSmallSize),
+  'Heavy Rain':
+      LottieWidget(asset: 'assets/heavyrain.json', size: kLottieSmallSize),
+  'Sunny': LottieWidget(asset: 'assets/sunny.json', size: kLottieSmallSize),
+  'Windy': LottieWidget(asset: 'assets/windy.json', size: kLottieSmallSize),
 };
 const kWeatherStatusLarge = {
+  'Moderate Rain': LottieWidget(asset: 'assets/moderaterain.json'),
+  'Heavy Rain': LottieWidget(asset: 'assets/heavyrain.json'),
   'Light Rain': LottieWidget(asset: 'assets/lightrain.json'),
   'Thundery Showers': LottieWidget(asset: 'assets/thunderstorm.json'),
   'Partly Cloudy (Day)': LottieWidget(asset: 'assets/partlycloudyday.json'),
@@ -37,4 +45,6 @@ const kWeatherStatusLarge = {
   'Cloudy': LottieWidget(asset: 'assets/cloudy.json'),
   'Heavy Thundery Showers with Gusty Winds':
       LottieWidget(asset: 'assets/thunderstorm.json'),
+  'Sunny': LottieWidget(asset: 'assets/sunny.json'),
+  'Windy': LottieWidget(asset: 'assets/windy.json'),
 };
