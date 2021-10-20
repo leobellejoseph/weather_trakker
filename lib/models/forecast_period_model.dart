@@ -22,8 +22,8 @@ extension RegionsExtension on Regions {
 }
 
 class ForecastPeriod {
-  late final TimePeriod time;
-  late final ForecastRegion region;
+  final TimePeriod time;
+  final ForecastRegion region;
   ForecastPeriod({required this.time, required this.region});
   factory ForecastPeriod.noData() => ForecastPeriod(
       time: TimePeriod.noData(), region: ForecastRegion.noData());

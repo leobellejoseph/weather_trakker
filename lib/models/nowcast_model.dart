@@ -2,9 +2,9 @@ import 'package:weather_trakker/models/area_model.dart';
 import 'package:weather_trakker/models/nowcast_item_model.dart';
 
 class NowcastModel {
-  late final List<AreaModel> areas;
-  late final List<NowcastItem> items;
-  late final String apiInfo;
+  final List<AreaModel> areas;
+  final List<NowcastItem> items;
+  final String apiInfo;
   NowcastModel(
       {required this.areas, required this.items, required this.apiInfo});
   factory NowcastModel.noData() =>

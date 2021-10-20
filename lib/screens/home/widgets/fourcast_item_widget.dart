@@ -22,7 +22,7 @@ class FourcastItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.only(left: 4, right: 4, top: 6, bottom: 2),
       decoration: BoxDecoration(
         //  color: Colors.blue,
         border: Border.all(color: Colors.white, width: 0.5),
@@ -31,22 +31,29 @@ class FourcastItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(item.forecastDate,
               style: TextStyle(
-                  fontSize: 12,
+                  fontSize: 16,
                   fontWeight: FontWeight.w700,
                   color: Colors.blueAccent.shade700)),
-          Row(
-            children: [
-              _getWeatherStatus(item.forecast),
-              // kWeatherStatus['Heavy Rain'] ?? Container(),
-              Flexible(
-                child:
-                    Text(item.forecast, style: const TextStyle(fontSize: 12)),
+          const Divider(),
+          Expanded(
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
+                children: [
+                  _getWeatherStatus(item.forecast),
+                  Flexible(
+                    child: Text(item.forecast,
+                        style: const TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.w500)),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

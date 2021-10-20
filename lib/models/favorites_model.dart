@@ -1,7 +1,7 @@
 class FavoritesModel {
-  late final String label;
-  late final String area;
-  late final String forecast;
+  final String label;
+  final String area;
+  final String forecast;
 
   FavoritesModel(
       {required this.label, required this.area, required this.forecast});

@@ -71,7 +71,7 @@ class _NowCastWidgetState extends State<NowCastWidget>
                   scrollDirection: Axis.horizontal,
                   children: state.data
                       .map((item) => NowCastItem(
-                          title: item.area,
+                          title: item.label.isEmpty ? item.area : item.label,
                           child:
                               kWeatherStatusLarge[item.forecast] ?? Container(),
                           subtitle: item.forecast))

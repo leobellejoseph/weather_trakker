@@ -1,11 +1,11 @@
 import 'package:weather_trakker/helpers/date_formatter.dart';
 
 class ForecastGeneral {
-  late final String forecast;
-  late final RelativeHumidity humidity;
-  late final Temperature temperature;
-  late final WindSpeed windSpeed;
-  late final String forecastDate;
+  final String forecast;
+  final RelativeHumidity humidity;
+  final Temperature temperature;
+  final WindSpeed windSpeed;
+  final String forecastDate;
   ForecastGeneral(
       {required this.forecast,
       required this.humidity,

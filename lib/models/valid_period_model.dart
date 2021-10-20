@@ -1,18 +1,18 @@
 import 'package:weather_trakker/helpers/helpers.dart';
 
 class ValidPeriod {
-  late final String startDate;
-  late final String endDate;
-  late final String startTime;
-  late final String endTime;
-  late final String description;
-  ValidPeriod(
+  final String startDate;
+  final String endDate;
+  final String startTime;
+  final String endTime;
+  final String description;
+  const ValidPeriod(
       {required this.startDate,
       required this.endDate,
       required this.startTime,
       required this.endTime,
       required this.description});
-  factory ValidPeriod.noData() => ValidPeriod(
+  factory ValidPeriod.noData() => const ValidPeriod(
       startDate: 'NA',
       endDate: 'NA',
       startTime: 'NA',
