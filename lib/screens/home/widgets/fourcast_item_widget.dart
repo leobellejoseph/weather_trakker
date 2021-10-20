@@ -48,7 +48,7 @@ class FourcastItem extends StatelessWidget {
             ],
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
@@ -100,8 +100,10 @@ class FourcastItem extends StatelessWidget {
                     size: 14,
                   ),
                   Text('${item.humidity.low}-${item.humidity.high}%',
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w700, fontSize: 12)),
+                      style: TextStyle(
+                          color: Colors.grey.shade800,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 12)),
                 ],
               ),
             ],
