@@ -19,8 +19,8 @@ class ForecastBloc extends Bloc<ForecastEvent, ForecastState> {
       ForecastGeneralEvent event, Emitter<ForecastState> emit) async {
     try {
       emit(state.copyWith(newStatus: ForecastStateStatus.loading));
-      final forecast = await repo.fetch24HourForecast(true);
       await Future.delayed(const Duration(seconds: 1), () async {
+        final forecast = await repo.fetch24HourForecast(true);
         if (forecast.isEmpty) {
           emit(state
               .copyWith(newData: [], newStatus: ForecastStateStatus.noData));

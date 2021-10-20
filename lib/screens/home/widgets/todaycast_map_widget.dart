@@ -22,7 +22,7 @@ class TodaycastMapItem extends StatelessWidget {
             margin: const EdgeInsets.all(8),
             child: Padding(
               padding: const EdgeInsets.only(
-                  left: 30, right: 70, bottom: 80, top: 5),
+                  left: 30, right: 70, bottom: 82, top: 2),
               child: Stack(
                 children: [
                   Align(

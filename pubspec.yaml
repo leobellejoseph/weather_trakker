@@ -33,7 +33,6 @@ dependencies:
   card_swiper: ^1.0.4
   animations: ^2.0.1
   flutter_speed_dial: ^4.4.0+2
-  intl: ^0.17.0
   date_format: ^2.0.4
 dev_dependencies:
   flutter_test:
