@@ -28,7 +28,7 @@ class LocationTile extends HookWidget {
             cubit.remove(item);
             isFavorite.value = false;
           } else {
-            cubit.add(item);
+            cubit.add('', item);
             isFavorite.value = true;
           }
         },

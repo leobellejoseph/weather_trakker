@@ -6,7 +6,7 @@ import 'package:weather_trakker/screens/home/widgets/widget.dart';
 
 class TodaycastMapItem extends StatelessWidget {
   final ForecastPeriod period;
-  TodaycastMapItem({Key? key, required this.period}) : super(key: key);
+  const TodaycastMapItem({Key? key, required this.period}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

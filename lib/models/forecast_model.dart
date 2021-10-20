@@ -1,14 +1,16 @@
 import 'package:equatable/equatable.dart';
 
 class ForecastModel extends Equatable {
-  late final String area;
-  late final String forecast;
+  final String area;
+  final String forecast;
 
-  ForecastModel({required this.area, required this.forecast});
-  factory ForecastModel.noData() => ForecastModel(area: 'NA', forecast: 'NA');
-  ForecastModel.fromJson(Map<String, dynamic> data) {
-    area = data['area'];
-    forecast = data['forecast'];
+  const ForecastModel({required this.area, required this.forecast});
+  factory ForecastModel.noData() =>
+      const ForecastModel(area: 'NA', forecast: 'NA');
+  factory ForecastModel.fromJson(Map<String, dynamic> data) {
+    final _area = data['area'];
+    final _forecast = data['forecast'];
+    return ForecastModel(area: _area, forecast: _forecast);
   }
 
   Map<String, dynamic> toJson() => {'area': area, 'forecast': forecast};

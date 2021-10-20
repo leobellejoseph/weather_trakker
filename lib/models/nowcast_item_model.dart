@@ -2,11 +2,11 @@ import 'package:equatable/equatable.dart';
 import 'package:weather_trakker/models/models.dart';
 
 class NowcastItem extends Equatable {
-  late final String updateTimeStamp;
-  late final String timeStamp;
-  late final ValidPeriod validPeriod;
-  late final List<ForecastModel> forecasts;
-  NowcastItem({
+  final String updateTimeStamp;
+  final String timeStamp;
+  final ValidPeriod validPeriod;
+  final List<ForecastModel> forecasts;
+  const NowcastItem({
     required this.updateTimeStamp,
     required this.timeStamp,
     required this.validPeriod,

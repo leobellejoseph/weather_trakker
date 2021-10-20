@@ -15,7 +15,7 @@ class PersistentHeader extends StatelessWidget {
 
 class _Delegate extends SliverPersistentHeaderDelegate {
   final String title;
-  _Delegate({Key? key, required this.title, double? min, double? max});
+  _Delegate({required this.title});
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {

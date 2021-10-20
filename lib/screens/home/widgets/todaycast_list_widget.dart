@@ -8,12 +8,17 @@ import 'package:weather_trakker/widgets/centered_text_button.dart';
 import 'package:weather_trakker/widgets/loading_widget.dart';
 
 class TodaycastList extends HookWidget {
-  const TodaycastList({Key? key}) : super(key: key);
+  const TodaycastList({Key? key, double? opacity}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final visible = useState(1.0);
-    return BlocBuilder<ForecastBloc, ForecastState>(
+    return BlocConsumer<ForecastBloc, ForecastState>(
+      listener: (context, state) {
+        if (state.status == ForecastStateStatus.loading) {
+          visible.value = 1.0;
+        }
+      },
       builder: (context, state) {
         if (state.status == ForecastStateStatus.noData) {
           return CenteredTextButton.noData(onPress: () {});
@@ -49,7 +54,9 @@ class TodaycastList extends HookWidget {
                 if (index == state.data[0].periods.length) {
                   visible.value = 0.0;
                 } else {
-                  if (visible.value == 0.0) visible.value = 1.0;
+                  if (visible.value == 0.0) {
+                    visible.value = 1.0;
+                  }
                 }
               },
               pagination: const SwiperPagination(

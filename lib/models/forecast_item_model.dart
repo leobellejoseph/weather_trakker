@@ -34,6 +34,5 @@ class ForecastItem {
         validPeriod: ValidPeriod.fromJson(_validPeriod),
         general: ForecastGeneral.fromJson(_general),
         periods: _periods);
-    return ForecastItem.noData();
   }
 }

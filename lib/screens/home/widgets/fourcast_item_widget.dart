@@ -43,7 +43,8 @@ class FourcastItem extends StatelessWidget {
               _getWeatherStatus(item.forecast),
               // kWeatherStatus['Heavy Rain'] ?? Container(),
               Flexible(
-                child: Text(item.forecast, style: TextStyle(fontSize: 12)),
+                child:
+                    Text(item.forecast, style: const TextStyle(fontSize: 12)),
               ),
             ],
           ),

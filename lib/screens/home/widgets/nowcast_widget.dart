@@ -47,11 +47,11 @@ class _NowCastWidgetState extends State<NowCastWidget>
       builder: (context, state) {
         if (state.status == FavoriteStatus.loading) {
           return const LoadingWidget();
-        } else if (state.status == FavoriteStatus.no_internet) {
+        } else if (state.status == FavoriteStatus.noInternet) {
           return CenteredTextButton.noInternet(
             onPress: () {},
           );
-        } else if (state.status == FavoriteStatus.no_data) {
+        } else if (state.status == FavoriteStatus.noData) {
           return CenteredTextButton.noFavorites(onPress: () {
             context.read<NowcastBloc>().add(NowcastFetchEvent());
             Navigator.pushNamed(context, LocationsScreen.id);

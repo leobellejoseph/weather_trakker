@@ -1,16 +1,18 @@
 import 'package:equatable/equatable.dart';
 
 class LocationModel extends Equatable {
-  late final double latitude;
-  late final double longitude;
+  final double latitude;
+  final double longitude;
 
-  LocationModel({required this.latitude, required this.longitude});
+  const LocationModel({required this.latitude, required this.longitude});
 
-  factory LocationModel.noData() => LocationModel(latitude: 0, longitude: 0);
+  factory LocationModel.noData() =>
+      const LocationModel(latitude: 0, longitude: 0);
 
-  LocationModel.fromJson(Map<String, dynamic> data) {
-    latitude = data['latitude'];
-    longitude = data['longitude'];
+  factory LocationModel.fromJson(Map<String, dynamic> data) {
+    final _lat = data['latitude'];
+    final _long = data['longitude'];
+    return LocationModel(latitude: _lat, longitude: _long);
   }
 
   Map<String, dynamic> toJson() => {

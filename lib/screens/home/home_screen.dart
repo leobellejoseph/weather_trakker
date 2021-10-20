@@ -11,7 +11,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
@@ -49,9 +48,10 @@ class HomeScreen extends StatelessWidget {
                       child: Divider(height: 0.5, color: Colors.blueAccent),
                     ),
                     SizedBox(
-                        height: 310,
-                        width: double.infinity,
-                        child: TodaycastList()),
+                      height: 310,
+                      width: double.infinity,
+                      child: TodaycastList(),
+                    ),
                   ],
                 ),
               ),

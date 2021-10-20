@@ -46,7 +46,7 @@ class FavoritesScreen extends StatelessWidget {
           builder: (context, state) {
             if (state.status == FavoriteStatus.loading) {
               return const LoadingWidget();
-            } else if (state.status == FavoriteStatus.no_data) {
+            } else if (state.status == FavoriteStatus.noData) {
               return CenteredTextButton.noFavorites(onPress: () {
                 context.read<NowcastBloc>().add(NowcastFetchEvent());
                 Navigator.pushNamed(context, LocationsScreen.id);
