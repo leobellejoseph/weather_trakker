@@ -1,13 +1,21 @@
+import 'package:weather_trakker/helpers/date_formatter.dart';
+
 class ForecastGeneral {
   late final String forecast;
   late final RelativeHumidity humidity;
   late final Temperature temperature;
   late final WindSpeed windSpeed;
+  late final String forecastDate;
   ForecastGeneral(
       {required this.forecast,
       required this.humidity,
       required this.temperature,
-      required this.windSpeed});
+      required this.windSpeed,
+      String? date})
+      : forecastDate = date ??
+            DateFormatter.formatToYYYYMMDD(
+              DateTime.now().toIso8601String(),
+            );
   factory ForecastGeneral.noData() => ForecastGeneral(
       forecast: 'NA',
       humidity: RelativeHumidity.noData(),
