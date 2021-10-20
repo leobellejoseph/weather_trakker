@@ -34,13 +34,6 @@ class SpeedDialWidget extends StatelessWidget {
           },
         ),
         SpeedDialChild(
-          child: const Icon(CupertinoIcons.cloud_rain),
-          backgroundColor: Colors.lightBlueAccent,
-          foregroundColor: Colors.white,
-          label: 'Forecast',
-          onTap: () => Navigator.pushNamed(context, ForecastScreen.id),
-        ),
-        SpeedDialChild(
           child: const Icon(CupertinoIcons.location_solid),
           backgroundColor: Colors.blue,
           foregroundColor: Colors.white,
