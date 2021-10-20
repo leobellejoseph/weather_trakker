@@ -34,10 +34,10 @@ class FourcastItem extends StatelessWidget {
         children: [
           Text(item.forecastDate,
               style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 14,
                   fontWeight: FontWeight.w700,
                   color: Colors.blueAccent.shade700)),
-          const Divider(),
+          const Divider(thickness: 0.5, height: 5),
           Expanded(
             child: Align(
               alignment: Alignment.topCenter,
@@ -46,7 +46,7 @@ class FourcastItem extends StatelessWidget {
                 textBaseline: TextBaseline.alphabetic,
                 children: [
                   _getWeatherStatus(item.forecast),
-                  Flexible(
+                  Expanded(
                     child: Text(item.forecast,
                         style: const TextStyle(
                             fontSize: 12, fontWeight: FontWeight.w500)),
