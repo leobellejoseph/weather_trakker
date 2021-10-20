@@ -17,15 +17,12 @@ class LocationsScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = useTextEditingController();
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: InkWellButton(
         size: const Size(50, 50),
         child: const Icon(Icons.arrow_back, size: 50, color: Colors.blue),
-        onPress: () {
-          Navigator.pop(context);
-        },
+        onPress: () => Navigator.pop(context),
       ),
       body: Container(
         decoration: BoxDecoration(

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_trakker/bloc/blocs.dart';
 import 'package:weather_trakker/cubit/cubit.dart';
 import 'package:weather_trakker/helpers/helpers.dart';
-import 'package:weather_trakker/models/forecast_model.dart';
+import 'package:weather_trakker/models/models.dart';
 import 'package:weather_trakker/screens/screens.dart';
 import 'package:weather_trakker/widgets/widgets.dart';
 
@@ -23,9 +23,7 @@ class FavoritesScreen extends StatelessWidget {
       floatingActionButton: InkWellButton(
         size: const Size(50, 50),
         child: const Icon(Icons.arrow_back, color: Colors.blueAccent, size: 50),
-        onPress: () {
-          Navigator.pop(context);
-        },
+        onPress: () => Navigator.pop(context),
       ),
       body: Container(
         decoration: BoxDecoration(

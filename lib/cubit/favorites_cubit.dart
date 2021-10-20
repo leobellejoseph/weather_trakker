@@ -65,19 +65,18 @@ class FavoritesCubit extends Cubit<FavoritesState> {
   void fetch() async {
     try {
       emit(state.copyWith(newData: [], newStatus: FavoriteStatus.loading));
-      await Future.delayed(const Duration(milliseconds: 500), () async {
-        final _data = await repo.fetchFavorite(key);
-        final filtered = await _fetchFilteredNowcast(_data);
-        if (filtered.list.isEmpty) {
-          emit(state.copyWith(
-              newData: [], newPeriod: '', newStatus: FavoriteStatus.no_data));
-        } else {
-          emit(state.copyWith(
-              newData: filtered.list,
-              newPeriod: filtered.period,
-              newStatus: FavoriteStatus.loaded));
-        }
-      });
+
+      final _data = await repo.fetchFavorite(key);
+      final filtered = await _fetchFilteredNowcast(_data);
+      if (filtered.list.isEmpty) {
+        emit(state.copyWith(
+            newData: [], newPeriod: '', newStatus: FavoriteStatus.no_data));
+      } else {
+        emit(state.copyWith(
+            newData: filtered.list,
+            newPeriod: filtered.period,
+            newStatus: FavoriteStatus.loaded));
+      }
     } on Failure catch (_) {
       emit(state.copyWith(newStatus: FavoriteStatus.error));
     }
