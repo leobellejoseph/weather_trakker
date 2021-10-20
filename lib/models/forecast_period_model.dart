@@ -1,3 +1,4 @@
+import 'package:weather_trakker/helpers/constants.dart';
 import 'package:weather_trakker/helpers/date_formatter.dart';
 
 enum Regions { west, east, central, south, north }
@@ -54,24 +55,7 @@ class TimePeriod {
     final _endDate = DateFormatter.formatToHourDate(_end);
     final _startHour = DateFormatter.formatToHour(_start);
     final _endHour = DateFormatter.formatToHour(_end);
-    String _description = 'Morning';
-    switch ('$_startHour$_endHour') {
-      case '12PM6AM':
-        _description = 'Midnight to early morning';
-        break;
-      case '6PM6AM':
-        _description = 'Night to early morning';
-        break;
-      case '6AM12PM':
-        _description = 'Morning until noon';
-        break;
-      case '12PM6PM':
-        _description = 'Afternoon until evening';
-        break;
-      default:
-        _description = '';
-    }
-
+    String _description = k24HourWeatherLabel[_startHour + _endHour] ?? '';
     return TimePeriod(
         start: _startDate, end: _endDate, description: _description);
   }

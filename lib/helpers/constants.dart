@@ -48,3 +48,11 @@ const kWeatherStatusLarge = {
   'Sunny': LottieWidget(asset: 'assets/sunny.json'),
   'Windy': LottieWidget(asset: 'assets/windy.json'),
 };
+const k24HourWeatherLabel = {
+  '6PM12AM': 'Evening to midnight',
+  '12AM6AM': 'Midnight to early morning',
+  '12PM6AM': 'Noon to next day early morning',
+  '6PM6AM': 'Evening to next day early morning',
+  '6AM12PM': 'Morning until noon',
+  '12PM6PM': 'Noon until evening',
+};

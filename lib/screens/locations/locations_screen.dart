@@ -39,7 +39,7 @@ class LocationsScreen extends HookWidget {
           ),
         ),
         child: BlocBuilder<NowcastBloc, NowcastState>(
-          builder: (_, state) {
+          builder: (context, state) {
             if (state.status == NowcastStateStatus.loading) {
               return const LoadingWidget();
             } else {
@@ -61,7 +61,8 @@ class LocationsScreen extends HookWidget {
                         children: [
                           Bounceable(
                               onTap: () {
-                                //TODO:fetch filtered data
+                                context.read<NowcastBloc>().add(
+                                    NowcastFilterEvent(query: controller.text));
                               },
                               child: const Icon(Icons.search)),
                           Expanded(
@@ -69,7 +70,9 @@ class LocationsScreen extends HookWidget {
                                 enableSuggestions: false,
                                 autocorrect: false,
                                 onSubmitted: (value) {
-                                  //TODO:fetch filtered data
+                                  context.read<NowcastBloc>().add(
+                                      NowcastFilterEvent(
+                                          query: controller.text));
                                 },
                                 focusNode: focus,
                                 backgroundCursorColor: Colors.blue,
@@ -78,14 +81,25 @@ class LocationsScreen extends HookWidget {
                                 style: const TextStyle(fontSize: 18)),
                           ),
                           Bounceable(
-                              onTap: () => controller.clear(),
+                              onTap: () {
+                                controller.clear();
+                                context
+                                    .read<NowcastBloc>()
+                                    .add(NowcastFetchEvent());
+                                focus.unfocus();
+                              },
                               child: const Icon(Icons.clear)),
                         ],
                       ),
                     ),
                     Expanded(
                       child: GestureDetector(
-                        onTap: () => focus.unfocus(),
+                        onTap: () {
+                          context
+                              .read<NowcastBloc>()
+                              .add(NowcastFilterEvent(query: controller.text));
+                          focus.unfocus();
+                        },
                         child: Container(
                           margin: const EdgeInsets.only(
                               left: 15, right: 15, bottom: 70),
