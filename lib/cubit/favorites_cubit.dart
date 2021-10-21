@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:weather_trakker/models/favorites_model.dart';
 import 'package:weather_trakker/models/models.dart';
 import 'package:weather_trakker/repositories/weather_repository.dart';
@@ -14,21 +15,26 @@ class FavoritesCubit extends Cubit<FavoritesState> {
   void add(String label, ForecastModel item) async {
     try {
       emit(state.copyWith(newStatus: FavoriteStatus.loading));
-      final _list = await repo.fetchFavorite(key);
-      final _favorite = FavoritesModel(
-          label: label, area: item.area, forecast: item.forecast);
-      _list.add(_favorite);
-      await repo.deleteFavorites(key);
-      await repo.addFavorites(key, _list);
-      final filtered = await _fetchFilteredNowcast(_list);
-      if (filtered.list.isEmpty) {
-        emit(state.copyWith(
-            newData: [], newPeriod: '', newStatus: FavoriteStatus.noData));
+      final _hasConnection = await InternetConnectionChecker().hasConnection;
+      if (_hasConnection == false) {
+        emit(state.copyWith(newStatus: FavoriteStatus.noInternet));
       } else {
-        emit(state.copyWith(
-            newData: filtered.list,
-            newPeriod: filtered.period,
-            newStatus: FavoriteStatus.loaded));
+        final _list = await repo.fetchFavorite(key);
+        final _favorite = FavoritesModel(
+            label: label, area: item.area, forecast: item.forecast);
+        _list.add(_favorite);
+        await repo.deleteFavorites(key);
+        await repo.addFavorites(key, _list);
+        final filtered = await _fetchFilteredNowcast(_list);
+        if (filtered.list.isEmpty) {
+          emit(state.copyWith(
+              newData: [], newPeriod: '', newStatus: FavoriteStatus.noData));
+        } else {
+          emit(state.copyWith(
+              newData: filtered.list,
+              newPeriod: filtered.period,
+              newStatus: FavoriteStatus.loaded));
+        }
       }
     } on Failure catch (_) {
       emit(state.copyWith(newData: [], newStatus: FavoriteStatus.error));
@@ -38,24 +44,28 @@ class FavoritesCubit extends Cubit<FavoritesState> {
   void remove(ForecastModel item) async {
     try {
       emit(state.copyWith(newStatus: FavoriteStatus.loading));
-      final _list = await repo.fetchFavorite(key);
-      final _filteredList =
-          _list.where((element) => element.area != item.area).toList();
-      await repo.deleteFavorites(key);
-      await repo.addFavorites(key, _filteredList);
-      if (_list.isEmpty) {
-        emit(state.copyWith(newData: [], newStatus: FavoriteStatus.noData));
-      }
-      final filtered = await _fetchFilteredNowcast(_filteredList);
-
-      if (filtered.list.isEmpty) {
-        emit(state.copyWith(
-            newData: [], newPeriod: '', newStatus: FavoriteStatus.noData));
+      final _hasConnection = await InternetConnectionChecker().hasConnection;
+      if (_hasConnection == false) {
+        emit(state.copyWith(newStatus: FavoriteStatus.noInternet));
       } else {
-        emit(state.copyWith(
-            newData: filtered.list,
-            newPeriod: filtered.period,
-            newStatus: FavoriteStatus.loaded));
+        final _list = await repo.fetchFavorite(key);
+        final _filteredList =
+            _list.where((element) => element.area != item.area).toList();
+        await repo.deleteFavorites(key);
+        await repo.addFavorites(key, _filteredList);
+        if (_list.isEmpty) {
+          emit(state.copyWith(newData: [], newStatus: FavoriteStatus.noData));
+        }
+        final filtered = await _fetchFilteredNowcast(_filteredList);
+        if (filtered.list.isEmpty) {
+          emit(state.copyWith(
+              newData: [], newPeriod: '', newStatus: FavoriteStatus.noData));
+        } else {
+          emit(state.copyWith(
+              newData: filtered.list,
+              newPeriod: filtered.period,
+              newStatus: FavoriteStatus.loaded));
+        }
       }
     } on Failure catch (_) {
       emit(state.copyWith(newData: [], newStatus: FavoriteStatus.error));
@@ -65,17 +75,21 @@ class FavoritesCubit extends Cubit<FavoritesState> {
   void fetch() async {
     try {
       emit(state.copyWith(newData: [], newStatus: FavoriteStatus.loading));
-
-      final _data = await repo.fetchFavorite(key);
-      final filtered = await _fetchFilteredNowcast(_data);
-      if (filtered.list.isEmpty) {
-        emit(state.copyWith(
-            newData: [], newPeriod: '', newStatus: FavoriteStatus.noData));
+      final _hasConnection = await InternetConnectionChecker().hasConnection;
+      if (_hasConnection == false) {
+        emit(state.copyWith(newStatus: FavoriteStatus.noInternet));
       } else {
-        emit(state.copyWith(
-            newData: filtered.list,
-            newPeriod: filtered.period,
-            newStatus: FavoriteStatus.loaded));
+        final _data = await repo.fetchFavorite(key);
+        final filtered = await _fetchFilteredNowcast(_data);
+        if (filtered.list.isEmpty) {
+          emit(state.copyWith(
+              newData: [], newPeriod: '', newStatus: FavoriteStatus.noData));
+        } else {
+          emit(state.copyWith(
+              newData: filtered.list,
+              newPeriod: filtered.period,
+              newStatus: FavoriteStatus.loaded));
+        }
       }
     } on Failure catch (_) {
       emit(state.copyWith(newStatus: FavoriteStatus.error));
