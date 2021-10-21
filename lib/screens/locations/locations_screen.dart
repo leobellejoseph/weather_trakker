@@ -46,50 +46,62 @@ class LocationsScreen extends HookWidget {
               return SafeArea(
                 child: Column(
                   children: [
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      margin:
-                          const EdgeInsets.only(left: 15, right: 15, bottom: 2),
-                      width: double.infinity,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14),
-                        border: Border.all(color: Colors.white, width: 0.5),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Bounceable(
-                              onTap: () {
-                                context.read<NowcastBloc>().add(
-                                    NowcastFilterEvent(query: controller.text));
-                              },
-                              child: const Icon(Icons.search)),
-                          Expanded(
-                            child: EditableText(
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 15, right: 15, top: 2),
+                      child: Container(
+                        width: double.infinity,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(14),
+                              topRight: Radius.circular(14)),
+                          border: Border.all(color: Colors.white, width: 0.5),
+                        ),
+                        child: Row(
+                          children: [
+                            Bounceable(
+                                onTap: () {
+                                  if (controller.text.isNotEmpty) {
+                                    context.read<NowcastBloc>().add(
+                                        NowcastFilterEvent(
+                                            query: controller.text));
+                                  }
+                                },
+                                child: const Icon(Icons.search, size: 35)),
+                            Expanded(
+                              child: TextField(
+                                decoration: const InputDecoration(
+                                  hintStyle: TextStyle(fontSize: 18),
+                                  hintText: 'Search Locations',
+                                  border: InputBorder.none,
+                                ),
                                 enableSuggestions: false,
                                 autocorrect: false,
-                                onSubmitted: (value) {
-                                  context.read<NowcastBloc>().add(
-                                      NowcastFilterEvent(
-                                          query: controller.text));
-                                },
-                                focusNode: focus,
-                                backgroundCursorColor: Colors.blue,
-                                controller: controller,
                                 cursorColor: Colors.black,
-                                style: const TextStyle(fontSize: 18)),
-                          ),
-                          Bounceable(
-                              onTap: () {
-                                controller.clear();
-                                context
-                                    .read<NowcastBloc>()
-                                    .add(NowcastFetchEvent());
-                                focus.unfocus();
-                              },
-                              child: const Icon(Icons.clear)),
-                        ],
+                                focusNode: focus,
+                                controller: controller,
+                                style: const TextStyle(fontSize: 18),
+                                onSubmitted: (value) {
+                                  if (value.isNotEmpty) {
+                                    context.read<NowcastBloc>().add(
+                                        NowcastFilterEvent(
+                                            query: controller.text));
+                                  }
+                                },
+                              ),
+                            ),
+                            Bounceable(
+                                onTap: () {
+                                  controller.clear();
+                                  context
+                                      .read<NowcastBloc>()
+                                      .add(NowcastFetchEvent());
+                                  focus.unfocus();
+                                },
+                                child: const Icon(Icons.clear, size: 35)),
+                          ],
+                        ),
                       ),
                     ),
                     Expanded(
@@ -104,7 +116,9 @@ class LocationsScreen extends HookWidget {
                           margin: const EdgeInsets.only(
                               left: 15, right: 15, bottom: 70),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(14),
+                            borderRadius: const BorderRadius.only(
+                                bottomRight: Radius.circular(14),
+                                bottomLeft: Radius.circular(14)),
                             border: Border.all(color: Colors.white, width: 0.5),
                           ),
                           child: BlocBuilder<FavoritesCubit, FavoritesState>(
