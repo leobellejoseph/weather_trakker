@@ -5,7 +5,7 @@ Singapore Weather Tracker
 ![Screens](https://user-images.githubusercontent.com/79257863/138235012-87684f0a-bfcc-42a8-bcbb-927953dbdaa3.png)
 
 # APK
-https://drive.google.com/file/d/1GVEC51y2ZQuUoyPi-ahVnpk5vBQtyy6c/view?usp=sharing
+https://drive.google.com/file/d/1B_E6yrQzDx-vPH41Ngb0oTzqba_XxCm0/view?usp=sharing
 
 # API
 https://data.gov.sg/dataset/weather-forecast
