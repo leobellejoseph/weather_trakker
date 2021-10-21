@@ -1,3 +1,4 @@
+import 'package:app_settings/app_settings.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,7 +24,8 @@ class TodaycastList extends HookWidget {
         if (state.status == ForecastStateStatus.noData) {
           return CenteredTextButton.noData(onPress: () {});
         } else if (state.status == ForecastStateStatus.noInternet) {
-          return CenteredTextButton.noInternet(onPress: () {});
+          return CenteredTextButton.noInternet(
+              onPress: () => AppSettings.openWIFISettings());
         } else if (state.status == ForecastStateStatus.loading) {
           return const LoadingWidget();
         } else {

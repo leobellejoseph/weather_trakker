@@ -31,19 +31,24 @@ class NowcastBloc extends Bloc<NowcastEvent, NowcastState> {
   FutureOr<void> _onNowcastFilterEvent(
       NowcastFilterEvent event, Emitter<NowcastState> emit) async {
     emit(state.copyWith(newStatus: NowcastStateStatus.loading));
-    final data = await repo.fetch2HourForecast();
-    final _query = event.query.toLowerCase();
-    final _forecasts = data.items[0].forecasts
-        .where((e) => e.area.toLowerCase().contains(_query))
-        .toList();
-    final _items = NowcastItem(
-        updateTimeStamp: data.items[0].updateTimeStamp,
-        timeStamp: data.items[0].timeStamp,
-        validPeriod: data.items[0].validPeriod,
-        forecasts: _forecasts);
-    final _filtered =
-        NowcastModel(areas: data.areas, items: [_items], apiInfo: data.apiInfo);
-    emit(state.copyWith(
-        newData: _filtered, newStatus: NowcastStateStatus.loaded));
+    final _hasConnection = await InternetConnectionChecker().hasConnection;
+    if (_hasConnection == false) {
+      emit(state.copyWith(newStatus: NowcastStateStatus.noInternet));
+    } else {
+      final data = await repo.fetch2HourForecast();
+      final _query = event.query.toLowerCase();
+      final _forecasts = data.items[0].forecasts
+          .where((e) => e.area.toLowerCase().contains(_query))
+          .toList();
+      final _items = NowcastItem(
+          updateTimeStamp: data.items[0].updateTimeStamp,
+          timeStamp: data.items[0].timeStamp,
+          validPeriod: data.items[0].validPeriod,
+          forecasts: _forecasts);
+      final _filtered = NowcastModel(
+          areas: data.areas, items: [_items], apiInfo: data.apiInfo);
+      emit(state.copyWith(
+          newData: _filtered, newStatus: NowcastStateStatus.loaded));
+    }
   }
 }

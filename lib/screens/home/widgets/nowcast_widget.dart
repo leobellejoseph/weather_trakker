@@ -1,3 +1,4 @@
+import 'package:app_settings/app_settings.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,7 @@ class _NowCastWidgetState extends State<NowCastWidget>
           return const LoadingWidget();
         } else if (state.status == FavoriteStatus.noInternet) {
           return CenteredTextButton.noInternet(
-            onPress: () {},
+            onPress: () => AppSettings.openWIFISettings(),
           );
         } else if (state.status == FavoriteStatus.noData) {
           return CenteredTextButton.noFavorites(onPress: () {
