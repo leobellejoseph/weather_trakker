@@ -40,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
@@ -66,20 +67,20 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   mainAxisAlignment: MainAxisAlignment.start,
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: const [
-                    SizedBox(
+                  children: [
+                    const SizedBox(
                       height: 240,
                       child: NowCastWidget(title: '2-hour Nowcast'),
                     ),
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.only(
                           left: 5, right: 5, top: 10, bottom: 10),
                       child: Divider(height: 0.5, color: Colors.blueAccent),
                     ),
                     SizedBox(
-                      height: 310,
+                      height: size.height * 0.47,
                       width: double.infinity,
-                      child: TodaycastList(),
+                      child: const TodaycastList(),
                     ),
                   ],
                 ),

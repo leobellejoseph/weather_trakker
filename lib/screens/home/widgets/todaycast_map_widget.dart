@@ -17,46 +17,44 @@ class TodaycastMapItem extends StatelessWidget {
         HeaderWidget(
             title: period.time.description,
             subtitle: '${period.time.start} - ${period.time.end}'),
-        Expanded(
-          child: Container(
-            margin: const EdgeInsets.all(8),
-            child: Padding(
-              padding: const EdgeInsets.only(
-                  left: 30, right: 70, bottom: 82, top: 2),
-              child: Stack(
-                children: [
-                  Align(
-                      alignment: Alignment.centerLeft,
-                      child: Tooltip(
-                          message: 'West: ${period.region.west}',
-                          child: kWeatherStatus[period.region.west] ??
-                              Container())),
-                  Align(
-                      alignment: Alignment.centerRight,
-                      child: Tooltip(
-                          message: 'East: ${period.region.east}',
-                          child: kWeatherStatus[period.region.east] ??
-                              Container())),
-                  Align(
-                      alignment: Alignment.center,
-                      child: Tooltip(
-                          message: 'Central: ${period.region.central}',
-                          child: kWeatherStatus[period.region.central] ??
-                              Container())),
-                  Align(
-                      alignment: Alignment.topCenter,
-                      child: Tooltip(
-                          message: 'North: ${period.region.north}',
-                          child: kWeatherStatus[period.region.north] ??
-                              Container())),
-                  Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Tooltip(
-                          message: 'South: ${period.region.south}',
-                          child: kWeatherStatus[period.region.south] ??
-                              Container())),
-                ],
-              ),
+        SizedBox(
+          height: 240,
+          child: Padding(
+            padding:
+                const EdgeInsets.only(left: 55, right: 75, bottom: 70, top: 0),
+            child: Stack(
+              children: [
+                Align(
+                    alignment: Alignment.centerLeft,
+                    child: Tooltip(
+                        message: 'West: ${period.region.west}',
+                        child:
+                            kWeatherStatus[period.region.west] ?? Container())),
+                Align(
+                    alignment: Alignment.centerRight,
+                    child: Tooltip(
+                        message: 'East: ${period.region.east}',
+                        child:
+                            kWeatherStatus[period.region.east] ?? Container())),
+                Align(
+                    alignment: Alignment.center,
+                    child: Tooltip(
+                        message: 'Central: ${period.region.central}',
+                        child: kWeatherStatus[period.region.central] ??
+                            Container())),
+                Align(
+                    alignment: Alignment.topCenter,
+                    child: Tooltip(
+                        message: 'North: ${period.region.north}',
+                        child: kWeatherStatus[period.region.north] ??
+                            Container())),
+                Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Tooltip(
+                        message: 'South: ${period.region.south}',
+                        child: kWeatherStatus[period.region.south] ??
+                            Container())),
+              ],
             ),
           ),
         ),

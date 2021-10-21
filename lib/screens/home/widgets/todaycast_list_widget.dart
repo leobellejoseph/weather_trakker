@@ -38,7 +38,6 @@ class TodaycastList extends HookWidget {
                   duration: const Duration(milliseconds: 500),
                   child: Container(
                     height: 240,
-                    margin: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
                       image: const DecorationImage(
                           fit: BoxFit.cover,
