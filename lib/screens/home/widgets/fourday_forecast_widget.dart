@@ -9,39 +9,35 @@ class FourdayForecast extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(0),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          HeaderWidget(
-            title: '4 Days Forecast',
-            subtitle:
-                '${items.first.forecastDate} - ${items.last.forecastDate}',
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        HeaderWidget(
+          title: '4 Days Forecast',
+          subtitle: '${items.first.forecastDate} - ${items.last.forecastDate}',
+        ),
+        Expanded(
+          child: Container(
+            margin: const EdgeInsets.all(2),
+            child: GridView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: 4,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  childAspectRatio: 1.6,
+                  crossAxisCount: 2,
+                ),
+                itemBuilder: (context, index) {
+                  final item = items[index];
+                  return Padding(
+                    padding: const EdgeInsets.only(
+                        left: 2, right: 2, top: 2, bottom: 2),
+                    child: FourcastItem(item: item),
+                  );
+                }),
           ),
-          Expanded(
-            child: Container(
-              margin: const EdgeInsets.all(2),
-              child: GridView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 4,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    childAspectRatio: 1.71,
-                    crossAxisCount: 2,
-                  ),
-                  itemBuilder: (context, index) {
-                    final item = items[index];
-                    return Padding(
-                      padding: const EdgeInsets.only(
-                          left: 2, right: 2, top: 2, bottom: 2),
-                      child: FourcastItem(item: item),
-                    );
-                  }),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
