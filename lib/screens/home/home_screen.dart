@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                       child: Divider(height: 0.5, color: Colors.blueAccent),
                     ),
                     SizedBox(
-                      height: size.height * 0.47,
+                      height: size.height * 0.4,
                       width: double.infinity,
                       child: const TodaycastList(),
                     ),
