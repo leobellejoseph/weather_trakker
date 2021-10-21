@@ -32,11 +32,12 @@ class TodaycastList extends HookWidget {
           return Stack(children: [
             Column(
               children: [
-                const SizedBox(height: 40),
+                const SizedBox(height: 35),
                 AnimatedOpacity(
                   opacity: visible.value,
                   duration: const Duration(milliseconds: 500),
                   child: Container(
+                    margin: const EdgeInsets.all(4),
                     height: 240,
                     decoration: BoxDecoration(
                       image: const DecorationImage(
@@ -61,7 +62,6 @@ class TodaycastList extends HookWidget {
                 }
               },
               pagination: const SwiperPagination(
-                margin: EdgeInsets.all(0),
                 alignment: Alignment.bottomCenter,
               ),
               scrollDirection: Axis.horizontal,

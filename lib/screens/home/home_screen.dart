@@ -67,20 +67,20 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   mainAxisAlignment: MainAxisAlignment.start,
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    const SizedBox(
+                  children: const [
+                    SizedBox(
                       height: 240,
                       child: NowCastWidget(title: '2-hour Nowcast'),
                     ),
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.only(
                           left: 5, right: 5, top: 10, bottom: 10),
                       child: Divider(height: 0.5, color: Colors.blueAccent),
                     ),
                     SizedBox(
-                      height: size.height * 0.4,
+                      height: 310,
                       width: double.infinity,
-                      child: const TodaycastList(),
+                      child: TodaycastList(),
                     ),
                   ],
                 ),
