@@ -20,4 +20,15 @@ class NowcastModel {
         (_itemsData as List).map((e) => NowcastItem.fromJson(e)).toList();
     return NowcastModel(areas: _areas, items: _items, apiInfo: _status);
   }
+  NowcastModel filter(List<String> filters) {
+    final item = items[0];
+    final _forecasts =
+        item.forecasts.where((e) => filters.contains(e.area)).toList();
+    final newItem = NowcastItem(
+        updateTimeStamp: item.updateTimeStamp,
+        timeStamp: item.timeStamp,
+        validPeriod: item.validPeriod,
+        forecasts: _forecasts);
+    return NowcastModel(areas: areas, items: [newItem], apiInfo: apiInfo);
+  }
 }

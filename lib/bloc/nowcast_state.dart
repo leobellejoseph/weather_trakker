@@ -1,18 +1,33 @@
 part of 'nowcast_bloc.dart';
 
-enum NowcastStateStatus { initial, loading, loaded, noData, noInternet, error }
+enum NowcastStateStatus {
+  initial,
+  loading,
+  loaded,
+  loadedAll,
+  noData,
+  noInternet,
+  error
+}
 
 class NowcastState extends Equatable {
-  final NowcastModel data;
+  final String period;
+  final List<ForecastModel> forecasts;
   final NowcastStateStatus status;
-  const NowcastState({required this.data, required this.status});
-  factory NowcastState.initial() => NowcastState(
-      data: NowcastModel.noData(), status: NowcastStateStatus.initial);
+  const NowcastState(
+      {required this.period, required this.forecasts, required this.status});
+  factory NowcastState.initial() => const NowcastState(
+      period: '', forecasts: [], status: NowcastStateStatus.initial);
 
   NowcastState copyWith(
-          {NowcastModel? newData, NowcastStateStatus? newStatus}) =>
-      NowcastState(data: newData ?? data, status: newStatus ?? status);
+          {String? newPeriod,
+          List<ForecastModel>? newForecasts,
+          NowcastStateStatus? newStatus}) =>
+      NowcastState(
+          period: newPeriod ?? period,
+          forecasts: newForecasts ?? forecasts,
+          status: newStatus ?? status);
 
   @override
-  List<Object> get props => [data];
+  List<Object> get props => [period, forecasts, status];
 }

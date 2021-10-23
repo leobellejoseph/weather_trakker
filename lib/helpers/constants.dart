@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_trakker/widgets/widgets.dart';
 
+const favoriteKey = 'favorites';
 const kForecastItemLabel =
     TextStyle(fontWeight: FontWeight.w700, color: Colors.white);
 const kForecastPeriodWest = Text('West', style: kForecastPeriodLabel);

@@ -11,10 +11,10 @@ class LocationsScreen extends HookWidget {
   static const id = 'locations';
 
   static Route route() => MaterialPageRoute(
-      builder: (context) => const LocationsScreen(key: ValueKey(id)),
+      builder: (context) => LocationsScreen(key: ValueKey(id)),
       settings: const RouteSettings(name: LocationsScreen.id));
-
-  const LocationsScreen({Key? key}) : super(key: key);
+  final scroll = ScrollController();
+  LocationsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,10 @@ class LocationsScreen extends HookWidget {
       floatingActionButton: InkWellButton(
         size: const Size(50, 50),
         child: const Icon(Icons.arrow_back, size: 50, color: Colors.blue),
-        onPress: () => Navigator.pop(context),
+        onPress: () {
+          context.read<NowcastBloc>().add(NowcastFetchEvent());
+          Navigator.pop(context);
+        },
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -42,7 +45,7 @@ class LocationsScreen extends HookWidget {
           builder: (context, state) {
             if (state.status == NowcastStateStatus.loading) {
               return const LoadingWidget();
-            } else {
+            } else if (state.status == NowcastStateStatus.loadedAll) {
               return SafeArea(
                 child: Column(
                   children: [
@@ -105,49 +108,42 @@ class LocationsScreen extends HookWidget {
                       ),
                     ),
                     Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          context
-                              .read<NowcastBloc>()
-                              .add(NowcastFilterEvent(query: controller.text));
-                          focus.unfocus();
-                        },
-                        child: Container(
-                          margin: const EdgeInsets.only(
-                              left: 15, right: 15, bottom: 70),
-                          decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.only(
-                                bottomRight: Radius.circular(14),
-                                bottomLeft: Radius.circular(14)),
-                            border: Border.all(color: Colors.white, width: 0.5),
-                          ),
-                          child: BlocBuilder<FavoritesCubit, FavoritesState>(
-                            builder: (_, favorites) {
-                              return ListView.separated(
-                                  itemBuilder: (context, index) {
-                                    final item =
-                                        state.data.items[0].forecasts[index];
-                                    bool isFavorite = favorites.data
-                                        .where((i) => i.area == item.area)
-                                        .isNotEmpty;
-                                    return LocationTile(
-                                        item: item, favorite: isFavorite);
-                                  },
-                                  itemCount:
-                                      state.data.items[0].forecasts.length,
-                                  separatorBuilder:
-                                      (BuildContext context, int index) =>
-                                          const Divider(
-                                              thickness: 0.1,
-                                              color: Colors.white));
-                            },
-                          ),
+                      child: Container(
+                        margin: const EdgeInsets.only(
+                            left: 15, right: 15, bottom: 70),
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.only(
+                              bottomRight: Radius.circular(14),
+                              bottomLeft: Radius.circular(14)),
+                          border: Border.all(color: Colors.white, width: 0.5),
+                        ),
+                        child: BlocBuilder<FavoritesCubit, FavoritesState>(
+                          builder: (_, favorites) {
+                            return ListView.separated(
+                                controller: scroll,
+                                itemBuilder: (context, index) {
+                                  final item = state.forecasts[index];
+                                  bool isFavorite = favorites.data
+                                      .where((i) => i.area == item.area)
+                                      .isNotEmpty;
+                                  return LocationTile(
+                                      item: item, favorite: isFavorite);
+                                },
+                                itemCount: state.forecasts.length,
+                                separatorBuilder:
+                                    (BuildContext context, int index) =>
+                                        const Divider(
+                                            thickness: 0.1,
+                                            color: Colors.white));
+                          },
                         ),
                       ),
                     ),
                   ],
                 ),
               );
+            } else {
+              return Container();
             }
           },
         ),

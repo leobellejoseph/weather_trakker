@@ -49,6 +49,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         body: Stack(
           children: [
             Container(
+              height: double.infinity,
+              width: double.infinity,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
@@ -63,26 +65,28 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 ),
               ),
               child: SafeArea(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: const [
-                    SizedBox(
-                      height: 240,
-                      child: NowCastWidget(title: '2-hour Nowcast'),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: 5, right: 5, top: 10, bottom: 10),
-                      child: Divider(height: 0.5, color: Colors.blueAccent),
-                    ),
-                    SizedBox(
-                      height: 310,
-                      width: double.infinity,
-                      child: TodaycastList(),
-                    ),
-                  ],
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      SizedBox(
+                        height: 240,
+                        child: NowCastWidget(title: '2-hour Nowcast'),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.only(
+                            left: 5, right: 5, top: 10, bottom: 10),
+                        child: Divider(height: 0.5, color: Colors.blueAccent),
+                      ),
+                      const SizedBox(
+                        height: 310,
+                        width: double.infinity,
+                        child: TodaycastList(),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

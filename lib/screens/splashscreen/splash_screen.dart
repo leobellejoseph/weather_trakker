@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:lottie/lottie.dart';
 import 'package:weather_trakker/bloc/blocs.dart';
-import 'package:weather_trakker/cubit/cubit.dart';
 import 'package:weather_trakker/screens/screens.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -47,11 +47,31 @@ class _LottieSplash extends HookWidget {
         controller
           ..duration = composition.duration
           ..forward()
-          ..addListener(() {
+          ..addListener(() async {
             if (controller.status == AnimationStatus.completed) {
-              context.read<FavoritesCubit>().fetch();
+              context.read<NowcastBloc>().add(NowcastFetchEvent());
               context.read<ForecastBloc>().add(ForecastGeneralEvent());
-              Navigator.popAndPushNamed(context, HomeScreen.id);
+              final enabledLocation =
+                  await Geolocator.isLocationServiceEnabled();
+              if (enabledLocation) {
+                final permission = await Geolocator.checkPermission();
+                final hasPermission =
+                    (permission == LocationPermission.always ||
+                        permission == LocationPermission.whileInUse);
+                if (hasPermission) {
+                  Navigator.popAndPushNamed(context, HomeScreen.id);
+                } else {
+                  final permission = await Geolocator.requestPermission();
+                  final hasPermission =
+                      (permission == LocationPermission.always ||
+                          permission == LocationPermission.whileInUse);
+                  if (hasPermission) {
+                    Navigator.popAndPushNamed(context, HomeScreen.id);
+                  }
+                }
+              } else {
+                Geolocator.requestPermission();
+              }
             }
           });
       },

@@ -40,8 +40,7 @@ class SpeedDialWidget extends StatelessWidget {
           label: 'Locations',
           visible: true,
           onTap: () {
-            final bloc = context.read<NowcastBloc>();
-            bloc.add(NowcastFetchEvent());
+            context.read<NowcastBloc>().add(NowcastFetchAllEvent());
             Navigator.pushNamed(context, LocationsScreen.id);
           },
         ),
@@ -52,7 +51,7 @@ class SpeedDialWidget extends StatelessWidget {
           label: 'Refresh',
           visible: true,
           onTap: () {
-            context.read<FavoritesCubit>().fetch();
+            context.read<NowcastBloc>().add(NowcastFetchEvent());
             context.read<ForecastBloc>().add(ForecastGeneralEvent());
           },
         ),

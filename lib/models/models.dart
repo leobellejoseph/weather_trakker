@@ -1,3 +1,4 @@
+export 'area_distance_model.dart';
 export 'area_model.dart';
 export 'failure_model.dart';
 export 'favorites_model.dart';

@@ -5,6 +5,12 @@ abstract class NowcastEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+class NowcastFetchAllEvent extends NowcastEvent {
+  NowcastFetchAllEvent();
+  @override
+  List<Object?> get props => [];
+}
+
 class NowcastFetchEvent extends NowcastEvent {
   NowcastFetchEvent();
   @override

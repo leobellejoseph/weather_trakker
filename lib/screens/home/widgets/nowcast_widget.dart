@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_trakker/bloc/blocs.dart';
-import 'package:weather_trakker/cubit/cubit.dart';
 import 'package:weather_trakker/helpers/helpers.dart';
 import 'package:weather_trakker/screens/home/widgets/widget.dart';
 import 'package:weather_trakker/screens/screens.dart';
@@ -12,47 +11,22 @@ import 'package:weather_trakker/widgets/widgets.dart';
 
 class NowCastWidget extends StatelessWidget {
   final String title;
-  const NowCastWidget({Key? key, required this.title}) : super(key: key);
-//
-//   @override
-//   State<NowCastWidget> createState() => _NowCastWidgetState();
-// }
-//
-// class _NowCastWidgetState extends State<NowCastWidget>
-//     with WidgetsBindingObserver {
-  // final controller = SwiperController();
-  // @override
-  // void initState() {
-  //   WidgetsBinding.instance?.addObserver(this);
-  //   super.initState();
-  // }
-  //
-  // @override
-  // void dispose() {
-  //   controller.dispose();
-  //   WidgetsBinding.instance?.removeObserver(this);
-  //   super.dispose();
-  // }
-  //
-  // @override
-  // void didChangeAppLifecycleState(AppLifecycleState state) {
-  //   if (state == AppLifecycleState.resumed) {
-  //     context.read<FavoritesCubit>().fetch();
-  //   }
-  //   super.didChangeAppLifecycleState(state);
-  // }
 
+  const NowCastWidget({Key? key, required this.title}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FavoritesCubit, FavoritesState>(
+    final scroll = SwiperController();
+    return BlocBuilder<NowcastBloc, NowcastState>(
+      buildWhen: (oldState, newState) =>
+          newState.status == NowcastStateStatus.loaded,
       builder: (context, state) {
-        if (state.status == FavoriteStatus.loading) {
+        if (state.status == NowcastStateStatus.loading) {
           return const LoadingWidget();
-        } else if (state.status == FavoriteStatus.noInternet) {
+        } else if (state.status == NowcastStateStatus.noInternet) {
           return CenteredTextButton.noInternet(
             onPress: () => AppSettings.openWIFISettings(),
           );
-        } else if (state.status == FavoriteStatus.noData) {
+        } else if (state.status == NowcastStateStatus.noData) {
           return CenteredTextButton.noFavorites(onPress: () {
             context.read<NowcastBloc>().add(NowcastFetchEvent());
             Navigator.pushNamed(context, LocationsScreen.id);
@@ -64,14 +38,15 @@ class NowCastWidget extends StatelessWidget {
               HeaderWidget(title: title, subtitle: state.period),
               Expanded(
                 child: Swiper.children(
+                  controller: scroll,
                   pagination: const SwiperPagination(
                     margin: EdgeInsets.all(0),
                     alignment: Alignment.bottomCenter,
                   ),
                   scrollDirection: Axis.horizontal,
-                  children: state.data
+                  children: state.forecasts
                       .map((item) => NowCastItem(
-                          title: item.label.isEmpty ? item.area : item.label,
+                          title: item.label,
                           child:
                               kWeatherStatusLarge[item.forecast] ?? Container(),
                           subtitle: item.forecast))
@@ -84,4 +59,48 @@ class NowCastWidget extends StatelessWidget {
       },
     );
   }
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   return BlocBuilder<FavoritesCubit, FavoritesState>(
+  //     builder: (context, state) {
+  //       if (state.status == FavoriteStatus.loading) {
+  //         return const LoadingWidget();
+  //       } else if (state.status == FavoriteStatus.noInternet) {
+  //         return CenteredTextButton.noInternet(
+  //           onPress: () => AppSettings.openWIFISettings(),
+  //         );
+  //       } else if (state.status == FavoriteStatus.noData) {
+  //         return CenteredTextButton.noFavorites(onPress: () {
+  //           context.read<NowcastBloc>().add(NowcastFetchEvent());
+  //           Navigator.pushNamed(context, LocationsScreen.id);
+  //         });
+  //       } else {
+  //         return Column(
+  //           mainAxisSize: MainAxisSize.max,
+  //           children: [
+  //             HeaderWidget(title: title, subtitle: state.period),
+  //             Expanded(
+  //               child: Swiper.children(
+  //                 controller: scroll,
+  //                 pagination: const SwiperPagination(
+  //                   margin: EdgeInsets.all(0),
+  //                   alignment: Alignment.bottomCenter,
+  //                 ),
+  //                 scrollDirection: Axis.horizontal,
+  //                 children: state.data
+  //                     .map((item) => NowCastItem(
+  //                     title: item.label.isEmpty ? item.area : item.label,
+  //                     child:
+  //                     kWeatherStatusLarge[item.forecast] ?? Container(),
+  //                     subtitle: item.forecast))
+  //                     .toList(),
+  //               ),
+  //             ),
+  //           ],
+  //         );
+  //       }
+  //     },
+  //   );
+  // }
 }

@@ -23,7 +23,10 @@ class FavoritesScreen extends StatelessWidget {
       floatingActionButton: InkWellButton(
         size: const Size(50, 50),
         child: const Icon(Icons.arrow_back, color: Colors.blueAccent, size: 50),
-        onPress: () => Navigator.pop(context),
+        onPress: () {
+          context.read<NowcastBloc>().add(NowcastFetchEvent());
+          Navigator.pop(context);
+        },
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -129,7 +132,8 @@ class _FavoritesItem extends StatelessWidget {
             child: InkWellButton(
                 size: const Size(50, 50),
                 onPress: () {
-                  final item = ForecastModel(area: title, forecast: '');
+                  final item =
+                      ForecastModel(label: title, area: title, forecast: '');
                   context.read<FavoritesCubit>().remove(item);
                 },
                 child: const Icon(Icons.clear, color: Colors.white, size: 50))),
