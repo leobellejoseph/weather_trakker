@@ -12,7 +12,6 @@ import 'package:weather_trakker/widgets/widgets.dart';
 
 class NowCastWidget extends StatelessWidget {
   final String title;
-
   const NowCastWidget({Key? key, required this.title}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -46,6 +45,14 @@ class NowCastWidget extends StatelessWidget {
             ],
           );
         } else if (state.status == NowcastStateStatus.loaded) {
+          // final Future<bool> hasLocation =
+          //     Geolocator.isLocationServiceEnabled();
+          // final list = state.forecasts
+          //     .map((item) => NowCastItem(
+          //         title: item.label,
+          //         child: kWeatherStatusLarge[item.forecast] ?? Container(),
+          //         subtitle: item.forecast))
+          //     .toList();
           return Column(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -58,6 +65,14 @@ class NowCastWidget extends StatelessWidget {
                     alignment: Alignment.bottomCenter,
                   ),
                   scrollDirection: Axis.horizontal,
+                  // children: [
+                  //   if (hasLocation == false)
+                  //     NowCastItem(
+                  //         title: 'Current Location',
+                  //         child: Text('Location not enabled'),
+                  //         subtitle: 'Location not enabled'),
+                  //   ...list,
+                  // ],
                   children: state.forecasts
                       .map((item) => NowCastItem(
                           title: item.label,

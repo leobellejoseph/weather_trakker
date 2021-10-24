@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:lottie/lottie.dart';
 import 'package:weather_trakker/bloc/blocs.dart';
 import 'package:weather_trakker/screens/screens.dart';
@@ -44,15 +45,15 @@ class _LottieSplash extends HookWidget {
       listeners: [
         BlocListener<NowcastBloc, NowcastState>(listener: (context, state) {
           hasNowcastCompleted = state.status != NowcastStateStatus.initial;
-          if (hasNowcastCompleted && hasForecastCompleted) {
-            Navigator.popAndPushNamed(context, HomeScreen.id);
-          }
+          // if (hasNowcastCompleted && hasForecastCompleted) {
+          //   Navigator.popAndPushNamed(context, HomeScreen.id);
+          // }
         }),
         BlocListener<ForecastBloc, ForecastState>(listener: (context, state) {
           hasForecastCompleted = state.status != ForecastStateStatus.initial;
-          if (hasForecastCompleted && hasNowcastCompleted) {
-            Navigator.popAndPushNamed(context, HomeScreen.id);
-          }
+          // if (hasForecastCompleted && hasNowcastCompleted) {
+          //   Navigator.popAndPushNamed(context, HomeScreen.id);
+          // }
         }),
       ],
       child: Lottie.asset(
@@ -61,7 +62,21 @@ class _LottieSplash extends HookWidget {
         onLoaded: (composition) {
           controller
             ..duration = composition.duration
-            ..repeat();
+            ..forward()
+            ..addStatusListener((status) async {
+              if (status == AnimationStatus.completed) {
+                final locEnabled = await Geolocator.isLocationServiceEnabled();
+                final permission = await Geolocator.checkPermission();
+                if (!locEnabled ||
+                    permission == LocationPermission.denied ||
+                    permission == LocationPermission.deniedForever) {
+                  await Geolocator.requestPermission();
+                }
+                if (hasNowcastCompleted && hasForecastCompleted) {
+                  Navigator.popAndPushNamed(context, HomeScreen.id);
+                }
+              }
+            });
         },
       ),
     );
