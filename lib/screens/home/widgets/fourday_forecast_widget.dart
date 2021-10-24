@@ -19,7 +19,7 @@ class FourdayForecast extends StatelessWidget {
         ),
         Expanded(
           child: Container(
-            margin: const EdgeInsets.all(1),
+            margin: const EdgeInsets.fromLTRB(2, 1, 2, 1),
             child: GridView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: 4,
