@@ -132,8 +132,11 @@ class _FavoritesItem extends StatelessWidget {
             child: InkWellButton(
                 size: const Size(50, 50),
                 onPress: () {
-                  final item =
-                      ForecastModel(label: title, area: title, forecast: '');
+                  final item = ForecastModel(
+                      label: title,
+                      area: title,
+                      forecast: '',
+                      isFavorite: true);
                   context.read<FavoritesCubit>().remove(item);
                 },
                 child: const Icon(Icons.clear, color: Colors.white, size: 50))),

@@ -29,7 +29,6 @@ class NowcastBloc extends Bloc<NowcastEvent, NowcastState> {
       emit(state.copyWith(newStatus: NowcastStateStatus.noInternet));
     } else {
       final data = await repo.fetch2HourForecast();
-      // final _items = data.items[0];
       final _start = data.items[0].validPeriod.startTime;
       final _end = data.items[0].validPeriod.endTime;
       final _period = '$_start to $_end';
@@ -45,7 +44,8 @@ class NowcastBloc extends Bloc<NowcastEvent, NowcastState> {
         return ForecastModel(
             label: e.label == current ? 'Current Location' : e.label,
             area: e.area,
-            forecast: e.forecast);
+            forecast: e.forecast,
+            isFavorite: false);
       }).toList();
       list.addAll(favoritesForecasts);
       emit(state.copyWith(
@@ -63,13 +63,18 @@ class NowcastBloc extends Bloc<NowcastEvent, NowcastState> {
       emit(state.copyWith(newStatus: NowcastStateStatus.noInternet));
     } else {
       final data = await repo.fetch2HourForecast();
+      final favorites = await repo.fetchFavorite(favoriteKey);
+      final favoritesList = favorites.map((e) => e.area).toList();
       final _items = data.items[0];
       final _start = _items.validPeriod.startTime;
       final _end = _items.validPeriod.endTime;
       final _period = '$_start to $_end';
+      final _forecasts = data.items[0].forecasts
+          .map((e) => e.favorite(value: favoritesList.contains(e.area)))
+          .toList();
       emit(state.copyWith(
           newPeriod: _period,
-          newForecasts: data.items[0].forecasts,
+          newForecasts: _forecasts,
           newStatus: NowcastStateStatus.loadedAll));
     }
   }

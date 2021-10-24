@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:lottie/lottie.dart';
 import 'package:weather_trakker/bloc/blocs.dart';
 import 'package:weather_trakker/screens/screens.dart';
@@ -39,42 +38,95 @@ class _LottieSplash extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final controller = useAnimationController();
-    return Lottie.asset(
-      'assets/splash.json',
-      //repeat: true,
-      controller: controller,
-      onLoaded: (composition) {
-        controller
-          ..duration = composition.duration
-          ..forward()
-          ..addListener(() async {
-            if (controller.status == AnimationStatus.completed) {
-              context.read<NowcastBloc>().add(NowcastFetchEvent());
-              context.read<ForecastBloc>().add(ForecastGeneralEvent());
-              final enabledLocation =
-                  await Geolocator.isLocationServiceEnabled();
-              if (enabledLocation) {
-                final permission = await Geolocator.checkPermission();
-                final hasPermission =
-                    (permission == LocationPermission.always ||
-                        permission == LocationPermission.whileInUse);
-                if (hasPermission) {
-                  Navigator.popAndPushNamed(context, HomeScreen.id);
-                } else {
-                  final permission = await Geolocator.requestPermission();
-                  final hasPermission =
-                      (permission == LocationPermission.always ||
-                          permission == LocationPermission.whileInUse);
-                  if (hasPermission) {
-                    Navigator.popAndPushNamed(context, HomeScreen.id);
-                  }
-                }
-              } else {
-                Geolocator.requestPermission();
-              }
-            }
-          });
-      },
+    bool hasNowcastCompleted = false;
+    bool hasForecastCompleted = false;
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<NowcastBloc, NowcastState>(listener: (context, state) {
+          hasNowcastCompleted = state.status == NowcastStateStatus.loaded;
+          if (hasNowcastCompleted && hasForecastCompleted) {
+            Navigator.popAndPushNamed(context, HomeScreen.id);
+          }
+        }),
+        BlocListener<ForecastBloc, ForecastState>(listener: (context, state) {
+          hasForecastCompleted = state.status == ForecastStateStatus.loaded;
+          if (hasForecastCompleted && hasNowcastCompleted) {
+            Navigator.popAndPushNamed(context, HomeScreen.id);
+          }
+        }),
+      ],
+      child: Lottie.asset(
+        'assets/splash.json',
+        controller: controller,
+        onLoaded: (composition) {
+          controller
+            ..duration = composition.duration
+            ..forward();
+          // ..addListener(() async {
+          //   if (controller.status == AnimationStatus.completed) {
+          //     context.read<NowcastBloc>().add(NowcastFetchEvent());
+          //     context.read<ForecastBloc>().add(ForecastGeneralEvent());
+          //     final enabledLocation =
+          //         await Geolocator.isLocationServiceEnabled();
+          //     if (enabledLocation) {
+          //       final permission = await Geolocator.checkPermission();
+          //       final hasPermission =
+          //           (permission == LocationPermission.always ||
+          //               permission == LocationPermission.whileInUse);
+          //       if (hasPermission) {
+          //         Navigator.popAndPushNamed(context, HomeScreen.id);
+          //       } else {
+          //         final permission = await Geolocator.requestPermission();
+          //         final hasPermission =
+          //             (permission == LocationPermission.always ||
+          //                 permission == LocationPermission.whileInUse);
+          //         if (hasPermission) {
+          //           Navigator.popAndPushNamed(context, HomeScreen.id);
+          //         }
+          //       }
+          //     } else {
+          //       Geolocator.requestPermission();
+          //     }
+          //   }
+          // });
+        },
+      ),
     );
+    // return Lottie.asset(
+    //   'assets/splash.json',
+    //   controller: controller,
+    //   onLoaded: (composition) {
+    //     controller
+    //       ..duration = composition.duration
+    //       ..forward()
+    //       ..addListener(() async {
+    //         if (controller.status == AnimationStatus.completed) {
+    //           context.read<NowcastBloc>().add(NowcastFetchEvent());
+    //           context.read<ForecastBloc>().add(ForecastGeneralEvent());
+    //           final enabledLocation =
+    //               await Geolocator.isLocationServiceEnabled();
+    //           if (enabledLocation) {
+    //             final permission = await Geolocator.checkPermission();
+    //             final hasPermission =
+    //                 (permission == LocationPermission.always ||
+    //                     permission == LocationPermission.whileInUse);
+    //             if (hasPermission) {
+    //               Navigator.popAndPushNamed(context, HomeScreen.id);
+    //             } else {
+    //               final permission = await Geolocator.requestPermission();
+    //               final hasPermission =
+    //                   (permission == LocationPermission.always ||
+    //                       permission == LocationPermission.whileInUse);
+    //               if (hasPermission) {
+    //                 Navigator.popAndPushNamed(context, HomeScreen.id);
+    //               }
+    //             }
+    //           } else {
+    //             Geolocator.requestPermission();
+    //           }
+    //         }
+    //       });
+    //   },
+    // );
   }
 }

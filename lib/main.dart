@@ -31,9 +31,13 @@ class MyApp extends StatelessWidget {
       create: (context) => repo,
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(create: (context) => NowcastBloc(repo: repo)),
+          BlocProvider(
+              create: (context) =>
+                  NowcastBloc(repo: repo)..add(NowcastFetchEvent())),
           BlocProvider(create: (context) => FavoritesCubit(repo: repo)),
-          BlocProvider(create: (context) => ForecastBloc(repo: repo)),
+          BlocProvider(
+              create: (context) =>
+                  ForecastBloc(repo: repo)..add(ForecastGeneralEvent())),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

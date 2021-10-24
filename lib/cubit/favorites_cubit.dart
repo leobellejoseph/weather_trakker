@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:weather_trakker/models/favorites_model.dart';
 import 'package:weather_trakker/models/models.dart';
@@ -124,21 +123,5 @@ class FavoritesCubit extends Cubit<FavoritesState> {
       _list.add(_model);
     }
     return FilteredNowcast(list: _list, period: _period);
-  }
-
-  Future<FavoritesModel> currentLocation() async {
-    final data = await repo.fetch2HourForecast();
-    final enabled = await Geolocator.isLocationServiceEnabled();
-    if (enabled) {
-      final permission = await Geolocator.checkPermission();
-      if (permission != LocationPermission.always ||
-          permission != LocationPermission.whileInUse) {}
-    } else {
-      return FavoritesModel(
-          label: 'Current Location',
-          area: 'Location disabled',
-          forecast: 'Location Disabled');
-    }
-    return FavoritesModel.noData();
   }
 }

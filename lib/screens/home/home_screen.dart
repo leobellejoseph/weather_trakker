@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_trakker/bloc/blocs.dart';
-import 'package:weather_trakker/cubit/cubit.dart';
 import 'package:weather_trakker/screens/home/widgets/widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -31,8 +30,9 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
+    print(state);
     if (state == AppLifecycleState.resumed) {
-      context.read<FavoritesCubit>().fetch();
+      context.read<NowcastBloc>().add(NowcastFetchEvent());
       context.read<ForecastBloc>().add(ForecastGeneralEvent());
     }
     super.didChangeAppLifecycleState(state);
@@ -40,7 +40,6 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
@@ -70,17 +69,17 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     mainAxisAlignment: MainAxisAlignment.start,
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
+                    children: const [
                       SizedBox(
                         height: 240,
                         child: NowCastWidget(title: '2-hour Nowcast'),
                       ),
-                      const Padding(
+                      Padding(
                         padding: EdgeInsets.only(
                             left: 5, right: 5, top: 10, bottom: 10),
                         child: Divider(height: 0.5, color: Colors.blueAccent),
                       ),
-                      const SizedBox(
+                      SizedBox(
                         height: 310,
                         width: double.infinity,
                         child: TodaycastList(),
