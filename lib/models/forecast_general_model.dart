@@ -25,10 +25,10 @@ class ForecastGeneral {
     final _forecast = data['forecast'] ?? 'NA';
     final _humidity = data['relative_humidity'] ?? '';
     final _temperature = data['temperature'] ?? '';
-    final _windspeed = data['wind'] ?? '';
+    final _windSpeed = data['wind'] ?? '';
     final _now = DateTime.now().toIso8601String();
     final _date = DateFormatter.formatToDate(data['date'] ?? _now);
-    final _wind = WindSpeed.fromJson(_windspeed);
+    final _wind = WindSpeed.fromJson(_windSpeed);
     final _temp = Temperature.fromJson(_temperature);
     final _humid = RelativeHumidity.fromJson(_humidity);
     return ForecastGeneral(

@@ -24,6 +24,7 @@ class NowcastItem extends Equatable {
     final _updateTimeStamp = data['update_timestamp'];
     final _timeStamp = data['timestamp'];
     final _validPeriod = ValidPeriod.fromJson(data['valid_period'] ?? '');
+
     final _forecasts = <ForecastModel>[];
     if (data['forecasts'] != null && data['forecasts'] is List) {
       final temp = (data['forecasts'] as List)

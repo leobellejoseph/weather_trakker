@@ -5,7 +5,7 @@ import 'package:weather_trakker/models/models.dart';
 class ForecastItem {
   late final String updateTimeStamp;
   late final String timeStamp;
-  late final ValidPeriod validPeriod;
+  late final ValidPeriodForecast validPeriod;
   late final ForecastGeneral general;
   late final List<ForecastPeriod> periods;
   ForecastItem(
@@ -17,7 +17,7 @@ class ForecastItem {
   factory ForecastItem.noData() => ForecastItem(
       updateTimeStamp: 'NA',
       timeStamp: 'NA',
-      validPeriod: ValidPeriod.noData(),
+      validPeriod: ValidPeriodForecast.noData(),
       general: ForecastGeneral.noData(),
       periods: []);
   factory ForecastItem.fromJson(Map<String, dynamic> data) {
@@ -31,7 +31,7 @@ class ForecastItem {
     return ForecastItem(
         updateTimeStamp: _updateTimeStamp,
         timeStamp: _timeStamp,
-        validPeriod: ValidPeriod.fromJson(_validPeriod),
+        validPeriod: ValidPeriodForecast.fromJson(_validPeriod),
         general: ForecastGeneral.fromJson(_general),
         periods: _periods);
   }

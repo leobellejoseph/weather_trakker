@@ -23,8 +23,10 @@ class NowcastBloc extends Bloc<NowcastEvent, NowcastState> {
 
   FutureOr<void> _onNowcastFetchEvent(
       NowcastFetchEvent event, Emitter<NowcastState> emit) async {
-    emit(state
-        .copyWith(newForecasts: [], newStatus: NowcastStateStatus.loading));
+    emit(state.copyWith(
+        newForecasts: [],
+        newPeriod: '',
+        newStatus: NowcastStateStatus.loading));
     final _hasConnection = await InternetConnectionChecker().hasConnection;
     if (_hasConnection == false) {
       emit(state.copyWith(
