@@ -17,8 +17,6 @@ class NowCastWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final scroll = SwiperController();
     return BlocBuilder<NowcastBloc, NowcastState>(
-      buildWhen: (oldState, newState) =>
-          newState.status == NowcastStateStatus.loaded,
       builder: (context, state) {
         if (state.status == NowcastStateStatus.loading) {
           return const LoadingWidget();
@@ -31,7 +29,7 @@ class NowCastWidget extends StatelessWidget {
             context.read<NowcastBloc>().add(NowcastFetchEvent());
             Navigator.pushNamed(context, LocationsScreen.id);
           });
-        } else {
+        } else if (state.status == NowcastStateStatus.loaded) {
           return Column(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -55,52 +53,10 @@ class NowCastWidget extends StatelessWidget {
               ),
             ],
           );
+        } else {
+          return Container();
         }
       },
     );
   }
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   return BlocBuilder<FavoritesCubit, FavoritesState>(
-  //     builder: (context, state) {
-  //       if (state.status == FavoriteStatus.loading) {
-  //         return const LoadingWidget();
-  //       } else if (state.status == FavoriteStatus.noInternet) {
-  //         return CenteredTextButton.noInternet(
-  //           onPress: () => AppSettings.openWIFISettings(),
-  //         );
-  //       } else if (state.status == FavoriteStatus.noData) {
-  //         return CenteredTextButton.noFavorites(onPress: () {
-  //           context.read<NowcastBloc>().add(NowcastFetchEvent());
-  //           Navigator.pushNamed(context, LocationsScreen.id);
-  //         });
-  //       } else {
-  //         return Column(
-  //           mainAxisSize: MainAxisSize.max,
-  //           children: [
-  //             HeaderWidget(title: title, subtitle: state.period),
-  //             Expanded(
-  //               child: Swiper.children(
-  //                 controller: scroll,
-  //                 pagination: const SwiperPagination(
-  //                   margin: EdgeInsets.all(0),
-  //                   alignment: Alignment.bottomCenter,
-  //                 ),
-  //                 scrollDirection: Axis.horizontal,
-  //                 children: state.data
-  //                     .map((item) => NowCastItem(
-  //                     title: item.label.isEmpty ? item.area : item.label,
-  //                     child:
-  //                     kWeatherStatusLarge[item.forecast] ?? Container(),
-  //                     subtitle: item.forecast))
-  //                     .toList(),
-  //               ),
-  //             ),
-  //           ],
-  //         );
-  //       }
-  //     },
-  //   );
-  // }
 }

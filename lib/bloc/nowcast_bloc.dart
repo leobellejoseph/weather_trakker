@@ -23,10 +23,12 @@ class NowcastBloc extends Bloc<NowcastEvent, NowcastState> {
 
   FutureOr<void> _onNowcastFetchEvent(
       NowcastFetchEvent event, Emitter<NowcastState> emit) async {
-    emit(state.copyWith(newStatus: NowcastStateStatus.loading));
+    emit(state
+        .copyWith(newForecasts: [], newStatus: NowcastStateStatus.loading));
     final _hasConnection = await InternetConnectionChecker().hasConnection;
     if (_hasConnection == false) {
-      emit(state.copyWith(newStatus: NowcastStateStatus.noInternet));
+      emit(state.copyWith(
+          newForecasts: [], newStatus: NowcastStateStatus.noInternet));
     } else {
       final data = await repo.fetch2HourForecast();
       final _start = data.items[0].validPeriod.startTime;
@@ -57,7 +59,8 @@ class NowcastBloc extends Bloc<NowcastEvent, NowcastState> {
 
   FutureOr<void> _onNowcastFetchAllEvent(
       NowcastFetchAllEvent event, Emitter<NowcastState> emit) async {
-    emit(state.copyWith(newStatus: NowcastStateStatus.loading));
+    emit(state
+        .copyWith(newForecasts: [], newStatus: NowcastStateStatus.loading));
     final _hasConnection = await InternetConnectionChecker().hasConnection;
     if (_hasConnection == false) {
       emit(state.copyWith(newStatus: NowcastStateStatus.noInternet));
@@ -81,7 +84,8 @@ class NowcastBloc extends Bloc<NowcastEvent, NowcastState> {
 
   FutureOr<void> _onNowcastFilterEvent(
       NowcastFilterEvent event, Emitter<NowcastState> emit) async {
-    emit(state.copyWith(newStatus: NowcastStateStatus.loading));
+    emit(state
+        .copyWith(newForecasts: [], newStatus: NowcastStateStatus.loading));
     final _hasConnection = await InternetConnectionChecker().hasConnection;
     if (_hasConnection == false) {
       emit(state.copyWith(newStatus: NowcastStateStatus.noInternet));
