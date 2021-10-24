@@ -61,72 +61,9 @@ class _LottieSplash extends HookWidget {
         onLoaded: (composition) {
           controller
             ..duration = composition.duration
-            ..forward();
-          // ..addListener(() async {
-          //   if (controller.status == AnimationStatus.completed) {
-          //     context.read<NowcastBloc>().add(NowcastFetchEvent());
-          //     context.read<ForecastBloc>().add(ForecastGeneralEvent());
-          //     final enabledLocation =
-          //         await Geolocator.isLocationServiceEnabled();
-          //     if (enabledLocation) {
-          //       final permission = await Geolocator.checkPermission();
-          //       final hasPermission =
-          //           (permission == LocationPermission.always ||
-          //               permission == LocationPermission.whileInUse);
-          //       if (hasPermission) {
-          //         Navigator.popAndPushNamed(context, HomeScreen.id);
-          //       } else {
-          //         final permission = await Geolocator.requestPermission();
-          //         final hasPermission =
-          //             (permission == LocationPermission.always ||
-          //                 permission == LocationPermission.whileInUse);
-          //         if (hasPermission) {
-          //           Navigator.popAndPushNamed(context, HomeScreen.id);
-          //         }
-          //       }
-          //     } else {
-          //       Geolocator.requestPermission();
-          //     }
-          //   }
-          // });
+            ..repeat();
         },
       ),
     );
-    // return Lottie.asset(
-    //   'assets/splash.json',
-    //   controller: controller,
-    //   onLoaded: (composition) {
-    //     controller
-    //       ..duration = composition.duration
-    //       ..forward()
-    //       ..addListener(() async {
-    //         if (controller.status == AnimationStatus.completed) {
-    //           context.read<NowcastBloc>().add(NowcastFetchEvent());
-    //           context.read<ForecastBloc>().add(ForecastGeneralEvent());
-    //           final enabledLocation =
-    //               await Geolocator.isLocationServiceEnabled();
-    //           if (enabledLocation) {
-    //             final permission = await Geolocator.checkPermission();
-    //             final hasPermission =
-    //                 (permission == LocationPermission.always ||
-    //                     permission == LocationPermission.whileInUse);
-    //             if (hasPermission) {
-    //               Navigator.popAndPushNamed(context, HomeScreen.id);
-    //             } else {
-    //               final permission = await Geolocator.requestPermission();
-    //               final hasPermission =
-    //                   (permission == LocationPermission.always ||
-    //                       permission == LocationPermission.whileInUse);
-    //               if (hasPermission) {
-    //                 Navigator.popAndPushNamed(context, HomeScreen.id);
-    //               }
-    //             }
-    //           } else {
-    //             Geolocator.requestPermission();
-    //           }
-    //         }
-    //       });
-    //   },
-    // );
   }
 }
