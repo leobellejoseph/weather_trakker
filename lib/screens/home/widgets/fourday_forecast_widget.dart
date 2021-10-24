@@ -19,19 +19,19 @@ class FourdayForecast extends StatelessWidget {
         ),
         Expanded(
           child: Container(
-            margin: const EdgeInsets.all(2),
+            margin: const EdgeInsets.all(1),
             child: GridView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: 4,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  childAspectRatio: 1.6,
+                  childAspectRatio: 1.65,
                   crossAxisCount: 2,
                 ),
                 itemBuilder: (context, index) {
                   final item = items[index];
                   return Padding(
                     padding: const EdgeInsets.only(
-                        left: 2, right: 2, top: 2, bottom: 2),
+                        left: 1, right: 1, top: 2, bottom: 2),
                     child: FourcastItem(item: item),
                   );
                 }),

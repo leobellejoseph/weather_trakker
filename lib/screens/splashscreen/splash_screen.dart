@@ -43,13 +43,13 @@ class _LottieSplash extends HookWidget {
     return MultiBlocListener(
       listeners: [
         BlocListener<NowcastBloc, NowcastState>(listener: (context, state) {
-          hasNowcastCompleted = state.status == NowcastStateStatus.loaded;
+          hasNowcastCompleted = state.status != NowcastStateStatus.initial;
           if (hasNowcastCompleted && hasForecastCompleted) {
             Navigator.popAndPushNamed(context, HomeScreen.id);
           }
         }),
         BlocListener<ForecastBloc, ForecastState>(listener: (context, state) {
-          hasForecastCompleted = state.status == ForecastStateStatus.loaded;
+          hasForecastCompleted = state.status != ForecastStateStatus.initial;
           if (hasForecastCompleted && hasNowcastCompleted) {
             Navigator.popAndPushNamed(context, HomeScreen.id);
           }

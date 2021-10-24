@@ -22,7 +22,7 @@ class FourcastItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(left: 4, right: 4, top: 6, bottom: 2),
+      padding: const EdgeInsets.only(left: 2, right: 2, top: 6, bottom: 2),
       decoration: BoxDecoration(
         //  color: Colors.blue,
         border: Border.all(color: Colors.white, width: 0.5),

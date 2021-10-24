@@ -11,6 +11,7 @@ class HTTPRequest {
     var date = formatDate(
         DateTime.now(), [yyyy, '-', mm, '-', dd, 'T', hh, ':', nn, ':', ss]);
     final url = Uri.parse('${baseUrl}2-hour-weather-forecast?date_time=$date');
+    print(url);
     final response = await client.get(url);
     if (response.statusCode == 200) {
       return jsonDecode(response.body);

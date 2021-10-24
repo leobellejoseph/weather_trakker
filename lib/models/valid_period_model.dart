@@ -43,6 +43,7 @@ class ValidPeriod {
     final _endDate = DateFormatter.formatToDate(_end);
     final _startTime = DateFormatter.formatToHourMinDate(_start);
     final _endTime = DateFormatter.formatToHourMinDate(_end);
+
     return ValidPeriod(
       startDate: _startDate,
       endDate: _endDate,

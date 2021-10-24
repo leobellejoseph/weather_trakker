@@ -3,6 +3,7 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:weather_trakker/bloc/blocs.dart';
 import 'package:weather_trakker/helpers/helpers.dart';
 import 'package:weather_trakker/screens/home/widgets/widget.dart';
@@ -25,10 +26,25 @@ class NowCastWidget extends StatelessWidget {
             onPress: () => AppSettings.openWIFISettings(),
           );
         } else if (state.status == NowcastStateStatus.noData) {
-          return CenteredTextButton.noFavorites(onPress: () {
-            context.read<NowcastBloc>().add(NowcastFetchEvent());
-            Navigator.pushNamed(context, LocationsScreen.id);
-          });
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text('No Data Available',
+                  style: TextStyle(fontWeight: FontWeight.w700)),
+              const Icon(Icons.info_outline, color: Colors.white, size: 100),
+              TextButton(
+                  child: const Text('Show Current Location'),
+                  onPressed: () => Geolocator.requestPermission()),
+              TextButton(
+                child: const Text('Add Favorites'),
+                onPressed: () {
+                  context.read<NowcastBloc>().add(NowcastFetchAllEvent());
+                  Navigator.pushNamed(context, LocationsScreen.id);
+                },
+              ),
+            ],
+          );
         } else if (state.status == NowcastStateStatus.loaded) {
           return Column(
             mainAxisSize: MainAxisSize.max,

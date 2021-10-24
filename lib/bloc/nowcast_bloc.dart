@@ -52,10 +52,17 @@ class NowcastBloc extends Bloc<NowcastEvent, NowcastState> {
             isFavorite: false);
       }).toList();
       list.addAll(favoritesForecasts);
-      emit(state.copyWith(
-          newPeriod: _period,
-          newForecasts: list,
-          newStatus: NowcastStateStatus.loaded));
+      if (list.isNotEmpty) {
+        emit(state.copyWith(
+            newPeriod: _period,
+            newForecasts: list,
+            newStatus: NowcastStateStatus.loaded));
+      } else {
+        emit(state.copyWith(
+            newPeriod: _period,
+            newForecasts: [],
+            newStatus: NowcastStateStatus.noData));
+      }
     }
   }
 
@@ -128,6 +135,10 @@ class NowcastBloc extends Bloc<NowcastEvent, NowcastState> {
         locations.sort((a, b) => a.distance.compareTo(b.distance));
       }
     }
-    return locations.first.area;
+    if (locations.isNotEmpty) {
+      return locations.first.area;
+    } else {
+      return 'Current Location';
+    }
   }
 }

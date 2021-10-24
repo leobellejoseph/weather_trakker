@@ -37,6 +37,12 @@ class DateFormatter {
     return _formatted;
   }
 
+  static String formatToAMPM(String date) {
+    final _date = DateTime.parse(date).toLocal();
+    final _formatted = formatDate(_date, [am]).toLowerCase();
+    return _formatted;
+  }
+
   static String formatToDateTime(String date) {
     final _date = DateTime.parse(date).toLocal();
     final _formatted =
