@@ -22,7 +22,9 @@ class TodaycastList extends HookWidget {
       },
       builder: (context, state) {
         if (state.status == ForecastStateStatus.noData) {
-          return CenteredTextButton.noData(onPress: () {});
+          return CenteredTextButton.noData(
+              onPress: () =>
+                  context.read<ForecastBloc>().add(ForecastGeneralEvent()));
         } else if (state.status == ForecastStateStatus.noForecast) {
           return CenteredTextButton.noForecast(
             onPress: () =>

@@ -27,7 +27,8 @@ class ForecastBloc extends Bloc<ForecastEvent, ForecastState> {
         await Future.delayed(const Duration(seconds: 1), () async {
           final forecast = await repo.fetch24HourForecast(true);
           final fourcast = await repo.fetch4DaysForecast();
-          if (forecast.isEmpty && fourcast.isEmpty) {
+          if ((forecast.isEmpty || (forecast.first.periods.isEmpty)) &&
+              fourcast.isEmpty) {
             emit(state.copyWith(
                 newData: [],
                 newFourcast: [],
