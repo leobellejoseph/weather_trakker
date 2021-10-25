@@ -20,6 +20,10 @@ class NowCastWidget extends StatelessWidget {
       builder: (context, state) {
         if (state.status == NowcastStateStatus.loading) {
           return const LoadingWidget();
+        } else if (state.status == NowcastStateStatus.noForecast) {
+          return CenteredTextButton.noForecast(
+            onPress: () => context.read<NowcastBloc>().add(NowcastFetchEvent()),
+          );
         } else if (state.status == NowcastStateStatus.noInternet) {
           return CenteredTextButton.noInternet(
             onPress: () => AppSettings.openWIFISettings(),
@@ -45,14 +49,6 @@ class NowCastWidget extends StatelessWidget {
             ],
           );
         } else if (state.status == NowcastStateStatus.loaded) {
-          // final Future<bool> hasLocation =
-          //     Geolocator.isLocationServiceEnabled();
-          // final list = state.forecasts
-          //     .map((item) => NowCastItem(
-          //         title: item.label,
-          //         child: kWeatherStatusLarge[item.forecast] ?? Container(),
-          //         subtitle: item.forecast))
-          //     .toList();
           return Column(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -65,14 +61,6 @@ class NowCastWidget extends StatelessWidget {
                     alignment: Alignment.bottomCenter,
                   ),
                   scrollDirection: Axis.horizontal,
-                  // children: [
-                  //   if (hasLocation == false)
-                  //     NowCastItem(
-                  //         title: 'Current Location',
-                  //         child: Text('Location not enabled'),
-                  //         subtitle: 'Location not enabled'),
-                  //   ...list,
-                  // ],
                   children: state.forecasts
                       .map((item) => NowCastItem(
                           title: item.label,

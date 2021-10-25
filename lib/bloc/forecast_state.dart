@@ -1,6 +1,14 @@
 part of 'forecast_bloc.dart';
 
-enum ForecastStateStatus { initial, loading, loaded, noData, noInternet, error }
+enum ForecastStateStatus {
+  initial,
+  loading,
+  loaded,
+  noData,
+  noInternet,
+  error,
+  noForecast,
+}
 
 class ForecastState extends Equatable {
   final List<ForecastItem> data;

@@ -20,10 +20,8 @@ class HTTPRequest {
 
   static Future<Map<String, dynamic>> get24HourGeneralForecast() async {
     final client = RetryClient(http.Client());
-    var date = DateTime.now().toIso8601String();
-    if (date.contains('.')) {
-      date = DateTime.now().toIso8601String().split('.')[0];
-    }
+    var date = formatDate(
+        DateTime.now(), [yyyy, '-', mm, '-', dd, 'T', hh, ':', nn, ':', ss]);
     final url = Uri.parse('${baseUrl}24-hour-weather-forecast?date_time=$date');
     final response = await client.get(url);
     if (response.statusCode == 200) {
@@ -34,7 +32,8 @@ class HTTPRequest {
 
   static Future<Map<String, dynamic>> get24HourPeriodForecast() async {
     final client = RetryClient(http.Client());
-    final date = DateTime.now().toIso8601String();
+    var date = formatDate(
+        DateTime.now(), [yyyy, '-', mm, '-', dd, 'T', hh, ':', nn, ':', ss]);
     final url = Uri.parse('${baseUrl}24-hour-weather-forecast?date_time=$date');
     final response = await client.get(url);
     if (response.statusCode == 200) {

@@ -27,9 +27,9 @@ class WeatherRepository extends BaseWeatherRepository {
     } else {
       response = await HTTPRequest.get24HourPeriodForecast();
     }
-    final _data = response['items'];
-    final _list = (_data as List).map((e) => ForecastItem.fromJson(e)).toList();
-    return _list;
+    final data = response['items'];
+    final list = (data as List).map((e) => ForecastItem.fromJson(e)).toList();
+    return list;
   }
 
   @override

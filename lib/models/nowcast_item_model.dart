@@ -21,9 +21,12 @@ class NowcastItem extends Equatable {
       );
 
   factory NowcastItem.fromJson(Map<String, dynamic> data) {
-    final _updateTimeStamp = data['update_timestamp'];
-    final _timeStamp = data['timestamp'];
-    final _validPeriod = ValidPeriod.fromJson(data['valid_period'] ?? '');
+    final _updateTimeStamp = data['update_timestamp'] ?? '';
+    final _timeStamp = data['timestamp'] ?? '';
+    final _validPeriodJSON = data['valid_period'] ?? '';
+    final _validPeriod = _validPeriodJSON == ''
+        ? ValidPeriod.noData()
+        : ValidPeriod.fromJson(data['valid_period'] ?? '');
 
     final _forecasts = <ForecastModel>[];
     if (data['forecasts'] != null && data['forecasts'] is List) {

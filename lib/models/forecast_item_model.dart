@@ -25,14 +25,19 @@ class ForecastItem {
     final _timeStamp = data['timestamp'] ?? '';
     final _validPeriod = data['valid_period'] ?? '';
     final _general = data['general'] ?? '';
-    final _periods = (data['periods'] as List)
-        .map((e) => ForecastPeriod.fromJson(e))
-        .toList();
-    return ForecastItem(
-        updateTimeStamp: _updateTimeStamp,
-        timeStamp: _timeStamp,
-        validPeriod: ValidPeriodForecast.fromJson(_validPeriod),
-        general: ForecastGeneral.fromJson(_general),
-        periods: _periods);
+    final _periodsJSON = data['periods'] ?? '';
+    if (_periodsJSON == '') {
+      return ForecastItem.noData();
+    } else {
+      final _periods = (data['periods'] as List)
+          .map((e) => ForecastPeriod.fromJson(e))
+          .toList();
+      return ForecastItem(
+          updateTimeStamp: _updateTimeStamp,
+          timeStamp: _timeStamp,
+          validPeriod: ValidPeriodForecast.fromJson(_validPeriod),
+          general: ForecastGeneral.fromJson(_general),
+          periods: _periods);
+    }
   }
 }

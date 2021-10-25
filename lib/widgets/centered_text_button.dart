@@ -50,6 +50,19 @@ class CenteredTextButton extends StatelessWidget {
         buttonText: 'Open Connection Settings',
       );
 
+  factory CenteredTextButton.noForecast({required Function onPress}) =>
+      CenteredTextButton(
+        title: 'Unable to fetch forecast data',
+        child: const Center(
+            child: Icon(
+          Icons.info_outline,
+          color: Colors.white,
+          size: 50,
+        )),
+        onPress: onPress,
+        buttonText: 'Tap to Refresh',
+      );
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -64,7 +77,7 @@ class CenteredTextButton extends StatelessWidget {
                 style: const TextStyle(
                     fontWeight: FontWeight.w700,
                     color: Colors.white,
-                    fontSize: 25)),
+                    fontSize: 18)),
             TextButton(
               style: TextButton.styleFrom(shape: const StadiumBorder()),
               onPressed: () => onPress(),

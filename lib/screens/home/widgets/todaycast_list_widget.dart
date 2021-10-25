@@ -23,6 +23,11 @@ class TodaycastList extends HookWidget {
       builder: (context, state) {
         if (state.status == ForecastStateStatus.noData) {
           return CenteredTextButton.noData(onPress: () {});
+        } else if (state.status == ForecastStateStatus.noForecast) {
+          return CenteredTextButton.noForecast(
+            onPress: () =>
+                context.read<ForecastBloc>().add(ForecastGeneralEvent()),
+          );
         } else if (state.status == ForecastStateStatus.noInternet) {
           return CenteredTextButton.noInternet(
               onPress: () => AppSettings.openWIFISettings());
@@ -69,7 +74,8 @@ class TodaycastList extends HookWidget {
                 for (var item in state.data)
                   for (var period in item.periods)
                     TodaycastMapItem(period: period),
-                FourdayForecast(items: state.fourcasts),
+                if (state.fourcasts.isNotEmpty)
+                  FourdayForecast(items: state.fourcasts),
               ],
             ),
           ]);

@@ -7,7 +7,8 @@ enum NowcastStateStatus {
   loadedAll,
   noData,
   noInternet,
-  error
+  error,
+  noForecast,
 }
 
 class NowcastState extends Equatable {
