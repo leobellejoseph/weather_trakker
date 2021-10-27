@@ -18,6 +18,10 @@ class TodaycastList extends HookWidget {
       listener: (context, state) {
         if (state.status == ForecastStateStatus.loading) {
           visible.value = 1.0;
+        } else {
+          if (state.data[0].periods.isEmpty) {
+            visible.value = 0.0;
+          }
         }
       },
       builder: (context, state) {
