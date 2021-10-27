@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bounceable/flutter_bounceable.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:weather_trakker/bloc/blocs.dart';
 import 'package:weather_trakker/cubit/cubit.dart';
 import 'package:weather_trakker/helpers/helpers.dart';
 import 'package:weather_trakker/models/models.dart';
@@ -31,6 +32,7 @@ class LocationTile extends HookWidget {
             cubit.add('', item);
             isFavorite.value = true;
           }
+          context.read<NowcastBloc>().add(NowcastFetchEvent());
         },
         child: Icon(
           isFavorite.value ? Icons.star : Icons.star_border,
