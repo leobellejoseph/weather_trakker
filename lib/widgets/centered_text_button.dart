@@ -37,6 +37,14 @@ class CenteredTextButton extends StatelessWidget {
         buttonText: 'Refresh',
       );
 
+  factory CenteredTextButton.error({required Function onPress}) =>
+      CenteredTextButton(
+          title: 'Unexpected Error',
+          child: const Center(
+              child: Icon(Icons.error, color: Colors.redAccent, size: 50)),
+          onPress: onPress,
+          buttonText: 'Refresh');
+
   factory CenteredTextButton.noInternet({required Function onPress}) =>
       CenteredTextButton(
         title: 'No Internet',

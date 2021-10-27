@@ -3,6 +3,7 @@ part of 'nowcast_bloc.dart';
 enum NowcastStateStatus {
   initial,
   loading,
+  loadingAll,
   loaded,
   loadedAll,
   noData,

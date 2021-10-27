@@ -22,9 +22,7 @@ class LocationsScreen extends HookWidget {
       floatingActionButton: InkWellButton(
           size: const Size(50, 50),
           child: const Icon(Icons.arrow_back, size: 50, color: Colors.blue),
-          onPress: () =>
-            Navigator.pop(context)
-          ),
+          onPress: () => Navigator.pop(context)),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -38,7 +36,7 @@ class LocationsScreen extends HookWidget {
         ),
         child: BlocBuilder<NowcastBloc, NowcastState>(
           builder: (context, state) {
-            if (state.status == NowcastStateStatus.loading) {
+            if (state.status == NowcastStateStatus.loadingAll) {
               return const LoadingWidget();
             } else if (state.status == NowcastStateStatus.loadedAll) {
               return SafeArea(
@@ -72,8 +70,21 @@ class LocationsScreen extends HookWidget {
                   ],
                 ),
               );
+            } else if (state.status == NowcastStateStatus.noData) {
+              return CenteredTextButton.noData(
+                onPress: () =>
+                    context.read<NowcastBloc>().add(NowcastFetchAllEvent()),
+              );
+            } else if (state.status == NowcastStateStatus.noInternet) {
+              return CenteredTextButton.noInternet(
+                onPress: () =>
+                    context.read<NowcastBloc>().add(NowcastFetchAllEvent()),
+              );
             } else {
-              return Container();
+              return CenteredTextButton.error(
+                onPress: () =>
+                    context.read<NowcastBloc>().add(NowcastFetchAllEvent()),
+              );
             }
           },
         ),
