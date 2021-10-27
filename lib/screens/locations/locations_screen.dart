@@ -22,7 +22,10 @@ class LocationsScreen extends HookWidget {
       floatingActionButton: InkWellButton(
           size: const Size(50, 50),
           child: const Icon(Icons.arrow_back, size: 50, color: Colors.blue),
-          onPress: () => Navigator.pop(context)),
+          onPress: () {
+            context.read<NowcastBloc>().add(NowcastFetchEvent());
+            Navigator.pop(context);
+          }),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
