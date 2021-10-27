@@ -73,7 +73,9 @@ class NowCastWidget extends StatelessWidget {
             ],
           );
         } else {
-          return Container();
+          return CenteredTextButton.error(
+            onPress: () => context.read<NowcastBloc>().add(NowcastFetchEvent()),
+          );
         }
       },
     );
