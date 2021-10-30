@@ -12,7 +12,7 @@ class HeaderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 38,
+      height: 45,
       color: _color,
       padding: const EdgeInsets.only(left: 5, right: 5),
       child: Column(

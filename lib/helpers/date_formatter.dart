@@ -58,7 +58,7 @@ class DateFormatter {
 
   static String formatToHourMinDate(String date) {
     final _date = DateTime.parse(date).toLocal();
-    final _formatted = formatDate(_date, [h, ':', nn, ' ', M, ' ', d]);
+    final _formatted = formatDate(_date, [h, ':', nn, am, ' ', M, ' ', d]);
     return _formatted;
   }
 }

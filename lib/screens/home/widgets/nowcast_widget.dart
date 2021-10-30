@@ -57,7 +57,7 @@ class NowCastWidget extends StatelessWidget {
                 child: Swiper.children(
                   controller: scroll,
                   pagination: const SwiperPagination(
-                    margin: EdgeInsets.all(0),
+                    margin: EdgeInsets.only(bottom: 1),
                     alignment: Alignment.bottomCenter,
                   ),
                   scrollDirection: Axis.horizontal,

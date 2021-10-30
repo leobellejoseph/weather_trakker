@@ -43,7 +43,7 @@ class TodaycastList extends HookWidget {
           return Stack(children: [
             Column(
               children: [
-                const SizedBox(height: 35),
+                const SizedBox(height: 38),
                 AnimatedOpacity(
                   opacity: visible.value,
                   duration: const Duration(milliseconds: 500),
