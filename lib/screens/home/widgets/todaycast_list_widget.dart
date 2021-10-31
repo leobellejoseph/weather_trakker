@@ -43,12 +43,12 @@ class TodaycastList extends HookWidget {
           return Stack(children: [
             Column(
               children: [
-                const SizedBox(height: 38),
+                const SizedBox(height: 46),
                 AnimatedOpacity(
                   opacity: visible.value,
                   duration: const Duration(milliseconds: 500),
                   child: Container(
-                    margin: const EdgeInsets.all(4),
+                    //margin: const EdgeInsets.all(3),
                     height: 240,
                     decoration: BoxDecoration(
                       image: const DecorationImage(
@@ -56,7 +56,7 @@ class TodaycastList extends HookWidget {
                           image: AssetImage('images/sgmap.png')),
                       border: Border.all(color: Colors.white60, width: 0.5),
                       shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(20),
+                      //borderRadius: BorderRadius.circular(20),
                     ),
                   ),
                 ),
