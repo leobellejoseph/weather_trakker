@@ -32,11 +32,13 @@ class FourcastItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.max,
         children: [
-          Text(item.forecastDate,
-              style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.blueAccent.shade700)),
+          Center(
+            child: Text(item.forecastDate,
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.blueAccent.shade700)),
+          ),
           const Divider(thickness: 0.5, height: 5),
           Expanded(
             child: Align(
