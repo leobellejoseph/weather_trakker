@@ -31,6 +31,8 @@ const kWeatherStatus = {
       asset: 'assets/partlycloudynight.json', size: kLottieSmallSize),
   'Showers':
       LottieWidget(asset: 'assets/rainshower.json', size: kLottieSmallSize),
+  'Light Showers':
+      LottieWidget(asset: 'assets/rainshower.json', size: kLottieSmallSize),
   'Cloudy': LottieWidget(asset: 'assets/cloudy.json', size: kLottieSmallSize),
   'Heavy Rain':
       LottieWidget(asset: 'assets/heavyrain.json', size: kLottieSmallSize),
@@ -45,6 +47,7 @@ const kWeatherStatusLarge = {
   'Partly Cloudy (Day)': LottieWidget(asset: 'assets/partlycloudyday.json'),
   'Partly Cloudy (Night)': LottieWidget(asset: 'assets/partlycloudynight.json'),
   'Showers': LottieWidget(asset: 'assets/rainshower.json'),
+  'Light Showers': LottieWidget(asset: 'assets/rainshower.json'),
   'Cloudy': LottieWidget(asset: 'assets/cloudy.json'),
   'Heavy Thundery Showers': LottieWidget(asset: 'assets/thunderstorm.json'),
   'Heavy Thundery Showers with Gusty Winds':
