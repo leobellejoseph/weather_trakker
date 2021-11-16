@@ -38,6 +38,8 @@ const kWeatherStatus = {
       LottieWidget(asset: 'assets/heavyrain.json', size: kLottieSmallSize),
   'Sunny': LottieWidget(asset: 'assets/sunny.json', size: kLottieSmallSize),
   'Windy': LottieWidget(asset: 'assets/windy.json', size: kLottieSmallSize),
+  'Fair & Warm':
+      LottieWidget(asset: 'assets/sunny.json', size: kLottieSmallSize),
 };
 const kWeatherStatusLarge = {
   'Moderate Rain': LottieWidget(asset: 'assets/moderaterain.json'),
@@ -53,6 +55,7 @@ const kWeatherStatusLarge = {
   'Heavy Thundery Showers with Gusty Winds':
       LottieWidget(asset: 'assets/thunderstorm.json'),
   'Sunny': LottieWidget(asset: 'assets/sunny.json'),
+  'Fair & Warm': LottieWidget(asset: 'assets/sunny.json'),
   'Windy': LottieWidget(asset: 'assets/windy.json'),
 };
 const k24HourWeatherLabel = {
