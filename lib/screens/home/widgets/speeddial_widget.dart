@@ -13,14 +13,12 @@ class SpeedDialWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SpeedDial(
-      childrenButtonSize: 60,
+      childrenButtonSize: const Size(16, 16),
       spaceBetweenChildren: 10,
       overlayColor: Colors.transparent,
       overlayOpacity: 0.5,
-      dialRoot: (context, open, children) => ImageButton(
-          asset: 'images/mss.png',
-          onPress: () => children(),
-          size: const Size(60, 60)),
+      dialRoot: (context, open, children) =>
+          ImageButton(asset: 'images/mss.png', onPress: () => children(), size: const Size(60, 60)),
       gradientBoxShape: BoxShape.circle,
       children: [
         SpeedDialChild(
